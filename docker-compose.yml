@@ -1,0 +1,29 @@
+version: "3.7"
+services: 
+  go:
+    image: golang:1.17-rc-alpine
+    container_name: 'go'
+    environment: 
+      - PORT=80
+    networks: 
+      - home
+    volumes: 
+      - ./go:/go/src/app
+    working_dir: /go/src/app
+    command: ["go", "get"]
+    command: ["go", "install"]
+    command: ["go", "run", "main.go"]
+  nginx:
+    build: 
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: 'nginx'
+    networks: 
+      - home
+    ports: 
+      - 8080:80
+    volumes: 
+      - ./nginx/src:/usr/share/nginx/html
+networks: 
+  home:
+    driver: bridge
