@@ -1,5 +1,8 @@
 package main
 
+//package src
+// 外部ファイルとして使えるようにする場合はsrc
+
 import (
 	"database/sql"
 	"fmt"
@@ -19,8 +22,8 @@ type DBTableInfos struct {
 
 /*
 type DBTableInfos struct {
-	questionId      uint   `db:"id" json:"id"`
-	questionName    string `db:"questionName" json:"questionName"`
+	questionId      uint   `db:"id"`
+	questionName    string `db:"questionName"`
 	userId          int
 	questionType    string
 	questionTag     []string
@@ -30,23 +33,6 @@ type DBTableInfos struct {
 	questionAnswer  string
 	quesitonAnswers []string
 	value           [4]string
-}
-*/
-
-/*
-func access_to_db() *gorm.DB {
-	DBMS := "mysql"
-	USER := "localhost"
-	PASS := "password"
-	PROTOCOL := "tcp(localhost:3306)"
-	DBNAME := "sample"
-
-	CONNECT := USER + ":" + PASS + "@" + PROTOCOL + "/" + DBNAME + "?charset=utf8&parseTime=True&loc=Local"
-	db, err := gorm.Open(DBMS, CONNECT)
-	if err != nil {
-		panic(err)
-	}
-	return db
 }
 */
 
@@ -64,17 +50,23 @@ func getQuestion(id int) DBTableInfos {
 		panic(err.Error())
 	}
 
+	// 返す構造体を作成
 	var check DBTableInfos
 
 	for rows.Next() {
 		var id int
 		var name string
 		var answer string
+
+		// 構造体に直接でも良さそう
 		if err := rows.Scan(&id, &name, &answer); err != nil {
 			panic(err.Error())
 		}
+
+		// プログラムが動くかの確認用のprint文
 		fmt.Println(id, name, answer)
 
+		// 構造体に入れている
 		check.id = id
 		check.name = name
 		check.answer = answer
@@ -85,32 +77,36 @@ func getQuestion(id int) DBTableInfos {
 }
 
 // 問題をデータベースに登録する関数
-/*
-func setQuestion() bool {
+func setQuestion(question DBTableInfos) bool {
 	db, err := sql.Open("mysql", "root@/hacku")
 	if err != nil {
 		panic(err.Error())
+		return false
 	}
 	defer db.Close()
 
-	stmtInsert, err := db.Prepare("INSERT INTO users(name) VALUES(?)")
+	stmtInsert, err := db.Prepare("INSERT INTO question_test (id,name,answer) VALUES(?,?,?)")
 	if err != nil {
 		panic(err.Error())
+		return false
 	}
 	defer stmtInsert.Close()
 
-	result, err := stmtInsert.Exec("テスト")
+	result, err := stmtInsert.Exec(question.id, question.name, question.answer)
 	if err != nil {
 		panic(err.Error())
+		return false
 	}
 
 	lastInsertID, err := result.LastInsertId()
 	if err != nil {
 		panic(err.Error())
+		return false
 	}
 	fmt.Println(lastInsertID)
+
+	return true
 }
-*/
 
 func SaveData(id int) {
 	getQuestion(id)
@@ -129,10 +125,29 @@ func SaveData(id int) {
 
 func main() {
 	//SaveData(123)
-	tmp := getQuestion(123)
-	fmt.Println(tmp)
+	var QuestionID interface{}
+
+	// テスト用構造体
+
+	st := DBTableInfos{234, "ひぐらし", "北条沙都子"}
+
+	QuestionID = st
+
+	switch judge := QuestionID.(type) {
+	case int:
+		tmp := getQuestion(judge)
+		fmt.Println(tmp)
+	case DBTableInfos:
+		isAllRegist := setQuestion(judge)
+		if isAllRegist {
+			fmt.Println("OK")
+		} else {
+			fmt.Println("NG")
+		}
+	}
 }
 
+// 以下はデータベースにアクセスできるかの確認で使用
 /*
 func main() {
 	db, err := sql.Open("mysql", "root@/hacku")
