@@ -3,8 +3,6 @@ HackU2021にて製作するアプリのリポジトリ
 
 ## 開発の流れ
 
-### branchを切る
-
 1. develop branchに移動する
 
     `git checkout develop`
