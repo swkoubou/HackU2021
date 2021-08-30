@@ -1,8 +1,10 @@
 <template>
   <div class="components-preview">
-    <QuestionParent v-bind:questionDataJson="sampleQuestionDataJson.q_4taku" />
-    <QuestionParent v-bind:questionDataJson="sampleQuestionDataJson.q_anaume" />
-    <QuestionParent v-bind:questionDataJson="sampleQuestionDataJson.q_collection" />
+    <div class="question-preview">
+      <QuestionParent v-bind:questionDataJson="sampleQuestionDataJson.q_4taku" />
+      <QuestionParent v-bind:questionDataJson="sampleQuestionDataJson.q_anaume" />
+      <QuestionParent v-bind:questionDataJson="sampleQuestionDataJson.q_collection" />
+    </div>
   </div>
 </template>
 
@@ -22,3 +24,11 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.question-preview {
+  display:flex;
+  /*flex-flow: column;*/
+  justify-content: center;
+}
+</style>

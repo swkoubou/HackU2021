@@ -1,7 +1,15 @@
 <template>
     <div id="question-4taku">
-        <h3>this is 4taku</h3>
-        <h3>title : {{question.name}}</h3>
+      <h3 class="title" > {{ question.name }} </h3>
+      <h3>Q. {{ question.question }}</h3>
+      <span></span>
+      <div v-for="v in question.value" :key="v.id">
+        <label class="radio">
+          <input type="radio" name="answer" :value="v" v-model="userChoice">
+          {{ v }}
+        </label>
+      </div>
+      <h3>あなたの回答: {{ (userChoice === "") ? "未回答" : userChoice }} ({{ (userChoice === question.answer ) ? "正解" : "不正解"}})</h3>
     </div>
 </template>
 
@@ -9,7 +17,16 @@
 export default {
     name: "Question4taku",
     props: ["question"],
+    data() {
+      return {
+        userChoice: ""
+      }
+    },
     setup() {
     },
 }
 </script>
+
+<style scoped>
+
+</style>

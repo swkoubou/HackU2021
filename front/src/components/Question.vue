@@ -1,6 +1,6 @@
 <template>
-    <div id="question-parent">
-        <div v-if="questionDataJson.questionType == '4taku'">
+    <div class="question-card" id="question-parent">
+        <div v-if="questionDataJson.questionType === '4taku'">
             <Question4taku v-bind:question="questionDataJson"/>
             </div>
         <div v-else-if="questionDataJson.questionType === 'anaume'">
@@ -29,3 +29,15 @@ export default {
     },
 }
 </script>
+
+<style scoped>
+.question-card {
+    background: #e2e1e0;
+    border-radius: 10px;
+    display: inline-block;
+    height: 500px;
+    margin: 1rem;
+    position: relative;
+    width: 500px;
+}
+</style>
