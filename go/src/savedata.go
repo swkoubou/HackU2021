@@ -1,4 +1,4 @@
-package src
+package main
 
 import (
 	"database/sql"
@@ -12,7 +12,7 @@ import (
 // 動作確認用データベースで使用する構造体
 
 type DBTableInfos struct {
-	id     uint   `db:id json:id`
+	id     int    `db:id json:id`
 	name   string `db:name json:name`
 	answer string `db:answer json:answer`
 }
@@ -51,7 +51,7 @@ func access_to_db() *gorm.DB {
 */
 
 // 問題IDから問題の構造体を返す関数
-func getQuestion(id int) {
+func getQuestion(id int) DBTableInfos {
 	db, err := sql.Open("mysql", "root@/hacku")
 	if err != nil {
 		panic(err.Error())
@@ -64,6 +64,8 @@ func getQuestion(id int) {
 		panic(err.Error())
 	}
 
+	var check DBTableInfos
+
 	for rows.Next() {
 		var id int
 		var name string
@@ -72,13 +74,41 @@ func getQuestion(id int) {
 			panic(err.Error())
 		}
 		fmt.Println(id, name, answer)
+
+		check.id = id
+		check.name = name
+		check.answer = answer
+
 	}
+
+	return check
 }
 
 // 問題をデータベースに登録する関数
 /*
 func setQuestion() bool {
+	db, err := sql.Open("mysql", "root@/hacku")
+	if err != nil {
+		panic(err.Error())
+	}
+	defer db.Close()
 
+	stmtInsert, err := db.Prepare("INSERT INTO users(name) VALUES(?)")
+	if err != nil {
+		panic(err.Error())
+	}
+	defer stmtInsert.Close()
+
+	result, err := stmtInsert.Exec("テスト")
+	if err != nil {
+		panic(err.Error())
+	}
+
+	lastInsertID, err := result.LastInsertId()
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Println(lastInsertID)
 }
 */
 
@@ -97,11 +127,11 @@ func SaveData(id int) {
 	fmt.Println("sql終了")
 }
 
-/*
 func main() {
-	SaveData(123)
+	//SaveData(123)
+	tmp := getQuestion(123)
+	fmt.Println(tmp)
 }
-*/
 
 /*
 func main() {
