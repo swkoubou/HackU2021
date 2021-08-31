@@ -29,16 +29,17 @@ type Question struct {
 	Answers      string    `db:"Answers"`
 }
 
-func Deletequestion(question uuid.UUID) {
+func Deletequestion(question uuid.UUID) bool {
 	db, err := sql.Open("mysql", "root@/hacku_db")
 	if err != nil {
 		panic(err.Error())
+		return false
 	}
 	defer db.Close()
-
 	stmtDelete, err := db.Prepare("DELETE FROM question WHERE QuestionId=?")
 	if err != nil {
 		panic(err.Error())
+		return false
 	}
 	defer stmtDelete.Close()
 
@@ -48,11 +49,14 @@ func Deletequestion(question uuid.UUID) {
 	result, err := stmtDelete.Exec(searchUserQuestion)
 	if err != nil {
 		panic(err.Error())
+		return false
 	}
 
 	rowsAffect, err := result.RowsAffected()
 	if err != nil {
 		panic(err.Error())
+		return false
 	}
 	fmt.Println(rowsAffect)
+	return true
 }
