@@ -1,44 +1,49 @@
 {
-    "q_4taku": {
-        "questionId": "uuid",
-        "name": "ポケモンの問題",
-        "question": "アニメポケットモンスターシリーズに登場する主人公の名前は？",
-        "questionType": "4taku",
-        "author": {
-          "userId": 0
-        },
-        "createTime": "2000/01/01 00:00:00",
-        "updateTime": "2000/01/01 00:00:00",
-        "answer": "サトシ",
-        "value": ["サトシ", "カスミ", "タケシ", "シンジ"]
+  "q_4taku": {
+    "questionId": "uuid",
+    "name": "ポケモンの問題",
+    "question": "アニメポケットモンスターシリーズに登場する主人公の名前は？",
+    "questionType": "4taku",
+    "author": {
+      "userId": 0
     },
-
-    "q_anaume": {
-        "questionId": "uuid",
-        "name": "天気の問題",
-        "question": "今日の天気は[]のち[]です。",
-        "questionType": "anaume",
-        "author": {
-          "userId": 0
-        },
-        "createTime": "2000/01/01 00:00:00",
-        "updateTime": "2000/01/01 00:00:00",
-        "answer": ["くもり","はれ"]
-      },
-
-    "q_collection": {
-        "questionType": "collection",
-        "collectionId": "uuid",
-        "description":"食事の問題集",
-          "author": {
-        "userId": 0
-      },
-      "createTime": "2000/01/01 00:00:00",
-      "updateTime": "2000/01/01 00:00:00",
-      "questions": {
-            "questionId":"uuid"
-      }
+    "createTime": "2000/01/01 00:00:00",
+    "updateTime": "2000/01/01 00:00:00",
+    "answer": "サトシ",
+    "value": [
+      "サトシ",
+      "カスミ",
+      "タケシ",
+      "シンジ"
+    ]
+  },
+  "q_anaume": {
+    "questionId": "uuid",
+    "name": "天気の問題",
+    "question": "今日の天気は[]のち[]です。",
+    "questionType": "anaume",
+    "author": {
+      "userId": 0
     },
-
+    "createTime": "2000/01/01 00:00:00",
+    "updateTime": "2000/01/01 00:00:00",
+    "answer": [
+      "くもり",
+      "はれ"
+    ]
+  },
+  "q_collection": {
+    "questionType": "collection",
+    "collectionId": "uuid",
+    "description": "食事の問題集",
+    "author": {
+      "userId": 0
+    },
+    "createTime": "2000/01/01 00:00:00",
+    "updateTime": "2000/01/01 00:00:00",
+    "questions": {
+      "questionId": "uuid"
+    }
+  },
   "q_test": {}
 }

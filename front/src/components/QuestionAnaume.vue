@@ -1,32 +1,32 @@
 <template>
-    <div id="question-anaume">
-      <h3>{{question.name}}</h3>
-      <div v-for="(wordData, index) in parsedQuestion" :key="index">
-        <div v-if="wordData.word === '[]'">
-          <input type="text" v-model="answers[wordData.index]">
-        </div>
-        <div v-else>
-          {{ wordData.word }}
-        </div>
+  <div id='question-anaume'>
+    <h3>{{ question.name }}</h3>
+    <div v-for='(wordData, index) in parsedQuestion' :key='index'>
+      <div v-if="wordData.word === '[]'">
+        <input type='text' v-model='answers[wordData.index]'>
       </div>
-
-      <h3>結果</h3>
-      <div v-for="(ans, index) in question.answer" :key="index">
-        <div>答え: {{ans}} | あなたの入力: {{answers[index]}} | {{(ans === answers[index]) ? "正解" : "不正解"}}</div>
+      <div v-else>
+        {{ wordData.word }}
       </div>
-
     </div>
+
+    <h3>結果</h3>
+    <div v-for='(ans, index) in question.answer' :key='index'>
+      <div>答え: {{ ans }} | あなたの入力: {{ answers[index] }} | {{ (ans === answers[index]) ? '正解' : '不正解' }}</div>
+    </div>
+
+  </div>
 </template>
 
 <script>
 
 export default {
-  name: "QuestionAnaume",
-  props: ["question"],
-  data (){
+  name: 'QuestionAnaume',
+  props: ['question'],
+  data() {
     return {
       answers: []
-    };
+    }
   },
   computed: {
     parsedQuestion() {
@@ -34,23 +34,23 @@ export default {
       // 目的: v-modelと答えを一致させる
       // 参考: https://qiita.com/iwato/items/183e6dd676bf547ea341
       // 分割対象を残した状態で、分割する。
-      let questionSplit = this.question.question.split(/(\[\])/g);
-      let questionWordWithIndex = [];
-      let holeIndex = 0;
-      for (let i=0; i<questionSplit.length; i++) {
-        let word = questionSplit[i];
+      let questionSplit = this.question.question.split(/(\[\])/g)
+      let questionWordWithIndex = []
+      let holeIndex = 0
+      for (let i = 0; i < questionSplit.length; i++) {
+        let word = questionSplit[i]
         let wordData = {
-          "word": word,
-        };
+          'word': word
+        }
         // 穴埋めの、穴の部分であれば、indexをつけてあげる。
-        if (word === "[]") {
-          wordData["index"] = holeIndex
+        if (word === '[]') {
+          wordData['index'] = holeIndex
           holeIndex++
         }
-        questionWordWithIndex.push(wordData);
+        questionWordWithIndex.push(wordData)
       }
-      return questionWordWithIndex;
-    },
+      return questionWordWithIndex
+    }
   }
 }
 

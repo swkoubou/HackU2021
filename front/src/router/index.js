@@ -1,7 +1,7 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
-import ComponentsPreviewPage from "../views/ComponentsPreviewPage.vue";
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Home from '../views/Home.vue'
+import ComponentsPreviewPage from '../views/ComponentsPreviewPage.vue'
 
 Vue.use(VueRouter)
 
@@ -21,11 +21,11 @@ const routes = [
       import(/* webpackChunkName: "about" */ '../views/About.vue'),
   },
   {
-    path: "/components",
-    name: "ComponentsPreviewPage",
-    component: ComponentsPreviewPage
-  }
-];
+    path: '/components',
+    name: 'ComponentsPreviewPage',
+    component: ComponentsPreviewPage,
+  },
+]
 
 const router = new VueRouter({
   routes,
