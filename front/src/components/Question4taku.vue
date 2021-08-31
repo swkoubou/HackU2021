@@ -1,11 +1,11 @@
 <template>
-  <div id='question-4taku'>
-    <h3 class='title'>{{ question.name }}</h3>
+  <div id="question-4taku">
+    <h3 class="title">{{ question.name }}</h3>
     <h3>Q. {{ question.question }}</h3>
     <span></span>
-    <div v-for='(value, index) in question.value' :key='index'>
-      <label class='radio'>
-        <input v-model='userChoice' :value='value' name='answer' type='radio' />
+    <div v-for="(value, index) in question.value" :key="index">
+      <label class="radio">
+        <input v-model="userChoice" :value="value" name="answer" type="radio" />
         {{ value }}
       </label>
     </div>
@@ -23,11 +23,10 @@ export default {
   props: ['question'],
   data() {
     return {
-      userChoice: ''
+      userChoice: '',
     }
   },
-  setup() {
-  }
+  setup() {},
 }
 </script>
 
