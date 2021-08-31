@@ -37,8 +37,18 @@ func PostQuestionHandler(c *gin.Context) {
 }
 
 func GetCollectionHandler(c *gin.Context) {
+	collectionID := c.Param("collectionID")
+
+	if _, err := uuid.Parse(collectionID); err != nil {
+		log.Println("uuid.Parse(): ", err)
+		c.String(http.StatusNotFound, "Not Found")
+		return
+	}
+
+	// DBからもらう
+
 	c.JSON(http.StatusOK, &param{
-		QuestionID: "get collection: " + c.Param("collectionID"),
+		QuestionID: collectionID,
 	})
 }
 
