@@ -41,9 +41,40 @@
     },
     "createTime": "2000/01/01 00:00:00",
     "updateTime": "2000/01/01 00:00:00",
-    "questions": {
-      "questionId": "uuid"
-    }
-  },
-  "q_test": {}
+    "questions": [
+      {
+        "questionId": "uuid",
+        "name": "ポケモンの問題",
+        "question": "アニメポケットモンスターシリーズに登場する主人公の名前は？",
+        "questionType": "4taku",
+        "author": {
+          "userId": 0
+        },
+        "createTime": "2000/01/01 00:00:00",
+        "updateTime": "2000/01/01 00:00:00",
+        "answer": "サトシ",
+        "value": [
+          "サトシ",
+          "カスミ",
+          "タケシ",
+          "シンジ"
+        ]
+      },
+      {
+        "questionId": "uuid",
+        "name": "天気の問題",
+        "question": "今日の天気は[]のち[]です。",
+        "questionType": "anaume",
+        "author": {
+          "userId": 0
+        },
+        "createTime": "2000/01/01 00:00:00",
+        "updateTime": "2000/01/01 00:00:00",
+        "answer": [
+          "くもり",
+          "はれ"
+        ]
+      }
+    ]
+  }
 }

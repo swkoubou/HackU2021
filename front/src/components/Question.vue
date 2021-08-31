@@ -1,10 +1,13 @@
 <template>
-  <div id='question-parent' class='question-card'>
+  <div id="question-parent" class="question-card">
     <div v-if="questionData.questionType === '4taku'">
-      <Question4taku :question='questionData' />
+      <Question4taku :question="questionData" />
     </div>
     <div v-else-if="questionData.questionType === 'anaume'">
-      <QuestionAnaume :question='questionData' />
+      <QuestionAnaume :question="questionData" />
+    </div>
+    <div v-else-if="questionData.questionType === 'collection'">
+      <QuestionCollection :question="questionData" />
     </div>
     <div v-else>
       <h3>unknown : {{ questionData.questionType }}</h3>
@@ -15,16 +18,17 @@
 <script>
 import Question4taku from '@/components/Question4taku.vue'
 import QuestionAnaume from '@/components/QuestionAnaume.vue'
+import QuestionCollection from '@/components/QuestionCollection.vue'
 
 export default {
   name: 'QuestionParent',
   props: ['questionData'],
   components: {
     Question4taku,
-    QuestionAnaume
+    QuestionAnaume,
+    QuestionCollection,
   },
-  setup() {
-  }
+  setup() {},
 }
 </script>
 
