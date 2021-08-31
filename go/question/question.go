@@ -12,7 +12,7 @@ type Question struct {
 	QuestionType string          `json:"questionType"`
 	CreateTime   string          `json:"createTime"`
 	UpdateTime   string          `json:"updateTime"`
-	QuestionBody []string        `json:"questionBody"`
+	QuestionBody string          `json:"questionBody"`
 	Values       []string        `json:"values"`
 	Answers      []string        `json:"answers"`
 }
