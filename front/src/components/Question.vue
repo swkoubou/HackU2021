@@ -1,10 +1,10 @@
 <template>
-  <div id='question-parent' class='question-card'>
+  <div id="question-parent" class="question-card">
     <div v-if="questionData.questionType === '4taku'">
-      <Question4taku :question='questionData' />
+      <Question4taku :question="questionData" />
     </div>
     <div v-else-if="questionData.questionType === 'anaume'">
-      <QuestionAnaume :question='questionData' />
+      <QuestionAnaume :question="questionData" />
     </div>
     <div v-else>
       <h3>unknown : {{ questionData.questionType }}</h3>
@@ -21,10 +21,9 @@ export default {
   props: ['questionData'],
   components: {
     Question4taku,
-    QuestionAnaume
+    QuestionAnaume,
   },
-  setup() {
-  }
+  setup() {},
 }
 </script>
 
