@@ -34,22 +34,22 @@ export default {
       // 目的: v-modelと答えを一致させる
       // 参考: https://qiita.com/iwato/items/183e6dd676bf547ea341
       // 分割対象を残した状態で、分割する。
-      let question_split = this.question.question.split(/(\[\])/g);
-      let question_word_with_index = [];
+      let questionSplit = this.question.question.split(/(\[\])/g);
+      let questionWordWithIndex = [];
       let holeIndex = 0;
-      for (let i=0; i<question_split.length; i++) {
-        let word = question_split[i];
-        let d = {
+      for (let i=0; i<questionSplit.length; i++) {
+        let word = questionSplit[i];
+        let wordData = {
           "word": word,
         };
         // 穴埋めの、穴の部分であれば、indexをつけてあげる。
         if (word === "[]") {
-          d["index"] = holeIndex
+          wordData["index"] = holeIndex
           holeIndex++
         }
-        question_word_with_index.push(d);
+        questionWordWithIndex.push(wordData);
       }
-      return question_word_with_index;
+      return questionWordWithIndex;
     },
   }
 }
