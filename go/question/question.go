@@ -1,20 +1,18 @@
 package question
 
 import (
+	"example.com/account"
 	"github.com/google/uuid"
 )
 
-type User struct {
-	UserID   uuid.UUID `json:"userID"`
-	UserName string    `json:"userName"`
-}
 type Question struct {
-	QuestionTag  []string  `json:"questionTag"`
-	QuestionID   uuid.UUID `json:"questionID"`
-	Auther       User      `json:"auther"`
-	CreateTime   string    `json:"createTime"`
-	UpdateTime   string    `json:"updateTime"`
-	QuestionBody []string  `json:"questionBody"`
-	Values       []string  `json:"values"`
-	Answers      []string  `json:"answers"`
+	QuestionID   uuid.UUID       `json:"questionID"`
+	Auther       account.Account `json:"auther"`
+	QuestionTag  []string        `json:"questionTag"`
+	QuestionType string          `json:"questionType"`
+	CreateTime   string          `json:"createTime"`
+	UpdateTime   string          `json:"updateTime"`
+	QuestionBody []string        `json:"questionBody"`
+	Values       []string        `json:"values"`
+	Answers      []string        `json:"answers"`
 }
