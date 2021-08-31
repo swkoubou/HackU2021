@@ -27,12 +27,23 @@ func GetQuestionsHandler(c *gin.Context) {
 }
 
 func GetAllQuestionsHandler(c *gin.Context) {
-	log.Println("hoge")
 	c.JSON(http.StatusOK, &param{
-		QuestionID: "all!",
+		QuestionID: "get all questions",
 	})
 }
 
 func PostQuestionHandler(c *gin.Context) {
 
+}
+
+func GetCollectionHandler(c *gin.Context) {
+	c.JSON(http.StatusOK, &param{
+		QuestionID: "get collection: " + c.Param("collectionID"),
+	})
+}
+
+func GetAllCollectionsHandler(c *gin.Context) {
+	c.JSON(http.StatusOK, &param{
+		QuestionID: "get all collection",
+	})
 }
