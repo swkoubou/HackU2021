@@ -29,39 +29,30 @@ type Question struct {
 	Answers      string    `db:"Answers"`
 }
 
-// 問題をデータベースに登録する関数
-func Savedata(question Question) bool {
+func Deletequestion(question uuid.UUID) {
 	db, err := sql.Open("mysql", "root@/hacku_db")
 	if err != nil {
 		panic(err.Error())
-		return false
 	}
 	defer db.Close()
 
-	// uuidを文字列へ変換している
-	searchUserQuestion := question.QuestionId.String()
-	userAuthorId := question.Author.String()
-
-	stmtInsert, err := db.Prepare("INSERT IGNORE INTO question (QuestionId,Author,QuestionTag,QuestionType,CreateTime,UpdateTime,QuestionBody,Value,Answers) VALUES(?,?,?,?,?,?,?,?,?)")
-
+	stmtDelete, err := db.Prepare("DELETE FROM question WHERE QuestionId=?")
 	if err != nil {
 		panic(err.Error())
-		return false
 	}
-	defer stmtInsert.Close()
+	defer stmtDelete.Close()
 
-	result, err := stmtInsert.Exec(searchUserQuestion, userAuthorId, question.QuestionTag, question.QuestionType, question.CreateTime, question.UpdateTime, question.QuestionBody, question.QuestionBody, question.Answers)
+	// uuidを文字列に変換
+	searchUserQuestion := question.String()
+
+	result, err := stmtDelete.Exec(searchUserQuestion)
 	if err != nil {
 		panic(err.Error())
-		return false
 	}
 
-	lastInsertID, err := result.LastInsertId()
+	rowsAffect, err := result.RowsAffected()
 	if err != nil {
 		panic(err.Error())
-		return false
 	}
-	fmt.Println(lastInsertID)
-
-	return true
+	fmt.Println(rowsAffect)
 }
