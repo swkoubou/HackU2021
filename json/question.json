@@ -10,6 +10,6 @@
     "createTime": "time",
     "updateTime": "time",
     "questionBody": "string",
-    "answer": "string",
+    "values": ["string"],
     "answers": ["string"]
   }
