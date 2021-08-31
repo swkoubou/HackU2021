@@ -35,7 +35,7 @@ export default {
 
       // 参考: https://qiita.com/iwato/items/183e6dd676bf547ea341
       // 分割対象を残した状態で、分割する。
-      let question_split = text.split(/([])/g);
+      let question_split = text.split(/(\[\])/g);
       let question_word_with_index = [];
       let holeIndex = 0;
       for (let i=0; i<question_split.length; i++) {
