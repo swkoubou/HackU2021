@@ -41,6 +41,11 @@
     },
     "rules": {}
   },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "endOfLine": "lf"
+  },
   "browserslist": [
     "> 1%",
     "last 2 versions",
