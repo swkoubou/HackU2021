@@ -27,6 +27,14 @@ HackU2021にて製作するアプリのリポジトリ
 
 1. develop branchにpull requestを出す
 
+### pull requestのReviewersになったら
+
+1. pull requestの内容をチェックし動作確認を行う
+
+1. 問題が無ければpull requestをApproveする
+
+1. Approveした本人が対象のbranchへMergeする
+
 
 ### Labelの種類
     
