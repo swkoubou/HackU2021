@@ -34,9 +34,7 @@ func main() {
 
 	collection := r.Group("/collection")
 	{
-		collection.GET("/all", func(c *gin.Context) {
-			c.String(http.StatusOK, "%v\n", c.Request.Method)
-		})
+		collection.GET("/all", handle.GetAllCollectionsHandler)
 
 		collection.GET("/:collectionID", handle.GetCollectionHandler)
 
