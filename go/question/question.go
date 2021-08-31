@@ -5,7 +5,7 @@ import (
 )
 
 type User struct {
-	UserID   uuid.UUID `json:"name"`
+	UserID   uuid.UUID `json:"userID"`
 	UserName string    `json:"userName"`
 }
 type Question struct {
