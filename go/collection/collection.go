@@ -6,11 +6,11 @@ import (
 )
 
 type Collection struct {
-	Auther                 question.User     `json:"auther"`
-	CollectionID           uuid.UUID         `json:"collectionID"`
-	CollectionName         string            `json:"collectionName"`
-	CollectionDescripition string            `json:"collectionDescription"`
-	Questions              question.Question `json:"questions"`
-	CreateTime             string            `json:"createtime"`
-	UpdateTime             string            `json:"updatetime"`
+	CollectionID           uuid.UUID           `json:"collectionID"`
+	CollectionName         string              `json:"collectionName"`
+	CollectionDescripition string              `json:"collectionDescription"`
+	Auther                 question.User       `json:"auther"`
+	Questions              []question.Question `json:"questions"`
+	CreateTime             string              `json:"createtime"`
+	UpdateTime             string              `json:"updatetime"`
 }

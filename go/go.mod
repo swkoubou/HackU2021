@@ -1,9 +1,7 @@
 module example.com
 
 go 1.17
-replace(
-example.com/question/question
-)
+
 require (
 	github.com/gin-gonic/gin v1.7.4
 	github.com/google/uuid v1.3.0
