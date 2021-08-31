@@ -1,14 +1,14 @@
 <template>
     <div class="question-card" id="question-parent">
-        <div v-if="questionDataJson.questionType === '4taku'">
-            <Question4taku v-bind:question="questionDataJson"/>
+        <div v-if="questionData.questionType === '4taku'">
+            <Question4taku :question="questionData"/>
             </div>
-        <div v-else-if="questionDataJson.questionType === 'anaume'">
-            <QuestionAnaume v-bind:question="questionDataJson"/>
+        <div v-else-if="questionData.questionType === 'anaume'">
+            <QuestionAnaume :question="questionData"/>
         </div>
         <div v-else>
             <h3>
-                unknown : {{ questionDataJson.questionType }}
+                unknown : {{ questionData.questionType }}
             </h3>
         </div>
     </div>
@@ -20,7 +20,7 @@ import QuestionAnaume from "@/components/QuestionAnaume.vue";
 
 export default {
     name: "QuestionParent",
-    props: ["questionDataJson"],
+    props: ["questionData"],
     components: {
         Question4taku,
         QuestionAnaume

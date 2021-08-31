@@ -3,10 +3,10 @@
       <h3 class="title" > {{ question.name }} </h3>
       <h3>Q. {{ question.question }}</h3>
       <span></span>
-      <div v-for="v in question.value" :key="v.id">
+      <div v-for="value in question.value" :key="value.id">
         <label class="radio">
-          <input type="radio" name="answer" :value="v" v-model="userChoice">
-          {{ v }}
+          <input type="radio" name="answer" :value="value" v-model="userChoice">
+          {{ value }}
         </label>
       </div>
       <h3>あなたの回答: {{ (userChoice === "") ? "未回答" : userChoice }} ({{ (userChoice === question.answer ) ? "正解" : "不正解"}})</h3>

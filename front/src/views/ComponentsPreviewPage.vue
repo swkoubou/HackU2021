@@ -1,9 +1,9 @@
 <template>
   <div class="components-preview">
     <div class="question-preview">
-      <QuestionParent v-bind:questionDataJson="sampleQuestionDataJson.q_4taku" />
-      <QuestionParent v-bind:questionDataJson="sampleQuestionDataJson.q_anaume" />
-      <QuestionParent v-bind:questionDataJson="sampleQuestionDataJson.q_collection" />
+      <QuestionParent :questionData="sampleQuestionData.q_4taku" />
+      <QuestionParent :questionData="sampleQuestionData.q_anaume" />
+      <QuestionParent :questionData="sampleQuestionData.q_collection" />
     </div>
   </div>
 </template>
@@ -19,7 +19,7 @@ export default {
   },
   data () {
     return {
-      sampleQuestionDataJson: require("@/testdata/question.json")
+      sampleQuestionData: require("@/testdata/question.json")
     }
   }
 };

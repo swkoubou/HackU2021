@@ -1,7 +1,7 @@
 <template>
     <div id="question-anaume">
-      <h3>title : {{question.name}}</h3>
-      <div v-for="wordData in parseQuestion(question.question)" :key="wordData.id">
+      <h3>{{question.name}}</h3>
+      <div v-for="wordData in parsedQuestion" :key="wordData.id">
         <div v-if="wordData.word === '[]'">
           <input type="text" v-model="answers[wordData.index]">
         </div>
@@ -28,14 +28,13 @@ export default {
       answers: []
     };
   },
-  methods: {
-    parseQuestion(text) {
+  computed: {
+    parsedQuestion() {
       // 入力: "今日は[]のち[]です" | 出力(一部省略): [{今日は}, {0}, {のち}, {1}, {です}]
       // 目的: v-modelと答えを一致させる
-
       // 参考: https://qiita.com/iwato/items/183e6dd676bf547ea341
       // 分割対象を残した状態で、分割する。
-      let question_split = text.split(/(\[\])/g);
+      let question_split = this.question.question.split(/(\[\])/g);
       let question_word_with_index = [];
       let holeIndex = 0;
       for (let i=0; i<question_split.length; i++) {
