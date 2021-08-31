@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import ComponentsPreviewPage from '../views/ComponentsPreviewPage.vue'
+import SignupPage from '../views/SignupPage'
 
 Vue.use(VueRouter)
 
@@ -24,6 +25,11 @@ const routes = [
     path: '/components',
     name: 'ComponentsPreviewPage',
     component: ComponentsPreviewPage,
+  },
+  {
+    path: '/signup',
+    name: 'SignupPage',
+    component: SignupPage,
   },
 ]
 
