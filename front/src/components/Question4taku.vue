@@ -3,7 +3,7 @@
       <h3 class="title" > {{ question.name }} </h3>
       <h3>Q. {{ question.question }}</h3>
       <span></span>
-      <div v-for="value in question.value" :key="value.id">
+      <div v-for="(value, index) in question.value" :key="index">
         <label class="radio">
           <input type="radio" name="answer" :value="value" v-model="userChoice">
           {{ value }}
