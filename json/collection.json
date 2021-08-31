@@ -1,0 +1,12 @@
+{
+    "collectionID": "uuid",
+    "collectionName": "string",
+    "collectionDescription": "string",
+    "auther":{
+        "userID": "uuid",
+        "userName": "string"
+    },
+    "questions": ["question"],
+    "createTime": "time",
+    "updateTime": "time"
+}
