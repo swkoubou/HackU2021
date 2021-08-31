@@ -1,5 +1,5 @@
 <template>
-  <div class='question-card' id='question-parent'>
+  <div id='question-parent' class='question-card'>
     <div v-if="questionData.questionType === '4taku'">
       <Question4taku :question='questionData' />
     </div>

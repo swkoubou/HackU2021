@@ -1,9 +1,9 @@
 <template>
   <div id='question-anaume'>
     <h3>{{ question.name }}</h3>
-    <div v-for='(wordData, index) in parsedQuestion' :key='index'>
+    <div v-for='(wordData, index) in parsedQuestion' :key='`word-${index}`'>
       <div v-if="wordData.word === '[]'">
-        <input type='text' v-model='answers[wordData.index]'>
+        <input v-model='answers[wordData.index]' type='text' />
       </div>
       <div v-else>
         {{ wordData.word }}
@@ -11,15 +11,16 @@
     </div>
 
     <h3>結果</h3>
-    <div v-for='(ans, index) in question.answer' :key='index'>
-      <div>答え: {{ ans }} | あなたの入力: {{ answers[index] }} | {{ (ans === answers[index]) ? '正解' : '不正解' }}</div>
+    <div v-for='(ans, index) in question.answer' :key='`answer-${index}`'>
+      <div>
+        答え: {{ ans }} | あなたの入力: {{ answers[index] }} |
+        {{ ans === answers[index] ? '正解' : '不正解' }}
+      </div>
     </div>
-
   </div>
 </template>
 
 <script>
-
 export default {
   name: 'QuestionAnaume',
   props: ['question'],
@@ -40,7 +41,7 @@ export default {
       for (let i = 0; i < questionSplit.length; i++) {
         let word = questionSplit[i]
         let wordData = {
-          'word': word
+          word: word
         }
         // 穴埋めの、穴の部分であれば、indexをつけてあげる。
         if (word === '[]') {
@@ -53,9 +54,6 @@ export default {
     }
   }
 }
-
 </script>
 
-
-<style scoped>
-</style>
+<style scoped></style>

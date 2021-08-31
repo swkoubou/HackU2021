@@ -5,7 +5,7 @@
     <span></span>
     <div v-for='(value, index) in question.value' :key='index'>
       <label class='radio'>
-        <input type='radio' name='answer' :value='value' v-model='userChoice' />
+        <input v-model='userChoice' :value='value' name='answer' type='radio' />
         {{ value }}
       </label>
     </div>
