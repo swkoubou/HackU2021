@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import ComponentsPreviewPage from '../views/ComponentsPreviewPage.vue'
 import SignupPage from '../views/SignupPage'
 import LoginPage from '../views/LoginPage'
+import LoginSuccessPreviewPage from '../views/LoginSuccessPreviewPage'
 
 Vue.use(VueRouter)
 
@@ -36,6 +37,11 @@ const routes = [
     path: '/login',
     name: 'LoginPage',
     component: LoginPage,
+  },
+  {
+    path: '/loginsuccesspreviewpage',
+    name: 'LoginSuccessPreviewPage',
+    component: LoginSuccessPreviewPage,
   },
 ]
 
