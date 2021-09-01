@@ -6,6 +6,8 @@ import SignupPage from '../views/SignupPage'
 import LoginPage from '../views/LoginPage'
 import LoginSuccessPreviewPage from '../views/LoginSuccessPreviewPage'
 
+import firebase from 'firebase/compat'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -42,11 +44,31 @@ const routes = [
     path: '/loginsuccesspreviewpage',
     name: 'LoginSuccessPreviewPage',
     component: LoginSuccessPreviewPage,
+    meta: { requiresAuth: true },
   },
 ]
 
 const router = new VueRouter({
   routes,
+})
+
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth)
+  console.log(requiresAuth)
+  if (requiresAuth) {
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        next()
+      } else {
+        next({
+          path: '/login',
+          query: { redirect: to.fullPath },
+        })
+      }
+    })
+  } else {
+    next()
+  }
 })
 
 export default router
