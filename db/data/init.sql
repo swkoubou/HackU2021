@@ -29,15 +29,15 @@ CREATE TABLE question_answer_map (
 );
 
 CREATE TABLE question_tag(
-    question_tag INT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    question_tag_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
     question_tag_name VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE question_tag_map(
     question_id VARCHAR(36) NOT NULL,
-    question_tag    INT UNSIGNED,
+    question_tag_id    INT UNSIGNED,
     FOREIGN KEY fk_question_id(question_id) REFERENCES question(question_id),
-    FOREIGN KEY fk_question_tag(question_tag) REFERENCES question_tag(question_tag)
+    FOREIGN KEY fk_question_tag(question_tag_id) REFERENCES question_tag(question_tag_id)
 );
 
 CREATE TABLE question_collection(
@@ -77,7 +77,7 @@ insert into question_value_map values
 insert into question_answer_map values
     ("1a4ee1ec-1073-f9fb-8281-f3041d15a9d2", 0, "hoge"),
     ("c9d09c9e-e445-d1cf-5cb8-03d4507ad1f5", 0, "hoge"),
-    ("c9d09c9e-e445-d1cf-5cb8-03d4507ad1f5", 1, "hoge"),
+    ("c9d09c9e-e445-d1cf-5cb8-03d4507ad1f5", 1, "hoge");
 
 insert into question_tag values
     (default, "国語"),
@@ -90,14 +90,14 @@ insert into question_tag values
     (default, "JavaScript");
 
 insert into question_tag_map values
-    ("1a4ee1ec-1073-f9fb-8281-f3041d15a9d2", 0),
-    ("1a4ee1ec-1073-f9fb-8281-f3041d15a9d2", 1),
-    ("1a4ee1ec-1073-f9fb-8281-f3041d15a9d2", 2),
-    ("1a4ee1ec-1073-f9fb-8281-f3041d15a9d2", 3),
-    ("c9d09c9e-e445-d1cf-5cb8-03d4507ad1f5", 4),
-    ("c9d09c9e-e445-d1cf-5cb8-03d4507ad1f5", 5),
-    ("c9d09c9e-e445-d1cf-5cb8-03d4507ad1f5", 6),
-    ("c9d09c9e-e445-d1cf-5cb8-03d4507ad1f5", 7);
+    ("1a4ee1ec-1073-f9fb-8281-f3041d15a9d2", (SELECT question_tag_id FROM question_tag WHERE question_tag_name = "国語")),
+    ("1a4ee1ec-1073-f9fb-8281-f3041d15a9d2", (SELECT question_tag_id FROM question_tag WHERE question_tag_name = "算数")),
+    ("1a4ee1ec-1073-f9fb-8281-f3041d15a9d2", (SELECT question_tag_id FROM question_tag WHERE question_tag_name = "理科")),
+    ("1a4ee1ec-1073-f9fb-8281-f3041d15a9d2", (SELECT question_tag_id FROM question_tag WHERE question_tag_name = "社会")),
+    ("c9d09c9e-e445-d1cf-5cb8-03d4507ad1f5", (SELECT question_tag_id FROM question_tag WHERE question_tag_name = "Go")),
+    ("c9d09c9e-e445-d1cf-5cb8-03d4507ad1f5", (SELECT question_tag_id FROM question_tag WHERE question_tag_name = "Dart")),
+    ("c9d09c9e-e445-d1cf-5cb8-03d4507ad1f5", (SELECT question_tag_id FROM question_tag WHERE question_tag_name = "C")),
+    ("c9d09c9e-e445-d1cf-5cb8-03d4507ad1f5", (SELECT question_tag_id FROM question_tag WHERE question_tag_name = "JavaScript"));
 
 insert into question_collection values
     ("81b989be-5f8a-a979-ed6d-7a4613ff08e3", "piyo問題集", "テスト用のコレクション", "116aa423-d551-2b81-2091-132e022d40c5", default, default),
