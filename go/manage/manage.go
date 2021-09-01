@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"os"
 
+	"example.com/question"
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -24,4 +25,8 @@ func NewDBConnection() (*sql.DB, error) {
 		dbName:   os.Getenv("MYSQL_DATABASE"),
 	}
 	return sql.Open("mysql", dsn.user+":"+dsn.pass+"@"+dsn.protocol+"("+dsn.address+")/"+dsn.dbName)
+}
+
+func GetQuestion(questionID string) (question.Question, error) {
+	return question.Question{}, nil
 }
