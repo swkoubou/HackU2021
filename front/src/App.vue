@@ -7,7 +7,7 @@
       |
       <router-link to="/components">Components</router-link>
       |
-      <router-link to="/signup">Signup</router-link>
+      <router-link to="/loginsuccesspreviewpage">ログイン済み確認</router-link>
       |
       <router-link to="/login">Login</router-link>
     </div>
