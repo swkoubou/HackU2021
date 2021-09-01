@@ -12,7 +12,6 @@ export default {
   name: 'LoginPage',
   methods: {
     async logout() {
-      console.log('logout')
       await firebase.auth().signOut()
       this.$router.push('/login')
     },
