@@ -6,30 +6,14 @@ import (
 
 	//"time"
 	//"github.com/jinzhu/gorm"
-
+    "example.com/question"
+    "example.com/account"
 	//"github.com/google/uuid"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	uuid "github.com/satori/go.uuid"
 )
 
-type User struct {
-	UserID   uuid.UUID `db:"userId"`
-	UserName string    `db:"userName"`
-}
-
-type Question struct {
-	QuestionId   uuid.UUID `db:"QuestionId"`
-	Author       uuid.UUID `db:"Author"`
-	QuestionTag  string    `db:"QuestionTag"`
-	QuestionType string    `db:QuestionType`
-	CreateTime   string    `db:"CreateTime"`
-	UpdateTime   string    `db:"UpdateTime"`
-	QuestionBody string    `db:"QuestionBody"`
-	Value        string    `db:"Value"`
-	Answers      string    `db:"Answers"`
-}
-
-func Deletequestion(question uuid.UUID) bool {
+func DeleteQuestion(question uuid.UUID) bool {
 	db, err := sql.Open("mysql", "root@/hacku_db")
 	if err != nil {
 		panic(err.Error())
