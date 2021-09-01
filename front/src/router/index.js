@@ -2,6 +2,11 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import ComponentsPreviewPage from '../views/ComponentsPreviewPage.vue'
+import LoginPage from '../views/LoginPage'
+import LoginSuccessPreviewPage from '../views/LoginSuccessPreviewPage'
+
+import firebase from 'firebase/compat/app'
+import 'firebase/compat/auth'
 
 Vue.use(VueRouter)
 
@@ -25,10 +30,39 @@ const routes = [
     name: 'ComponentsPreviewPage',
     component: ComponentsPreviewPage,
   },
+  {
+    path: '/login',
+    name: 'LoginPage',
+    component: LoginPage,
+  },
+  {
+    path: '/loginsuccesspreviewpage',
+    name: 'LoginSuccessPreviewPage',
+    component: LoginSuccessPreviewPage,
+    meta: { requiresAuth: true },
+  },
 ]
 
 const router = new VueRouter({
   routes,
+})
+
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth)
+  if (requiresAuth) {
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        next()
+      } else {
+        next({
+          path: '/login',
+          query: { redirect: to.fullPath },
+        })
+      }
+    })
+  } else {
+    next()
+  }
 })
 
 export default router
