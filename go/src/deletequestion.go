@@ -6,14 +6,14 @@ import (
 
 	//"time"
 	//"github.com/jinzhu/gorm"
-    "example.com/question"
-    "example.com/account"
+        "example.com/question"
+        "example.com/account"
 	//"github.com/google/uuid"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	uuid "github.com/satori/go.uuid"
 )
 
-func DeleteQuestion(question uuid.UUID) bool {
+func Deletequestion(question uuid.UUID) bool {
 	db, err := sql.Open("mysql", "root@/hacku_db")
 	if err != nil {
 		panic(err.Error())

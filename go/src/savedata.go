@@ -6,15 +6,15 @@ import (
 
 	//"time"
 	//"github.com/jinzhu/gorm"
-    "example.com/question"
-    "example.com/account"
+        "example.com/question"
+        "example.com/account"
 	//"github.com/google/uuid"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	uuid "github.com/satori/go.uuid"
 )
 
 // 問題をデータベースに登録する関数
-func SaveData(question Question) bool {
+func Savedata(question Question) bool {
 	db, err := sql.Open("mysql", "root@/hacku_db")
 	if err != nil {
 		panic(err.Error())
