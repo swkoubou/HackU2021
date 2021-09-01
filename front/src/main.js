@@ -5,7 +5,9 @@ import store from './store'
 
 Vue.config.productionTip = false
 
-import firebase from 'firebase/compat'
+import firebase from 'firebase/compat/app'
+import 'firebase/compat/auth'
+
 const firebaseConfig = {
   apiKey: process.env.VUE_APP_API_KEY,
   authDomain: process.env.VUE_APP_AUTH_DOMAIN,

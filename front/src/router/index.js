@@ -6,7 +6,8 @@ import SignupPage from '../views/SignupPage'
 import LoginPage from '../views/LoginPage'
 import LoginSuccessPreviewPage from '../views/LoginSuccessPreviewPage'
 
-import firebase from 'firebase/compat'
+import firebase from 'firebase/compat/app'
+import 'firebase/compat/auth'
 
 Vue.use(VueRouter)
 

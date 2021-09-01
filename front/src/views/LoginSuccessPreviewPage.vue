@@ -6,7 +6,8 @@
 </template>
 
 <script>
-import firebase from 'firebase/compat'
+import firebase from 'firebase/compat/app'
+import 'firebase/compat/auth'
 export default {
   name: 'LoginPage',
   methods: {
