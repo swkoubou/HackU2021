@@ -1,6 +1,5 @@
 <template>
   <div class="question-preview">
-    
     <div
       class="question-preview-header"
       v-if="question.questionType === 'anaume'"
@@ -43,6 +42,8 @@
 import IconQuestion4taku from '@/components/icons/IconQuestion4taku.vue'
 import IconQuestionAnaume from '@/components/icons/IconQuestionAnaume.vue'
 import IconQuestionCollection from '@/components/icons/IconQuestionCollection.vue'
+
+// todo : 問題集の名前を埋める
 
 export default {
   name: 'QuestionPreview',
