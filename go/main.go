@@ -1,9 +1,11 @@
 package main
 
 import (
+	"log"
 	"net/http"
 
 	"example.com/handle"
+	"example.com/manage"
 	"github.com/gin-gonic/gin"
 )
 
@@ -50,6 +52,20 @@ func main() {
 			c.String(http.StatusOK, "%v\n", c.Request.Method)
 		})
 	}
+
+	r.GET("/check", func(c *gin.Context) {
+		db, err := manage.NewDBConnection()
+		if err != nil {
+			log.Println("NewDBConnection(): ", err)
+			return
+		}
+
+		if err := db.Ping(); err != nil {
+			log.Println("db.Ping(): ", err)
+		} else {
+			log.Println("db.Ping(): success")
+		}
+	})
 
 	r.Run()
 }
