@@ -2,7 +2,8 @@ package manage
 
 import (
 	"database/sql"
-	"fmt"
+	"errors"
+	"os"
 
 	"example.com/question"
 	_ "github.com/go-sql-driver/mysql"
@@ -18,17 +19,21 @@ type dsn struct {
 }
 
 func NewDBConnection() (*sql.DB, error) {
-	/*
-		dsn := &dsn{
-			user:     "root",
-			pass:     os.Getenv("MYSQL_ROOT_PASSWORD"),
-			protocol: "tcp",
-			address:  "db:3306",
-			dbName:   os.Getenv("MYSQL_DATABASE"),
-		}
-	*/
-	//return sql.Open("mysql", dsn.user+":"+dsn.pass+"@"+dsn.protocol+"("+dsn.address+")/"+dsn.dbName)
-	return sql.Open("mysql", "root@/MYSQL_DATABASE")
+
+	dsn := &dsn{
+		user:     "root",
+		pass:     os.Getenv("MYSQL_ROOT_PASSWORD"),
+		protocol: "tcp",
+		address:  "db:3306",
+		dbName:   os.Getenv("MYSQL_DATABASE"),
+	}
+
+	return sql.Open("mysql", dsn.user+":"+dsn.pass+"@"+dsn.protocol+"("+dsn.address+")/"+dsn.dbName)
+
+	// 下のはローカル環境で行った時に使用した，データベースである．
+	// データベースの内容はinit.sqlを使用
+
+	//return sql.Open("mysql", "root@/MYSQL_DATABASE")
 }
 
 func GetQuestion(questionID string) (question.Question, error) {
@@ -60,19 +65,13 @@ func GetQuestion(questionID string) (question.Question, error) {
 
 	var user question.Question
 
-	//var userInfo account.Account
-
+	// ここからデータベースでの処理
 	for rows1.Next() {
 		if err := rows1.Scan(&uuid_tmp1, &tmp, &uuid_tmp2, &user.QuestionType, &user.CreateTime, &user.UpdateTime, &user.QuestionBody); err != nil {
 			panic(err.Error())
 		}
-		if err == nil {
-			user.QuestionID, _ = uuid.Parse(uuid_tmp1)
-			user.Auther.UserID, _ = uuid.Parse(uuid_tmp2)
-		}
-		if err != nil {
-			user.QuestionID = nil
-		}
+		user.QuestionID, _ = uuid.Parse(uuid_tmp1)
+		user.Auther.UserID, _ = uuid.Parse(uuid_tmp2)
 	}
 
 	rows2, err := db.Query("SELECT * FROM user WHERE user_id = ?", uuid_tmp2)
@@ -144,7 +143,21 @@ func GetQuestion(questionID string) (question.Question, error) {
 		}
 		user.Answers = append(user.Answers, array_tmp)
 	}
-	fmt.Println(user)
+
+	// 出力確認用
+	//fmt.Println(user)
+
+	// 文字列での比較を行うため
+	num_nil := "00000000-0000-0000-0000-000000000000"
+
+	if uuid_tmp1 == num_nil || uuid_tmp2 == num_nil || len(user.Auther.UserName) == 0 || len(user.QuestionTag) == 0 || len(user.QuestionType) == 0 || len(user.CreateTime) == 0 || len(user.UpdateTime) == 0 || len(user.QuestionBody) == 0 || len(user.Values) == 0 || len(user.Answers) == 0 {
+		user2 := question.Question{}
+		var isEmpty error
+
+		// エラーになる場合は，戻り値としてerrorをtrueとすることで，uuidによる00初期化を防止
+		isEmpty = errors.New("true")
+		return user2, isEmpty
+	}
 
 	// user を question.Questionとして定義している.
 	return user, nil
