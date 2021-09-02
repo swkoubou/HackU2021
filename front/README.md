@@ -17,7 +17,7 @@ touch public/auth.json
   "projectId": "",
   "storageBucket": "",
   "messagingSenderId": "",
-  "appId": "1:824629223713:web:ce2c904b91056d7c1f1e60"
+  "appId": ""
 }
 ```
 
