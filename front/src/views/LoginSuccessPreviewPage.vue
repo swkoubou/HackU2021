@@ -13,6 +13,7 @@ export default {
   methods: {
     async logout() {
       await firebase.auth().signOut()
+      localStorage.removeItem('login_data')
       this.$router.push('/login')
     },
   },

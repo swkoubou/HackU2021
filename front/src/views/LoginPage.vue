@@ -26,7 +26,9 @@ export default {
     ui.start(firebaseuiAuthContainer, {
       signInOptions: [firebase.auth.EmailAuthProvider.PROVIDER_ID],
       callbacks: {
-        signInSuccessWithAuthResult: () => {
+        signInSuccessWithAuthResult: async (response) => {
+          const idToken = await response.user.getIdToken(true)
+          localStorage.setItem('login_data', idToken.toString())
           this.$router.push('/loginsuccesspreviewpage')
           return false
         },
