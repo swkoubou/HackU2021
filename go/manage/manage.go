@@ -4,7 +4,6 @@ import (
 	"database/sql"
 	"fmt"
 
-	"example.com/account"
 	"example.com/question"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/google/uuid"
@@ -46,9 +45,9 @@ func GetQuestion(questionID string) (question.Question, error) {
 	defer db.Close()
 
 	// クエリ
-	rows, err := db.Query("SELECT * FROM question WHERE question_id = ?", questionID)
+	rows1, err := db.Query("SELECT * FROM question WHERE question_id = ?", questionID)
 
-	defer rows.Close()
+	defer rows1.Close()
 
 	// エラー処理
 	if err != nil {
@@ -61,18 +60,94 @@ func GetQuestion(questionID string) (question.Question, error) {
 
 	var user question.Question
 
-	var userInfo account.Account
+	//var userInfo account.Account
 
-	for rows.Next() {
-		if err := rows.Scan(&uuid_tmp1, &tmp, &uuid_tmp2, &user.QuestionType, &user.CreateTime, &user.UpdateTime, &user.QuestionBody); err != nil {
+	for rows1.Next() {
+		if err := rows1.Scan(&uuid_tmp1, &tmp, &uuid_tmp2, &user.QuestionType, &user.CreateTime, &user.UpdateTime, &user.QuestionBody); err != nil {
 			panic(err.Error())
 		}
-		user.QuestionID, _ = uuid.Parse(uuid_tmp1)
-		userInfo.UserID, _ = uuid.Parse(uuid_tmp2)
+		if err == nil {
+			user.QuestionID, _ = uuid.Parse(uuid_tmp1)
+			user.Auther.UserID, _ = uuid.Parse(uuid_tmp2)
+		}
+		if err != nil {
+			user.QuestionID = nil
+		}
 	}
 
-	//rows, err := db.Query("SELECT * FROM question WHERE question_id = ?", questionID)
+	rows2, err := db.Query("SELECT * FROM user WHERE user_id = ?", uuid_tmp2)
 
+	if err != nil {
+		panic(err.Error())
+	}
+
+	var name_tmp string
+
+	for rows2.Next() {
+		if err := rows2.Scan(&name_tmp, &user.Auther.UserName); err != nil {
+			panic(err.Error())
+		}
+	}
+
+	rows3, err := db.Query("SELECT * FROM question_tag_map WHERE question_id = ?", uuid_tmp1)
+
+	if err != nil {
+		panic(err.Error())
+	}
+
+	var questionid_tmp, array_tmp string
+
+	var tag_int int
+
+	for rows3.Next() {
+		if err := rows3.Scan(&questionid_tmp, &tag_int); err != nil {
+			panic(err.Error())
+		}
+
+		rows4, err := db.Query("SELECT * FROM question_tag WHERE question_tag_id = ?", tag_int)
+		if err != nil {
+			panic(err.Error())
+		}
+
+		for rows4.Next() {
+			if err := rows4.Scan(&tag_int, &array_tmp); err != nil {
+				panic(err.Error())
+			}
+			user.QuestionTag = append(user.QuestionTag, array_tmp)
+		}
+	}
+
+	rows5, err := db.Query("SELECT * FROM question_value_map WHERE question_id = ?", uuid_tmp1)
+
+	if err != nil {
+		panic(err.Error())
+	}
+
+	var int_tmp int
+
+	for rows5.Next() {
+		if err := rows5.Scan(&questionid_tmp, &int_tmp, &array_tmp); err != nil {
+			panic(err.Error())
+		}
+		user.Values = append(user.Values, array_tmp)
+	}
+
+	rows6, err := db.Query("SELECT * FROM question_answer_map WHERE question_id = ?", uuid_tmp1)
+
+	if err != nil {
+		panic(err.Error())
+	}
+
+	for rows6.Next() {
+		if err := rows6.Scan(&questionid_tmp, &int_tmp, &array_tmp); err != nil {
+			panic(err.Error())
+		}
+		user.Answers = append(user.Answers, array_tmp)
+	}
 	fmt.Println(user)
-	return question.Question{}, nil
+
+	// user を question.Questionとして定義している.
+	return user, nil
+
+	//return question.Question{}, nil
 }
