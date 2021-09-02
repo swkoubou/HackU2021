@@ -54,16 +54,16 @@
 
 <script>
 export default {
-    name: 'IconQuestionCollection',
-    props: {
-        width: {
-            type: [Number, String],
-            default: 100
-        },
-        height: {
-            type: [Number, String],
-            default: 100
-        }
-    }
+  name: 'IconQuestionCollection',
+  props: {
+    width: {
+      type: [Number, String],
+      default: 100,
+    },
+    height: {
+      type: [Number, String],
+      default: 100,
+    },
+  },
 }
 </script>

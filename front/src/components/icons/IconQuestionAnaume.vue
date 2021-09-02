@@ -81,16 +81,16 @@
 
 <script>
 export default {
-    name: 'IconQuestionAnaume',
-    props: {
-        width: {
-            type: [Number, String],
-            default: 100
-        },
-        height: {
-            type: [Number, String],
-            default: 100
-        }
-    }
+  name: 'IconQuestionAnaume',
+  props: {
+    width: {
+      type: [Number, String],
+      default: 100,
+    },
+    height: {
+      type: [Number, String],
+      default: 100,
+    },
+  },
 }
 </script>

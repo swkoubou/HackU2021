@@ -59,16 +59,16 @@
 
 <script>
 export default {
-    name: 'IconQuestion4taku',
-    props: {
-        width: {
-            type: [Number, String],
-            default: 100
-        },
-        height: {
-            type: [Number, String],
-            default: 100
-        }
-    }
+  name: 'IconQuestion4taku',
+  props: {
+    width: {
+      type: [Number, String],
+      default: 100,
+    },
+    height: {
+      type: [Number, String],
+      default: 100,
+    },
+  },
 }
 </script>

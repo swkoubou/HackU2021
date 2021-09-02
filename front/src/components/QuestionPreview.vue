@@ -11,7 +11,7 @@
       class="question-preview-header"
       v-else-if="question.questionType === '4taku'"
     >
-    <IconQuestion4taku :width="100" :height="100" />
+      <IconQuestion4taku :width="100" :height="100" />
       <h3>四択問題</h3>
     </div>
 
