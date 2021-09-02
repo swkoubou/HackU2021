@@ -6,6 +6,9 @@
     <div v-else-if="questionData.questionType === 'anaume'">
       <QuestionAnaume :question="questionData" />
     </div>
+    <div v-else-if="questionData.questionType === 'collection'">
+      <QuestionCollection :question="questionData" />
+    </div>
     <div v-else>
       <h3>unknown : {{ questionData.questionType }}</h3>
     </div>
@@ -15,6 +18,7 @@
 <script>
 import Question4taku from '@/components/Question4taku.vue'
 import QuestionAnaume from '@/components/QuestionAnaume.vue'
+import QuestionCollection from '@/components/QuestionCollection.vue'
 
 export default {
   name: 'QuestionParent',
@@ -22,6 +26,7 @@ export default {
   components: {
     Question4taku,
     QuestionAnaume,
+    QuestionCollection,
   },
   setup() {},
 }
