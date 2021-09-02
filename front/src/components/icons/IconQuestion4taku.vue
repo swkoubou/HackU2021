@@ -59,6 +59,7 @@
 
 <script>
 export default {
+    name: 'IconQuestion4taku',
     props: {
         width: {
             type: [Number, String],

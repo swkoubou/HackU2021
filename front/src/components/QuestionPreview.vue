@@ -4,14 +4,14 @@
       class="question-preview-header"
       v-if="question.questionType === 'anaume'"
     >
-      <h3>icon</h3>
+      <IconQuestionAnaume :width="100" :height="100" />
       <h3>穴埋め問題</h3>
     </div>
     <div
       class="question-preview-header"
       v-else-if="question.questionType === '4taku'"
     >
-      <h3>icon</h3>
+    <IconQuestion4taku :width="100" :height="100" />
       <h3>四択問題</h3>
     </div>
 
@@ -19,7 +19,7 @@
       class="question-preview-header"
       v-else-if="question.questionType === 'collection'"
     >
-      <h3>icon</h3>
+      <IconQuestionCollection :width="100" :height="100" />
       <h3>問題集</h3>
     </div>
 
@@ -40,12 +40,18 @@
 </template>
 
 <script>
-// import '@/components/icons/IconQuestion4taku.vue'
+import IconQuestion4taku from '@/components/icons/IconQuestion4taku.vue'
+import IconQuestionAnaume from '@/components/icons/IconQuestionAnaume.vue'
+import IconQuestionCollection from '@/components/icons/IconQuestionCollection.vue'
 
 export default {
   name: 'QuestionPreview',
   props: ['question'],
-  components: {},
+  components: {
+    IconQuestion4taku,
+    IconQuestionAnaume,
+    IconQuestionCollection,
+  },
 }
 </script>
 

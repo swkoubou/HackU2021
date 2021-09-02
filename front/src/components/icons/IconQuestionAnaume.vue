@@ -9,6 +9,8 @@
     viewBox="0 0 100 100"
     style="enable-background: new 0 0 100 100"
     xml:space="preserve"
+    :width="width"
+    :height="height"
   >
     <g>
       <path
@@ -76,3 +78,19 @@
     </g>
   </svg>
 </template>
+
+<script>
+export default {
+    name: 'IconQuestionAnaume',
+    props: {
+        width: {
+            type: [Number, String],
+            default: 100
+        },
+        height: {
+            type: [Number, String],
+            default: 100
+        }
+    }
+}
+</script>
