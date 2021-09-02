@@ -1,6 +1,8 @@
 package account
 
-import "github.com/google/uuid"
+import (
+	"github.com/google/uuid"
+)
 
 type Account struct {
 	UserID   uuid.UUID `json:"userID"`
