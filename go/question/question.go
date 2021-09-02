@@ -1,6 +1,8 @@
 package question
 
 import (
+	"reflect"
+
 	"example.com/account"
 	"github.com/google/uuid"
 )
@@ -46,4 +48,54 @@ func NewQuestion(param QuestionParam) (Question, error) {
 	q.Answers = param.Answers
 
 	return q, nil
+}
+
+func (q *Question) Equals(question *Question) bool {
+	if reflect.TypeOf(*q) != reflect.TypeOf(*question) {
+		return false
+	}
+
+	if q.QuestionID != question.QuestionID {
+		return false
+	}
+
+	if !reflect.DeepEqual(q.Auther, question.Auther) {
+		return false
+	}
+
+	if len(q.QuestionTag) != len(q.QuestionTag) {
+		return false
+	}
+
+	for i, v := range q.QuestionTag {
+		if v != question.QuestionTag[i] {
+			return false
+		}
+	}
+
+	if len(q.CreateTime) != len(question.CreateTime) {
+		return false
+	}
+
+	if len(q.UpdateTime) != len(question.UpdateTime) {
+		return false
+	}
+
+	if q.QuestionBody != question.QuestionBody {
+		return false
+	}
+
+	for i, v := range q.Values {
+		if v != question.Values[i] {
+			return false
+		}
+	}
+
+	for i, v := range q.Answers {
+		if v != question.Answers[i] {
+			return false
+		}
+	}
+
+	return true
 }

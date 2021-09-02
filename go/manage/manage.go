@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"os"
 
+	"example.com/collection"
 	"example.com/question"
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -29,4 +30,8 @@ func NewDBConnection() (*sql.DB, error) {
 
 func GetQuestion(questionID string) (question.Question, error) {
 	return question.Question{}, nil
+}
+
+func GetCollection(collectionID string) (collection.Collection, error) {
+	return collection.Collection{}, nil
 }

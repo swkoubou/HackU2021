@@ -1,6 +1,8 @@
 package collection
 
 import (
+	"reflect"
+
 	"example.com/account"
 	"example.com/question"
 	"github.com/google/uuid"
@@ -42,4 +44,42 @@ func NewCollection(param CollectionParam) (Collection, error) {
 	c.Questions = []question.Question{} // DBからもってくる
 
 	return c, nil
+}
+
+func (c *Collection) Equals(collection *Collection) bool {
+	if reflect.TypeOf(*c) != reflect.TypeOf(*collection) {
+		return false
+	}
+
+	if c.CollectionID != collection.CollectionID {
+		return false
+	}
+
+	if c.CollectionName != collection.CollectionName {
+		return false
+	}
+
+	if c.CollectionDescripition != collection.CollectionDescripition {
+		return false
+	}
+
+	if !reflect.DeepEqual(c.Auther, collection.Auther) {
+		return false
+	}
+
+	for i, v := range c.Questions {
+		if !v.Equals(&collection.Questions[i]) {
+			return false
+		}
+	}
+
+	if len(c.CreateTime) != len(collection.CreateTime) {
+		return false
+	}
+
+	if len(c.UpdateTime) != len(collection.UpdateTime) {
+		return false
+	}
+
+	return true
 }
