@@ -5,10 +5,14 @@ services:
     container_name: 'go'
     environment:
       - PORT=80
+      - MYSQL_ROOT_PASSWORD=${ROOT_PASS}
+      - MYSQL_DATABASE=${DATABASE}
     networks:
       - home
     volumes:
       - ./go:/go/src/app
+    depends_on:
+      - "db"
     working_dir: /go/src/app
     command: [ "go", "get" ]
     command: [ "go", "install" ]
@@ -24,6 +28,20 @@ services:
       - 8080:80
     volumes:
       - ./nginx/src:/usr/share/nginx/html
+  db:
+    image: mysql:8.0
+    container_name: 'db'
+    environment:
+      - MYSQL_ROOT_PASSWORD=${ROOT_PASS}
+      - MYSQL_DATABASE=${DATABASE}
+      - TZ=Asia/Tokyo
+    env_file:
+      - ./db/db.env
+    networks:
+      - home
+    volumes:
+      - ./db/cnf:/etc/mysql/conf.d
+      - ./db/data:/docker-entrypoint-initdb.d
 networks:
   home:
     driver: bridge
