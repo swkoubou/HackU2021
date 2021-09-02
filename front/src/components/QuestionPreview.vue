@@ -1,5 +1,6 @@
 <template>
   <div class="question-preview">
+    
     <div
       class="question-preview-header"
       v-if="question.questionType === 'anaume'"
@@ -7,6 +8,7 @@
       <IconQuestionAnaume :width="100" :height="100" />
       <h3>穴埋め問題</h3>
     </div>
+
     <div
       class="question-preview-header"
       v-else-if="question.questionType === '4taku'"
@@ -22,8 +24,6 @@
       <IconQuestionCollection :width="100" :height="100" />
       <h3>問題集</h3>
     </div>
-
-    <div class="question-preview-header" v-else>unknown</div>
 
     <div class="question-preview-footer">
       <div class="question-preview-title">「{{ question.name }}」</div>
