@@ -39,7 +39,7 @@ HackU2021にて製作するアプリのリポジトリ
 ### Labelの種類
 
     common: front,back共通、または割り切れないタスク
-    
+
     front: frontendが受け持つタスク
-    
+
     back: backendが受け持つタスク
