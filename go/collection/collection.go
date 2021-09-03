@@ -83,3 +83,7 @@ func (c *Collection) Equals(collection *Collection) bool {
 
 	return true
 }
+
+func GetCollection(collectionID string) (*Collection, error) {
+	return &Collection{}, nil
+}
