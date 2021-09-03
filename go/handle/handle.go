@@ -9,7 +9,20 @@ import (
 	"example.com/question"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
+
+	firebase "firebase.google.com/go"
+	"firebase.google.com/go/auth"
 )
+
+type Handle struct {
+	app  *firebase.App
+	auth *auth.Client
+}
+
+func NewHandle(app *firebase.App, auth *auth.Client) *Handle {
+	return &Handle{app: app, auth: auth}
+
+}
 
 func newUUID() uuid.UUID {
 	uuid, err := uuid.NewUUID()
@@ -84,7 +97,7 @@ var collections []collection.Collection = []collection.Collection{
 	},
 }
 
-func GetQuestionsHandler(c *gin.Context) {
+func (h *Handle) GetQuestionsHandler(c *gin.Context) {
 	questionID := c.Param("questionID")
 
 	if _, err := uuid.Parse(questionID); err != nil {
@@ -104,13 +117,13 @@ func GetQuestionsHandler(c *gin.Context) {
 	c.JSON(http.StatusNotFound, "Not Found")
 }
 
-func GetAllQuestionsHandler(c *gin.Context) {
+func (h *Handle) GetAllQuestionsHandler(c *gin.Context) {
 	//DBからもらう
 
 	c.JSON(http.StatusOK, questions)
 }
 
-func GetCollectionHandler(c *gin.Context) {
+func (h *Handle) GetCollectionHandler(c *gin.Context) {
 	collectionID := c.Param("collectionID")
 
 	if _, err := uuid.Parse(collectionID); err != nil {
@@ -130,6 +143,6 @@ func GetCollectionHandler(c *gin.Context) {
 	c.JSON(http.StatusNotFound, "Not Found")
 }
 
-func GetAllCollectionsHandler(c *gin.Context) {
+func (h *Handle) GetAllCollectionsHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, collections)
 }

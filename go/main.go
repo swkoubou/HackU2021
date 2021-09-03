@@ -1,19 +1,34 @@
 package main
 
 import (
+	"context"
 	"log"
 	"net/http"
 
 	"example.com/handle"
 	"example.com/manage"
 	"example.com/middleware"
+	firebase "firebase.google.com/go"
 	"github.com/gin-gonic/gin"
+	"google.golang.org/api/option"
 )
 
 func main() {
 
+	// firebase init
 	firebaseCredentialsFilePath := "firebase-adminsdk.json"
-	middleware := middleware.NewMiddleware(firebaseCredentialsFilePath)
+	opt := option.WithCredentialsFile(firebaseCredentialsFilePath)
+	app, err := firebase.NewApp(context.Background(), nil, opt)
+	if err != nil {
+		log.Panic("firebase init err: ", err)
+	}
+	auth, err := app.Auth(context.Background())
+	if err != nil {
+		log.Panic("firebase init err: ", err)
+	}
+
+	middleware := middleware.NewMiddleware(app, auth)
+	handle := handle.NewHandle(app, auth)
 
 	r := gin.Default()
 	r.GET("/", func(c *gin.Context) {
@@ -58,9 +73,9 @@ func main() {
 		})
 	}
 
-	auth := r.Group("/private", middleware.Auth())
+	private := r.Group("/private", middleware.Auth())
 	{
-		auth.GET("/mydata", func(c *gin.Context) {
+		private.GET("/mydata", func(c *gin.Context) {
 			c.String(http.StatusOK, "%v\n", "isLogin")
 		})
 	}
