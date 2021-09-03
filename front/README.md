@@ -4,13 +4,21 @@
 
 1. firebaseの設定を環境変数に設定する
 
+```bash
+touch public/auth.json
 ```
-export API_KEY=
-export AUTH_DOMAIN=
-export PROJECT_ID=
-export STORAGE_BUCKET=
-export MESSAGING_SENDER_ID=
-export APP_ID=
+
+#### `public/auth.json` にfirebaseの設定を書く
+
+```json
+{
+  "apiKey": "",
+  "authDomain": "",
+  "projectId": "",
+  "storageBucket": "",
+  "messagingSenderId": "",
+  "appId": ""
+}
 ```
 
 2. yarn install
