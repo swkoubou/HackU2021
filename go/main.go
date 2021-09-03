@@ -53,6 +53,13 @@ func main() {
 		})
 	}
 
+	auth := r.Group("/private")
+	{
+		auth.GET("/mydata", func(c *gin.Context) {
+			c.String(http.StatusOK, "%v\n", "isLogin")
+		})
+	}
+
 	r.GET("/check", func(c *gin.Context) {
 		db, err := manage.NewDBConnection()
 		if err != nil {
