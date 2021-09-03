@@ -2,6 +2,34 @@
 
 HackU2021にて製作するアプリのリポジトリ
 
+
+## ビルドの準備
+
+1. firebase の設定を環境変数に設定する
+
+```bash
+touch front/public/auth.json
+```
+
+#### `front/public/auth.json`に firebase の設定を書く
+
+```json
+{
+  "apiKey": "",
+  "authDomain": "",
+  "projectId": "",
+  "storageBucket": "",
+  "messagingSenderId": "",
+  "appId": ""
+}
+```
+
+## ビルドの方法
+
+```bash
+docker-compose up --build
+```
+
 ## 開発の流れ
 
 1. issueを切る
