@@ -24,6 +24,12 @@ touch front/public/auth.json
 }
 ```
 
+#### `./go`に firebase の秘密鍵を書く
+
+```bash
+cp ~/Downloads/hogehoge-firebase-adminsdk-hogehoge.json ./go/firebase-adminsdk.json
+```
+
 ## ビルドの方法
 
 ```bash

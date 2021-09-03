@@ -6,10 +6,15 @@ import (
 
 	"example.com/handle"
 	"example.com/manage"
+	"example.com/middleware"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
+
+	firebaseCredentialsFilePath := "firebase-adminsdk.json"
+	middleware := middleware.NewMiddleware(firebaseCredentialsFilePath)
+
 	r := gin.Default()
 	r.GET("/", func(c *gin.Context) {
 		c.String(http.StatusOK, "%v\n", "hogehoge")
@@ -53,7 +58,7 @@ func main() {
 		})
 	}
 
-	auth := r.Group("/private")
+	auth := r.Group("/private", middleware.Auth())
 	{
 		auth.GET("/mydata", func(c *gin.Context) {
 			c.String(http.StatusOK, "%v\n", "isLogin")
