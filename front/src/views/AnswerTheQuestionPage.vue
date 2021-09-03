@@ -1,10 +1,18 @@
 <template>
-    <div>{{ this.sampleQuestionData }}</div>
+    <div>
+        <QuestionParent :questionData="this.sampleQuestionData" />
+        <!-- <div>{{ this.sampleQuestionData }}</div> -->
+    </div>
 </template>
 
 <script>
+import QuestionParent from '@/components/Question.vue'
+
 export default {
     name: "AnswerTheQuestionPage",
+    components: {
+        QuestionParent
+    },
     data() {
         return {
             sampleQuestionDatas: require('@/testdata/question.json')
