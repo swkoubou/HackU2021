@@ -5,7 +5,7 @@ HackU2021にて製作するアプリのリポジトリ
 
 ## ビルドの準備
 
-1. firebase の設定を環境変数に設定する
+1. firebase の設定をjsonに設定する
 
 ```bash
 touch front/public/auth.json
