@@ -10,7 +10,7 @@ touch public/auth.json
 
 #### `public/auth.json` にfirebaseの設定を書く
 
-```json:
+```json
 {
   "apiKey": "",
   "authDomain": "",
