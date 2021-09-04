@@ -2,6 +2,40 @@
 
 HackU2021にて製作するアプリのリポジトリ
 
+
+## ビルドの準備
+
+1. firebase の設定をjsonに設定する
+
+```bash
+touch front/public/auth.json
+```
+
+#### `front/public/auth.json`に firebase の設定を書く
+
+```json
+{
+  "apiKey": "",
+  "authDomain": "",
+  "projectId": "",
+  "storageBucket": "",
+  "messagingSenderId": "",
+  "appId": ""
+}
+```
+
+#### `./go`に firebase の秘密鍵を書く
+
+```bash
+cp ~/Downloads/hogehoge-firebase-adminsdk-hogehoge.json ./go/firebase-adminsdk.json
+```
+
+## ビルドの方法
+
+```bash
+docker-compose up --build
+```
+
 ## 開発の流れ
 
 1. issueを切る
@@ -39,7 +73,7 @@ HackU2021にて製作するアプリのリポジトリ
 ### Labelの種類
 
     common: front,back共通、または割り切れないタスク
-    
+
     front: frontendが受け持つタスク
-    
+
     back: backendが受け持つタスク

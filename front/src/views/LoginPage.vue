@@ -8,8 +8,8 @@
 <script>
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
-import * as firebaseui from 'firebaseui'
-import 'firebaseui/dist/firebaseui.css'
+import firebaseui from 'firebaseui-ja/dist/npm__ja'
+import 'firebaseui-ja/dist/firebaseui.css'
 export default {
   name: 'LoginPage',
   mounted() {
@@ -20,20 +20,31 @@ export default {
       // domの生成が出来ていない時はuiの生成をやめる
       return
     }
-    let ui =
-      firebaseui.auth.AuthUI.getInstance() ||
-      new firebaseui.auth.AuthUI(firebase.auth())
-    ui.start(firebaseuiAuthContainer, {
-      signInOptions: [firebase.auth.EmailAuthProvider.PROVIDER_ID],
-      callbacks: {
-        signInSuccessWithAuthResult: async (response) => {
-          const idToken = await response.user.getIdToken(true)
-          localStorage.setItem('login_data', idToken.toString())
-          this.$router.push('/loginsuccesspreviewpage')
-          return false
+    if (
+      firebaseui.auth.AuthUI.getInstance() != null &&
+      firebaseuiAuthContainer.innerHTML == ''
+    ) {
+      // インスタンスがあるのにUIが消えてたら復元する
+      firebaseuiAuthContainer.replaceWith(
+        firebaseui.auth.AuthUI.getInstance().D.a
+      )
+    } else {
+      // UIがなければ作る
+      const ui =
+        firebaseui.auth.AuthUI.getInstance() ||
+        new firebaseui.auth.AuthUI(firebase.auth())
+      ui.start(firebaseuiAuthContainer, {
+        signInOptions: [firebase.auth.EmailAuthProvider.PROVIDER_ID],
+        signInSuccessUrl: 'http://localhost:8080/#/loginsuccesspreviewpage',
+        callbacks: {
+          signInSuccessWithAuthResult: async (response) => {
+            const idToken = await response.user.getIdToken(true)
+            localStorage.setItem('login_data', idToken.toString())
+            return true
+          },
         },
-      },
-    })
+      })
+    }
   },
 }
 </script>

@@ -1,7 +1,9 @@
 version: "3.7"
 services:
   go:
-    image: golang:1.17-rc-alpine
+    build:
+      context: ./go
+      dockerfile: Dockerfile
     container_name: 'go'
     environment:
       - PORT=80
@@ -9,14 +11,8 @@ services:
       - MYSQL_DATABASE=${DATABASE}
     networks:
       - home
-    volumes:
-      - ./go:/go/src/app
     depends_on:
       - "db"
-    working_dir: /go/src/app
-    command: [ "go", "get" ]
-    command: [ "go", "install" ]
-    command: [ "go", "run", "main.go" ]
   nginx:
     build:
       context: ./nginx
@@ -26,8 +22,13 @@ services:
       - home
     ports:
       - 8080:80
-    volumes:
-      - ./nginx/src:/usr/share/nginx/html
+  front:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    container_name: 'front'
+    networks:
+      - home
   db:
     image: mysql:8.0
     container_name: 'db'
