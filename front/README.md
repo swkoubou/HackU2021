@@ -30,7 +30,7 @@ yarn install
 3. firebaseuiのライブラリにパッチを当てる
 
 ```bash
-sed -i -e "s#^import firebase from 'firebase/app'#import firebase from 'firebase/compat/app'#" ./node_modules/firebaseui/dist/esm.js
+sed -i  -e "s#^(function() { var firebase=require('firebase/app');require('firebase/auth')#(function() { var firebase=require('firebase/compat/app');require('firebase/compat/auth')#" ./node_modules/firebaseui-ja/dist/npm__ja.js
 ```
 
 ### Compiles and hot-reloads for development
