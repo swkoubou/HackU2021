@@ -234,33 +234,3 @@ func TestSetQuestion(t *testing.T) {
 		}
 	}
 }
-
-func TestUpdateQuestion(t *testing.T) {
-	type questionCase struct {
-		question question.Question
-		err      bool
-	}
-	type testCase struct {
-		arg  string
-		want questionCase
-	}
-
-	cases := []testCase{
-		{
-			arg: users[0].ID(),
-			want: questionCase{
-				question: question.Question{
-					QuestionID:   newUUID("1a4ee1ec-1073-f9fb-8281-f3041d15a9d2"),
-					Auther:       users[0],
-					QuestionTag:  []string{"国語", "算数", "理科", "社会"},
-					QuestionType: "4taku",
-					CreateTime:   "1000-01-01 00:00:00",
-					UpdateTime:   "1000-01-01 00:00:00",
-					QuestionBody: "hogeってhoge?",
-					Values:       []string{"hoge", "huga", "piyo", "foo"},
-					Answers:      []string{"hoge"},
-				},
-			},
-		},
-	}
-}

@@ -246,10 +246,48 @@ func SetQuestion(q *QuestionParam) (string, error) {
 	return string(""), nil
 }
 
+/*
+引数: Question
+type Question struct {
+	QuestionID   uuid.UUID       `json:"questionID"`	必須
+	Auther       account.Account `json:"auther"`		必須
+	QuestionTag  []string        `json:"questionTag"`	0個以上
+	QuestionType string          `json:"questionType"`	必須
+	CreateTime   string          `json:"createTime"`	更新しない
+	UpdateTime   string          `json:"updateTime"`	勝手に更新されるはず
+	QuestionBody string          `json:"questionBody"`	QuestionTypeがanaumeの場合"以下の空欄を埋めなさい"で固定
+	Values       []string        `json:"values"`		必須: QuestionTypeで適切かどうか判別してください
+	Answers      []string        `json:"answers"`		必須: QuestionTypeで適切かどうか判別してください
+}
+
+戻り値: string, error
+データの更新が成功した場合はQuestionIDとnilを返す
+データの更新に失敗した場合は空文字とerrorを返す
+*/
 func UpdateQuestion(q *Question) (string, error) {
 	return string(""), nil
 }
 
+/*
+引数: string
+QuestionID
+
+戻り値: string, error
+データの削除が成功した場合はnilを返す
+データの削除に失敗した場合はerrorを返す
+*/
 func DeleteQuestion(id string) error {
 	return nil
+}
+
+/*
+引数: string
+QuestionID
+
+戻り値: Account, error
+データの取得が成功した場合はAccountとnilを返す
+データの取得に失敗した場合はnilとerrorを返す
+*/
+func GetAuther(id string) (*account.Account, error) {
+	return &account.Account{}, nil
 }
