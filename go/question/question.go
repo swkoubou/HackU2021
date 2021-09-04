@@ -12,6 +12,7 @@ import (
 type Question struct {
 	QuestionID   uuid.UUID       `json:"questionID"`
 	Auther       account.Account `json:"auther"`
+	QuestionName string          `json:"questionName"`
 	QuestionTag  []string        `json:"questionTag"`
 	QuestionType string          `json:"questionType"`
 	CreateTime   string          `json:"createTime"`
@@ -23,6 +24,7 @@ type Question struct {
 
 type QuestionParam struct {
 	UserID       string
+	QuestionName string
 	QuestionTag  []string
 	QuestionType string
 	QuestionBody string
@@ -129,11 +131,9 @@ func GetQuestion(questionID string) (*Question, error) {
 
 	var uuid_tmp1, uuid_tmp2 string
 
-	var tmp string
-
 	// ここからデータベースでの処理
 	for rows1.Next() {
-		if err := rows1.Scan(&uuid_tmp1, &tmp, &uuid_tmp2, &user.QuestionType, &user.CreateTime, &user.UpdateTime, &user.QuestionBody); err != nil {
+		if err := rows1.Scan(&uuid_tmp1, &user.QuestionName, &uuid_tmp2, &user.QuestionType, &user.CreateTime, &user.UpdateTime, &user.QuestionBody); err != nil {
 			return nil, err
 		}
 		user.QuestionID, _ = uuid.Parse(uuid_tmp1)
