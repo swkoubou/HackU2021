@@ -36,9 +36,9 @@ type QuestionParam struct {
 	Answers      []string
 }
 
-var layout = "2006-01-02 15:04:05"
-
+// 取得した時間を指定されたフォーマットへ変換する関数
 func timeToString(t time.Time) string {
+	layout := "2006-01-02 15:04:05"
 	str := t.Format(layout)
 	return str
 }
@@ -254,10 +254,10 @@ type QuestionParam struct {
 データの挿入が成功した場合はQuestionIDとnilを返す
 データの挿入に失敗した場合は空文字とerrorを返す
 */
-/*
+
+// 渡されたQuestionParam構造体をデータベースに保存する関数
 func SetQuestion(q *QuestionParam) (string, error) {
 	var question Question
-
 	// データベースへのアクセス
 	//db, err := manage.NewDBConnection()
 
@@ -297,7 +297,7 @@ func SetQuestion(q *QuestionParam) (string, error) {
 	// レイアウトの変換
 	time_now := timeToString(t)
 
-	stmtInsert1, err := db.Prepare("INSERT IGNORE INTO question (question_id,question_name,user_id,question_type,create_at,update_at,question_body) VALUES(?,?,?,?,?,?,?)")
+	stmtInsert1, err := db.Prepare("INSERT INTO question (question_id,question_name,user_id,question_type,created_at,updated_at,question_body) VALUES(?,?,?,?,?,?,?)")
 
 	if err != nil {
 		return string(""), nil
@@ -309,20 +309,136 @@ func SetQuestion(q *QuestionParam) (string, error) {
 		return string(""), nil
 	}
 
-	// ここでquestion_tagテーブルの行数を調べている
+	var subject_nums []int
 
-	name_row, err := db.Query("SELECT user_name FROM user WHERE user_id = ?", q.UserID)
+	// QuestionTagが入っている場合に処理を行う
+	//if len(q.QuestionTag) != 0 {
+	for i := 0; i < len(q.QuestionTag); i++ {
 
-	// ここでQuestionTagを挿入する
+		var subject_name string
 
-	stmtInsert2, err := db.Prepare("INSERT IGNORE INTO question (question_id,question_name,user_id,question_type,create_at,update_at,question_body) VALUES(?,?,?,?,?,?,?)")
+		subject_name = q.QuestionTag[i]
+
+		subject_row, err := db.Query("SELECT question_tag_id FROM question_tag WHERE question_tag_name = ?", subject_name)
+
+		if err != nil {
+			return string(""), nil
+		}
+		// ここまで表示できている
+		fmt.Println(subject_name)
+		fmt.Println(subject_row)
+
+		fmt.Println(err)
+
+		for subject_row.Next() {
+
+			var tmp_question_tag_id int
+
+			if err := subject_row.Scan(&tmp_question_tag_id); err != nil {
+				// 存在しないため，挿入処理を行う
+				// 行数をカウントすることで新しく挿入するquestion_tag_idを作成している
+				count_row, err := db.Query("SELECT count(question_tag_id) FROM question_tag")
+
+				var count_tmp int
+
+				for count_row.Next() {
+					if err := count_row.Scan(&count_tmp); err != nil {
+						return string(""), nil
+					}
+
+				}
+
+				count_tmp++
+
+				stmtInsert2, err := db.Prepare("INSERT IGNORE INTO question_tag (question_tag_id,question_tag_name) VALUES(?,?)")
+
+				if err != nil {
+					return string(""), nil
+				}
+
+				_, err = stmtInsert2.Exec(count_tmp, subject_name)
+
+				if err != nil {
+					return string(""), nil
+				}
+				// idを配列に代入
+				subject_nums = append(subject_nums, count_tmp)
+
+			} else {
+				// 存在する場合
+				// idを配列に代入
+				subject_nums = append(subject_nums, tmp_question_tag_id)
+			}
+		}
+	}
+
+	// question_tag_mapに挿入する処理
+	for i := 0; i < len(subject_nums); i++ {
+
+		var row_num int
+
+		row_num = subject_nums[i]
+
+		stmtInsert3, err := db.Prepare("INSERT IGNORE INTO question_tag_map (question_id,question_tag_id) VALUES(?,?)")
+
+		if err != nil {
+			return string(""), nil
+		}
+
+		_, err = stmtInsert3.Exec(question.QuestionID, row_num)
+
+		if err != nil {
+			return string(""), nil
+		}
+	}
+
+	// question_value_mapに挿入する処理
+
+	for i := 0; i < len(q.Values); i++ {
+
+		var question_value string
+
+		question_value = q.Values[i]
+
+		stmtInsert4, err := db.Prepare("INSERT IGNORE INTO question_value_map (question_id,value_order,question_value) VALUES(?,?,?)")
+
+		if err != nil {
+			return string(""), nil
+		}
+
+		_, err = stmtInsert4.Exec(question.QuestionID, i, question_value)
+
+		if err != nil {
+			return string(""), nil
+		}
+	}
+
+	// question_answer_mapに挿入する処理
+
+	for i := 0; i < len(q.Answers); i++ {
+		var answer_tmp string
+
+		answer_tmp = q.Answers[i]
+
+		stmtInsert5, err := db.Prepare("INSERT IGNORE INTO question_answer_map (question_id,answer_order,question_answer) VALUES(?,?,?)")
+
+		if err != nil {
+			return string(""), nil
+		}
+
+		_, err = stmtInsert5.Exec(question.QuestionID, i, answer_tmp)
+
+		if err != nil {
+			return string(""), nil
+		}
+	}
 
 	// 成功したら
-	// return question.QuestionID.String(), nil
+	return question.QuestionID.String(), nil
 
 	//return string(""), nil
 }
-*/
+
 /*
 引数: Question
 type Question struct {
@@ -365,34 +481,57 @@ QuestionID
 データの取得が成功した場合はAccountとnilを返す
 データの取得に失敗した場合はnilとerrorを返す
 */
-func GetAuther(id string) (*account.Account, error) {
+func GetAuthor(id string) (*account.Account, error) {
 	return &account.Account{}, nil
 }
 
 func main() {
 
-	db, err := sql.Open("mysql", "root@/MYSQL_DATABASE")
+	var test QuestionParam
 
-	// エラー処理
+	test.UserID = "XYZ"
+	test.QuestionName = "ひぐらし"
+	test.QuestionTag = append(test.QuestionTag, "国語")
+	test.QuestionTag = append(test.QuestionTag, "アニメ")
+	test.QuestionType = "4taku"
+	test.QuestionBody = "にぱー"
+	test.Values = append(test.Values, "orz")
+	test.Values = append(test.Values, "aiueo")
+	test.Answers = append(test.Answers, "面白い")
+	test.Answers = append(test.Answers, "神アニメ")
+
+	ans, err := SetQuestion(&test)
+
 	if err != nil {
-		fmt.Println("err")
+		fmt.Println("error")
 	}
 
-	// returnされた後に実行され，DBとの接続を切る
-	defer db.Close()
+	fmt.Println(ans)
 
-	var count_tmp int
+	/*
+		// 行のカウント
+			db, err := sql.Open("mysql", "root@/MYSQL_DATABASE")
 
-	count_row, err := db.Query("SELECT count(question_tag_id) FROM question_tag")
+			// エラー処理
+			if err != nil {
+				fmt.Println("err")
+			}
 
-	for count_row.Next() {
-		if err := count_row.Scan(&count_tmp); err != nil {
-			fmt.Println("error")
-		}
-	}
+			// returnされた後に実行され，DBとの接続を切る
+			defer db.Close()
 
-	fmt.Println(count_tmp)
+			var count_tmp int
 
+			count_row, err := db.Query("SELECT count(question_tag_id) FROM question_tag")
+
+			for count_row.Next() {
+				if err := count_row.Scan(&count_tmp); err != nil {
+					fmt.Println("error")
+				}
+			}
+
+			fmt.Println(count_tmp)
+	*/
 	/*
 		// GetQuestionの実行
 		var err error
