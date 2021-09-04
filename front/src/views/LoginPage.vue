@@ -8,8 +8,8 @@
 <script>
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
-import * as firebaseui from 'firebaseui'
-import 'firebaseui/dist/firebaseui.css'
+import firebaseui from 'firebaseui-ja/dist/npm__ja'
+import 'firebaseui-ja/dist/firebaseui.css'
 export default {
   name: 'LoginPage',
   mounted() {
