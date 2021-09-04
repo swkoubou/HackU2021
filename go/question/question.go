@@ -6,8 +6,10 @@ import (
 	"errors"
 	"fmt"
 	"reflect"
+	"time"
 
 	"example.com/account"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/google/uuid"
 )
 
@@ -32,6 +34,13 @@ type QuestionParam struct {
 	QuestionBody string
 	Values       []string
 	Answers      []string
+}
+
+var layout = "2006-01-02 15:04:05"
+
+func timeToString(t time.Time) string {
+	str := t.Format(layout)
+	return str
 }
 
 func (q *Question) ID() string {
@@ -114,7 +123,6 @@ func GetQuestion(questionID string) (*Question, error) {
 
 	db, err := sql.Open("mysql", "root@/MYSQL_DATABASE")
 
-	fmt.Println(db)
 	// エラー処理
 	if err != nil {
 		return nil, err
@@ -224,7 +232,6 @@ func GetQuestion(questionID string) (*Question, error) {
 		isEmpty = errors.New("true")
 		return nil, isEmpty
 	}
-	fmt.Println(user)
 	// user を question.Questionとして定義している.
 	return &user, nil
 
@@ -235,6 +242,7 @@ func GetQuestion(questionID string) (*Question, error) {
 引数: QuestionParam
 type QuestionParam struct {
 	UserID       string		必須
+	QuestionName string     必須
 	QuestionTag  []string	0個以上
 	QuestionType string		必須
 	QuestionBody string		QuestionTypeがanaumeの場合"以下の空欄を埋めなさい"で固定
@@ -246,10 +254,75 @@ type QuestionParam struct {
 データの挿入が成功した場合はQuestionIDとnilを返す
 データの挿入に失敗した場合は空文字とerrorを返す
 */
+/*
 func SetQuestion(q *QuestionParam) (string, error) {
-	return string(""), nil
-}
+	var question Question
 
+	// データベースへのアクセス
+	//db, err := manage.NewDBConnection()
+
+	db, err := sql.Open("mysql", "root@/MYSQL_DATABASE")
+
+	// エラー処理
+	if err != nil {
+		return string(""), nil
+	}
+
+	// returnされた後に実行され，DBとの接続を切る
+	defer db.Close()
+
+	// questionテーブルに挿入している．
+	// ここで，挿入しているのは
+	// question_id , question_name , user_id , question_type , create_at , update_at , question_body　である
+
+	name_row, err := db.Query("SELECT user_name FROM user WHERE user_id = ?", q.UserID)
+
+	if err != nil {
+		return string(""), nil
+	}
+
+	for name_row.Next() {
+		if err := name_row.Scan(&question.Auther.UserName); err != nil {
+			return string(""), nil
+		}
+	}
+
+	// 最初のinsert文
+
+	question.QuestionID = uuid.New()
+
+	//　現在時刻の取得
+	t := time.Now()
+
+	// レイアウトの変換
+	time_now := timeToString(t)
+
+	stmtInsert1, err := db.Prepare("INSERT IGNORE INTO question (question_id,question_name,user_id,question_type,create_at,update_at,question_body) VALUES(?,?,?,?,?,?,?)")
+
+	if err != nil {
+		return string(""), nil
+	}
+
+	_, err = stmtInsert1.Exec(question.QuestionID, q.QuestionName, q.UserID, q.QuestionType, time_now, time_now, q.QuestionBody)
+
+	if err != nil {
+		return string(""), nil
+	}
+
+	// ここでquestion_tagテーブルの行数を調べている
+
+	name_row, err := db.Query("SELECT user_name FROM user WHERE user_id = ?", q.UserID)
+
+	// ここでQuestionTagを挿入する
+
+	stmtInsert2, err := db.Prepare("INSERT IGNORE INTO question (question_id,question_name,user_id,question_type,create_at,update_at,question_body) VALUES(?,?,?,?,?,?,?)")
+
+	// 成功したら
+	// return question.QuestionID.String(), nil
+
+	//return string(""), nil
+}
+*/
 /*
 引数: Question
 type Question struct {
@@ -297,12 +370,37 @@ func GetAuther(id string) (*account.Account, error) {
 }
 
 func main() {
-	//var tt Question
-	var err error
-	st := "1a4ee1ec-1073-f9fb-8281-f3041d15a9d2"
-	tt, err := GetQuestion(st)
+
+	db, err := sql.Open("mysql", "root@/MYSQL_DATABASE")
+
+	// エラー処理
 	if err != nil {
-		fmt.Println("hello")
+		fmt.Println("err")
 	}
-	fmt.Println(tt)
+
+	// returnされた後に実行され，DBとの接続を切る
+	defer db.Close()
+
+	var count_tmp int
+
+	count_row, err := db.Query("SELECT count(question_tag_id) FROM question_tag")
+
+	for count_row.Next() {
+		if err := count_row.Scan(&count_tmp); err != nil {
+			fmt.Println("error")
+		}
+	}
+
+	fmt.Println(count_tmp)
+
+	/*
+		// GetQuestionの実行
+		var err error
+		st := "1a4ee1ec-1073-f9fb-8281-f3041d15a9d2"
+		tt, err := GetQuestion(st)
+		if err != nil {
+			fmt.Println("hello")
+		}
+		fmt.Println(tt)
+	*/
 }
