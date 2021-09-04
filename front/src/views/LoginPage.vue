@@ -24,7 +24,10 @@ export default {
       firebaseui.auth.AuthUI.getInstance() ||
       new firebaseui.auth.AuthUI(firebase.auth())
     ui.start(firebaseuiAuthContainer, {
-      signInOptions: [firebase.auth.EmailAuthProvider.PROVIDER_IDy],
+      signInOptions: [
+        firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      ],
       signInSuccessUrl: 'http://localhost:8080/#/loginsuccesspreviewpage',
       callbacks: {
         signInSuccessWithAuthResult: async (response) => {
