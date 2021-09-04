@@ -10,7 +10,6 @@ import (
 
 	firebase "firebase.google.com/go"
 	"firebase.google.com/go/auth"
-	"google.golang.org/api/option"
 )
 
 type Middleware struct {
@@ -18,16 +17,7 @@ type Middleware struct {
 	auth *auth.Client
 }
 
-func NewMiddleware(firebaseCredentialsFilePath string) *Middleware {
-	opt := option.WithCredentialsFile(firebaseCredentialsFilePath)
-	app, err := firebase.NewApp(context.Background(), nil, opt)
-	if err != nil {
-		log.Panic("firebase init err: ", err)
-	}
-	auth, err := app.Auth(context.Background())
-	if err != nil {
-		log.Panic("firebase init err: ", err)
-	}
+func NewMiddleware(app *firebase.App, auth *auth.Client) *Middleware {
 	return &Middleware{app: app, auth: auth}
 }
 
