@@ -12,7 +12,7 @@ import (
 type Question struct {
 	QuestionID   uuid.UUID       `json:"questionID"`
 	Auther       account.Account `json:"auther"`
-	QuestionName string          `json:questionName`
+	QuestionName string          `json:"questionName"`
 	QuestionTag  []string        `json:"questionTag"`
 	QuestionType string          `json:"questionType"`
 	CreateTime   string          `json:"createTime"`
