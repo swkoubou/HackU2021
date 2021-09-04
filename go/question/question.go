@@ -1,11 +1,13 @@
-package question
+//package question
+package main
 
 import (
+	"database/sql"
 	"errors"
+	"fmt"
 	"reflect"
 
 	"example.com/account"
-	"example.com/manage"
 	"github.com/google/uuid"
 )
 
@@ -105,12 +107,14 @@ func (q *Question) Equals(question *Question) bool {
 }
 
 func GetQuestion(questionID string) (*Question, error) {
-
 	var user Question
 
 	// データベースへのアクセス
-	db, err := manage.NewDBConnection()
+	//db, err := manage.NewDBConnection()
 
+	db, err := sql.Open("mysql", "root@/MYSQL_DATABASE")
+
+	fmt.Println(db)
 	// エラー処理
 	if err != nil {
 		return nil, err
@@ -220,7 +224,7 @@ func GetQuestion(questionID string) (*Question, error) {
 		isEmpty = errors.New("true")
 		return nil, isEmpty
 	}
-
+	fmt.Println(user)
 	// user を question.Questionとして定義している.
 	return &user, nil
 
@@ -290,4 +294,15 @@ QuestionID
 */
 func GetAuther(id string) (*account.Account, error) {
 	return &account.Account{}, nil
+}
+
+func main() {
+	//var tt Question
+	var err error
+	st := "1a4ee1ec-1073-f9fb-8281-f3041d15a9d2"
+	tt, err := GetQuestion(st)
+	if err != nil {
+		fmt.Println("hello")
+	}
+	fmt.Println(tt)
 }
