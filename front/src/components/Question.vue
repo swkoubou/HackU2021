@@ -14,9 +14,8 @@
       <h3>unknown : {{ questionData.questionType }}</h3>
     </div>
     <br />
-    <button @click="checkTheAnswer">答え合わせ</button>
+    <button v-on:click="getUserAnswersAndGoScorePage()">答え合わせ</button>
     <div>ユーザー回答Debug : {{ this.userAnswers }}</div>
-    <div>答案Debug : {{ this.questionAnswers }}</div>
   </div>
 </template>
 
@@ -36,49 +35,52 @@ export default {
   data() {
     return {
       userAnswers: [],
-      questionAnswers: [],
+      answerData: [],
     }
   },
   created() {
     // ユーザーの回答を保存するための配列を作ります。
-    // ついでに答案、答案データ格納用のmapも作ります。
+    // ついでにスコア表示画面に持っていくデータも作ります。
     if (this.questionData.questionType === 'collection') {
       for (let i = 0; i < this.questionData.questions.length; i++) {
         this.userAnswers.push([])
-        // this.questionAnswers[i] = this.questionData.questions[i].answers
-        this.questionAnswers[i] = []
+        this.answerData[i] = []
         for (
           let j = 0;
           j < this.questionData.questions[i].answers.length;
           j++
         ) {
-          this.questionAnswers[i].push({
+          this.answerData[i].push({
             questionAnswer: this.questionData.questions[i].answers[j],
-            userAnswer: '',
+            userAnswer: null,
           })
         }
       }
     } else {
       this.userAnswers.push([])
-      // this.questionAnswers[0] = this.questionData.answers
-      this.questionAnswers[0] = []
+      this.answerData[0] = []
       for (let k = 0; k < this.questionData.answers.length; k++) {
-        this.questionAnswers[0].push({
+        this.answerData[0].push({
           questionAnswer: this.questionData.answers[k],
-          userAnswer: '',
+          userAnswer: null,
         })
       }
     }
   },
   methods: {
     // todo
-    checkTheAnswer() {
+    getUserAnswersAndGoScorePage() {
       for (let i = 0; i < this.userAnswers.length; i++) {
-        // 問題ごとに
-        for (let j = 0; j < this.userAnswers[j].length; j++) {
-          // 回答ごとに
+        // 問題
+        for (let j = 0; j < this.userAnswers[i].length; j++) {
+          // 回答
+          this.answerData[i][j].userAnswer = this.userAnswers[i][j]
         }
       }
+      console.log(JSON.stringify(this.answerData))
+    },
+    sayhello() {
+      alert('hello')
     },
   },
 }
