@@ -34,7 +34,7 @@ const routes = [
   {
     path: '/answerthequestion',
     name: 'AnswerTheQuestionPage',
-    component: AnswerTheQuestionPage
+    component: AnswerTheQuestionPage,
   },
   {
     path: '/login',
