@@ -20,31 +20,22 @@ export default {
       // domの生成が出来ていない時はuiの生成をやめる
       return
     }
-    if (
-      firebaseui.auth.AuthUI.getInstance() != null &&
-      firebaseuiAuthContainer.innerHTML == ''
-    ) {
-      // インスタンスがあるのにUIが消えてたら復元する
-      firebaseuiAuthContainer.replaceWith(
-        firebaseui.auth.AuthUI.getInstance().D.a
-      )
-    } else {
-      // UIがなければ作る
-      const ui =
-        firebaseui.auth.AuthUI.getInstance() ||
-        new firebaseui.auth.AuthUI(firebase.auth())
-      ui.start(firebaseuiAuthContainer, {
-        signInOptions: [firebase.auth.EmailAuthProvider.PROVIDER_ID],
-        signInSuccessUrl: 'http://localhost:8080/#/loginsuccesspreviewpage',
-        callbacks: {
-          signInSuccessWithAuthResult: async (response) => {
-            const idToken = await response.user.getIdToken(true)
-            localStorage.setItem('login_data', idToken.toString())
-            return true
-          },
+    const ui =
+      firebaseui.auth.AuthUI.getInstance() ||
+      new firebaseui.auth.AuthUI(firebase.auth())
+    ui.start(firebaseuiAuthContainer, {
+      signInOptions: [firebase.auth.EmailAuthProvider.PROVIDER_IDy],
+      signInSuccessUrl: 'http://localhost:8080/#/loginsuccesspreviewpage',
+      callbacks: {
+        signInSuccessWithAuthResult: async (response) => {
+          const idToken = await response.user.getIdToken(true)
+          localStorage.setItem('login_data', idToken.toString())
+          this.$router.push('/loginsuccesspreviewpage')
+          ui.reset()
+          return false
         },
-      })
-    }
+      },
+    })
   },
 }
 </script>
