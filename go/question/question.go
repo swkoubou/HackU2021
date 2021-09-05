@@ -4,7 +4,6 @@ package main
 import (
 	"database/sql"
 	"errors"
-	"fmt"
 	"reflect"
 
 	"example.com/account"
@@ -112,9 +111,7 @@ func GetQuestion(questionID string) (*Question, error) {
 	var user Question
 
 	// データベースへのアクセス
-	//db, err := manage.NewDBConnection()
-
-	db, err := sql.Open("mysql", "root@/MYSQL_DATABASE")
+	db, err := manage.NewDBConnection()
 
 	// エラー処理
 	if err != nil {
@@ -467,7 +464,7 @@ QuestionID
 */
 func DeleteQuestion(id string) error {
 
-	db, err := sql.Open("mysql", "root@/MYSQL_DATABASE")
+	db, err := manage.NewDBConnection()
 
 	// エラー処理
 	if err != nil {
@@ -532,16 +529,64 @@ QuestionID
 データの取得に失敗した場合はnilとerrorを返す
 */
 func GetAuthor(id string) (*account.Account, error) {
-	return &account.Account{}, nil
+	var author account.Account
+
+	author.UserID, _ = uuid.Parse(id)
+
+	db, err := manage.NewDBConnection()
+
+	// エラー処理
+	if err != nil {
+		return nil, err
+	}
+
+	// returnされた後に実行され，DBとの接続を切る
+	defer db.Close()
+
+	rows, err := db.Query("SELECT user_name FROM user WHERE user_id = ?", id)
+
+	defer rows.Close()
+
+	// エラー処理
+	if err != nil {
+		return nil, err
+	}
+
+	// ここからデータベースでの処理
+	for rows.Next() {
+		if err := rows.Scan(&author.UserName); err != nil {
+			return nil, err
+		}
+	}
+
+	// author を account.Account{}としている
+
+	return &author, nil
+	//return &account.Account{}, nil
 }
 
 func main() {
 
-	st := "dec9318b-83db-4f3c-bc14-62037c0ff722"
+	/*
+	   // GetAuthorのテスト
+	   	st := "116aa423-d551-2b81-2091-132e022d40c5"
 
-	ans := DeleteQuestion(st)
+	   	ans, err := GetAuthor(st)
 
-	fmt.Println(ans)
+	   	if err != nil {
+	   		fmt.Println("error")
+	   	}
+
+	   	fmt.Println(ans)
+	*/
+	/*
+		// DeleteQuestionのテスト
+		st := "dec9318b-83db-4f3c-bc14-62037c0ff722"
+
+		ans := DeleteQuestion(st)
+
+		fmt.Println(ans)
+	*/
 	/*
 		// setQuestionのテスト
 		var test QuestionParam
