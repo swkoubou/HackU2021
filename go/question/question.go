@@ -4,6 +4,7 @@ package main
 import (
 	"database/sql"
 	"errors"
+	"fmt"
 	"reflect"
 
 	"example.com/account"
@@ -14,7 +15,7 @@ import (
 
 type Question struct {
 	QuestionID   uuid.UUID       `json:"questionID"`
-	Auther       account.Account `json:"auther"`
+	Auther       account.Account `json:"author"`
 	QuestionName string          `json:"questionName"`
 	QuestionTag  []string        `json:"questionTag"`
 	QuestionType string          `json:"questionType"`
@@ -437,6 +438,7 @@ type Question struct {
 データの更新が成功した場合はQuestionIDとnilを返す
 データの更新に失敗した場合は空文字とerrorを返す
 */
+
 func UpdateQuestion(q *Question) (string, error) {
 
 	db, err := sql.Open("mysql", "root@/MYSQL_DATABASE")
@@ -448,6 +450,9 @@ func UpdateQuestion(q *Question) (string, error) {
 
 	// returnされた後に実行され，DBとの接続を切る
 	defer db.Close()
+
+	// update
+	// stmtUpdate, err := db.Prepare("UPDATE users SET name=? WHERE id=?")
 
 	return string(""), nil
 }
@@ -461,6 +466,60 @@ QuestionID
 データの削除に失敗した場合はerrorを返す
 */
 func DeleteQuestion(id string) error {
+
+	db, err := sql.Open("mysql", "root@/MYSQL_DATABASE")
+
+	// エラー処理
+	if err != nil {
+		return err
+	}
+
+	// returnされた後に実行され，DBとの接続を切る
+	defer db.Close()
+
+	// 消すデータベース
+	// question_answer_map , question_tag_map , question_value_map , question
+
+	stmtDelete1, err := db.Prepare("DELETE FROM question_answer_map WHERE question_id=?")
+	if err != nil {
+		return err
+	}
+
+	_, err = stmtDelete1.Exec(id)
+	if err != nil {
+		return err
+	}
+
+	stmtDelete2, err := db.Prepare("DELETE FROM question_tag_map WHERE question_id=?")
+	if err != nil {
+		return err
+	}
+
+	_, err = stmtDelete2.Exec(id)
+	if err != nil {
+		return err
+	}
+
+	stmtDelete3, err := db.Prepare("DELETE FROM question_value_map WHERE question_id=?")
+	if err != nil {
+		return err
+	}
+
+	_, err = stmtDelete3.Exec(id)
+	if err != nil {
+		return err
+	}
+
+	stmtDelete4, err := db.Prepare("DELETE FROM question WHERE question_id=?")
+	if err != nil {
+		return err
+	}
+
+	_, err = stmtDelete4.Exec(id)
+	if err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -478,6 +537,11 @@ func GetAuthor(id string) (*account.Account, error) {
 
 func main() {
 
+	st := "dec9318b-83db-4f3c-bc14-62037c0ff722"
+
+	ans := DeleteQuestion(st)
+
+	fmt.Println(ans)
 	/*
 		// setQuestionのテスト
 		var test QuestionParam
