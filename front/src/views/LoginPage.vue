@@ -33,7 +33,6 @@ export default {
         signInSuccessWithAuthResult: async (response) => {
           const idToken = await response.user.getIdToken(true)
           localStorage.setItem('login_data', idToken.toString())
-          this.$router.push('/loginsuccesspreviewpage')
           ui.reset()
           return false
         },
