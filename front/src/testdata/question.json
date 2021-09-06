@@ -11,12 +11,7 @@
     "createTime": "2000/01/01 00:00:00",
     "updateTime": "2000/01/01 00:00:00",
     "answers": ["サトシ"],
-    "value": [
-      "サトシ",
-      "カスミ",
-      "タケシ",
-      "シンジ"
-    ]
+    "value": ["サトシ", "カスミ", "タケシ", "シンジ"]
   },
   "q_anaume": {
     "questionId": "uuid",
@@ -29,10 +24,7 @@
     },
     "createTime": "2000/01/01 00:00:00",
     "updateTime": "2000/01/01 00:00:00",
-    "answers": [
-      "くもり",
-      "はれ"
-    ]
+    "answers": ["くもり", "はれ"]
   },
   "q_collection": {
     "questionType": "collection",
@@ -44,7 +36,8 @@
     },
     "createTime": "2000/01/01 00:00:00",
     "updateTime": "2000/01/01 00:00:00",
-    "questions": [{
+    "questions": [
+      {
         "questionId": "uuid",
         "name": "ポケモンの問題",
         "question": "アニメポケットモンスターシリーズに登場する主人公の名前は？",
@@ -56,12 +49,7 @@
         "createTime": "2000/01/01 00:00:00",
         "updateTime": "2000/01/01 00:00:00",
         "answers": ["サトシ"],
-        "value": [
-          "サトシ",
-          "カスミ",
-          "タケシ",
-          "シンジ"
-        ]
+        "value": ["サトシ", "カスミ", "タケシ", "シンジ"]
       },
       {
         "questionId": "uuid",
@@ -74,11 +62,122 @@
         },
         "createTime": "2000/01/01 00:00:00",
         "updateTime": "2000/01/01 00:00:00",
-        "answers": [
-          "くもり",
-          "はれ"
-        ]
+        "answers": ["くもり", "はれ"]
       }
     ]
-  }
+  },
+  "multipleProblemSamples": [
+    {
+      "questionID": "aea20873-0e55-11ec-bf6a-0242ac140005",
+      "author": {
+        "userID": "aea20225-0e55-11ec-bf6a-0242ac140005",
+        "displayName": "hoge"
+      },
+      "questionTag": ["国語", "算数", "理科", "社会"],
+      "questionType": "4taku",
+      "createTime": "9999-12-31 23:59:59.999999",
+      "updateTime": "",
+      "questionBody": "hogeってhoge?",
+      "values": ["hoge", "huga", "piyo", "foo"],
+      "answers": ["hoge"]
+    },
+    {
+      "questionID": "aea2087B-0e55-11ec-bf6a-0242ac140005",
+      "author": {
+        "userID": "aea2086f-0e55-11ec-bf6a-0242ac140005",
+        "displayName": "huga"
+      },
+      "questionTag": ["Go", "Dart", "C", "JavaScript"],
+      "questionType": "anaume",
+      "createTime": "1000-01-01 00:00:00.000000",
+      "updateTime": "9999-12-31 23:59:59.999999",
+      "questionBody": "以下の空欄を埋めなさい",
+      "values": ["[]って[]?"],
+      "answers": ["hoge", "hoge"]
+    },
+    {
+      "questionID": "aea2087A-0e55-11ec-bf6a-0242ac140005",
+      "author": {
+        "userID": "aea20864-0e55-11ec-bf6a-0242ac140005",
+        "displayName": "huga"
+      },
+      "questionTag": ["Go", "Dart", "C", "JavaScript"],
+      "questionType": "anaume",
+      "createTime": "1000-01-01 00:00:00.000000",
+      "updateTime": "9999-12-31 23:59:59.999999",
+      "questionBody": "以下の空欄を埋めなさい",
+      "values": ["[]って[]?"],
+      "answers": ["hoge", "hoge"]
+    },
+    {
+      "questionID": "aea20875-0e55-11ec-bf6a-0242ac140005",
+      "author": {
+        "userID": "aea2086f-0e55-11ec-bf6a-0242ac140005",
+        "displayName": "huga"
+      },
+      "questionTag": ["Go", "Dart", "C", "JavaScript"],
+      "questionType": "anaume",
+      "createTime": "1000-01-01 00:00:00.000000",
+      "updateTime": "9999-12-31 23:59:59.999999",
+      "questionBody": "以下の空欄を埋めなさい",
+      "values": ["[]って[]?"],
+      "answers": ["hoge", "hoge"]
+    },
+    {
+      "questionID": "aea20879-0e55-11ec-bf6a-0242ac140005",
+      "author": {
+        "userID": "aea20863-0e55-11ec-bf6a-0242ac140005",
+        "displayName": "huga"
+      },
+      "questionTag": ["Go", "Dart", "C", "JavaScript"],
+      "questionType": "anaume",
+      "createTime": "1000-01-01 00:00:00.000000",
+      "updateTime": "9999-12-31 23:59:59.999999",
+      "questionBody": "以下の空欄を埋めなさい",
+      "values": ["[]って[]?"],
+      "answers": ["hoge", "hoge"]
+    },
+    {
+      "questionID": "aea20878-0e55-11ec-bf6a-0242ac140005",
+      "author": {
+        "userID": "aea20862-0e55-11ec-bf6a-0242ac140005",
+        "displayName": "huga"
+      },
+      "questionTag": ["Go", "Dart", "C", "JavaScript"],
+      "questionType": "anaume",
+      "createTime": "1000-01-01 00:00:00.000000",
+      "updateTime": "9999-12-31 23:59:59.999999",
+      "questionBody": "以下の空欄を埋めなさい",
+      "values": ["[]って[]?"],
+      "answers": ["hoge", "hoge"]
+    },
+    {
+      "questionID": "aea20877-0e55-11ec-bf6a-0242ac140005",
+      "author": {
+        "userID": "aea20861-0e55-11ec-bf6a-0242ac140005",
+        "displayName": "huga"
+      },
+      "questionTag": ["Go", "Dart", "C", "JavaScript"],
+      "questionType": "anaume",
+      "createTime": "1000-01-01 00:00:00.000000",
+      "updateTime": "9999-12-31 23:59:59.999999",
+      "questionBody": "以下の空欄を埋めなさい",
+      "values": ["[]って[]?"],
+      "answers": ["hoge", "hoge"]
+    },
+    {
+      "questionID": "aea20876-0e55-11ec-bf6a-0242ac140005",
+      "author": {
+        "userID": "aea20860-0e55-11ec-bf6a-0242ac140005",
+        "displayName": "huga"
+      },
+      "questionTag": ["Go", "Dart", "C", "JavaScript"],
+      "questionType": "anaume",
+      "createTime": "1000-01-01 00:00:00.000000",
+      "updateTime": "9999-12-31 23:59:59.999999",
+      "questionBody": "以下の空欄を埋めなさい",
+      "values": ["[]って[]?"],
+      "answers": ["hoge", "hoge"]
+    }
+  ]
 }
