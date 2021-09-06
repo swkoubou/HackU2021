@@ -91,8 +91,9 @@ export default {
           if (this.userAnswers[userAnswersIndex][answerIndex] == null) {
             this.answerData[userAnswersIndex][answerIndex].userAnswer = null
           } else {
-          this.answerData[userAnswersIndex][answerIndex].userAnswer =
-            this.userAnswers[userAnswersIndex][answerIndex]}
+            this.answerData[userAnswersIndex][answerIndex].userAnswer =
+              this.userAnswers[userAnswersIndex][answerIndex]
+          }
         }
       }
       this.$router.push({
