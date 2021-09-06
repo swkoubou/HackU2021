@@ -41,6 +41,7 @@ const routes = [
     path: '/score',
     name: 'ScorePage',
     component: ScorePage,
+    props: true,
   },
   {
     path: '/login',

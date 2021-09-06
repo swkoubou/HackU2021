@@ -14,7 +14,7 @@
       <h3>unknown : {{ questionData.questionType }}</h3>
     </div>
     <br />
-    <button @click="getUserAnswersAndGoScorePage()">答え合わせ</button>
+    <button @click="getUserAnswersAndGoScorePage()">スコアを確認する</button>
     <div>ユーザー回答Debug : {{ this.userAnswers }}</div>
   </div>
 </template>
@@ -92,7 +92,10 @@ export default {
             this.userAnswers[userAnswersIndex][answerIndex]
         }
       }
-      console.log(JSON.stringify(this.answerData))
+      this.$router.push({
+        name: 'ScorePage',
+        params: { answerData: this.answerData },
+      })
     },
   },
 }
