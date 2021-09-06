@@ -24,11 +24,11 @@ export default {
     },
     UserAnswer: {
       type: String,
-      required: true,
+      default: () => null,
     },
     QuestionAnswer: {
       type: String,
-      required: true,
+      default: () => null,
     },
   },
   computed: {
