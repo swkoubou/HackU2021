@@ -54,7 +54,7 @@ var accounts []account.Account = []account.Account{
 var questions []question.Question = []question.Question{
 	{
 		QuestionID:   newUUID(),
-		Auther:       accounts[0],
+		Author:       accounts[0],
 		QuestionTag:  []string{"国語", "算数", "理科", "社会"},
 		QuestionType: "4taku",
 		CreateTime:   "9999-12-31 23:59:59.999999",
@@ -65,7 +65,7 @@ var questions []question.Question = []question.Question{
 	},
 	{
 		QuestionID:   newUUID(),
-		Auther:       accounts[1],
+		Author:       accounts[1],
 		QuestionTag:  []string{"Go", "Dart", "C", "JavaScript"},
 		QuestionType: "anaume",
 		CreateTime:   "1000-01-01 00:00:00.000000",
@@ -81,7 +81,7 @@ var collections []collection.Collection = []collection.Collection{
 		CollectionID:           newUUID(),
 		CollectionName:         "foo",
 		CollectionDescripition: "テスト用のコレクション",
-		Auther:                 accounts[2],
+		Author:                 accounts[2],
 		Questions:              questions,
 		CreateTime:             "9999-12-31 23:59:59.999999",
 		UpdateTime:             "",
@@ -90,7 +90,7 @@ var collections []collection.Collection = []collection.Collection{
 		CollectionID:           newUUID(),
 		CollectionName:         "bar",
 		CollectionDescripition: "ンョシクレコの用トステ",
-		Auther:                 accounts[2],
+		Author:                 accounts[2],
 		Questions:              questions,
 		CreateTime:             "1000-01-01 00:00:00.000000",
 		UpdateTime:             "9999-12-31 23:59:59.999999",

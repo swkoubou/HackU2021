@@ -12,7 +12,7 @@ type Collection struct {
 	CollectionID           uuid.UUID           `json:"collectionID"`
 	CollectionName         string              `json:"collectionName"`
 	CollectionDescripition string              `json:"collectionDescription"`
-	Auther                 account.Account     `json:"auther"`
+	Author                 account.Account     `json:"author"`
 	Questions              []question.Question `json:"questions"`
 	CreateTime             string              `json:"createtime"`
 	UpdateTime             string              `json:"updatetime"`
@@ -40,7 +40,7 @@ func NewCollection(param CollectionParam) (Collection, error) {
 	c.CollectionID = uuid
 	c.CollectionName = param.CollectionName
 	c.CollectionDescripition = param.CollectionDescripition
-	c.Auther = account.Account{}        // DBからもってくる
+	c.Author = account.Account{}        // DBからもってくる
 	c.Questions = []question.Question{} // DBからもってくる
 
 	return c, nil
@@ -63,7 +63,7 @@ func (c *Collection) Equals(collection *Collection) bool {
 		return false
 	}
 
-	if !reflect.DeepEqual(c.Auther, collection.Auther) {
+	if !reflect.DeepEqual(c.Author, collection.Author) {
 		return false
 	}
 
