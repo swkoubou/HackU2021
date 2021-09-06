@@ -1,7 +1,5 @@
 <template>
-    <div>
-        score page
-    </div>
+  <div>score page</div>
 </template>
 
 <script>

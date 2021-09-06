@@ -40,7 +40,7 @@ const routes = [
   {
     path: '/score',
     name: 'ScorePage',
-    component: ScorePage
+    component: ScorePage,
   },
   {
     path: '/login',
