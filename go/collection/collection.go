@@ -4,6 +4,7 @@ import (
 	"reflect"
 
 	"example.com/account"
+	"example.com/manage"
 	"example.com/question"
 	"github.com/google/uuid"
 )
@@ -85,5 +86,54 @@ func (c *Collection) Equals(collection *Collection) bool {
 }
 
 func GetCollection(collectionID string) (*Collection, error) {
-	return &Collection{}, nil
+	var user Collection
+	//データベース開く
+	db, err := manage.NewDBConnection()
+	if err != nil {
+		return nil, err
+	}
+	//クエリ
+	defer db.Close()
+	rows1, err := db.Query("SELECT * FROM question_collection WHERE collection_id = ?", collectionID)
+	//defer rows1.Close()
+	if err != nil {
+		return nil, err
+	}
+	var collection_id_tmp, collection_user_id_tmp string
+	for rows1.Next() {
+		//question_collectionテーブルのデータを構造体に代入
+		if err := rows1.Scan(&collection_id_tmp, &user.CollectionName, &user.CollectionDescripition,
+			&collection_user_id_tmp, &user.CreateTime, &user.UpdateTime); err != nil {
+			return nil, err
+		}
+		user.CollectionID, _ = uuid.Parse(collection_id_tmp)
+		user.Author.UserID, _ = uuid.Parse(collection_user_id_tmp)
+	}
+	rows2, err := db.Query("SELECT  user_id FROM user WHERE user_id = ?", collection_user_id_tmp)
+	if err != nil {
+		return nil, err
+	}
+	for rows2.Next() {
+		if err := rows2.Scan(&user.Author.UserName); err != nil {
+			return nil, err
+		}
+	}
+	//ここからQuestions取得
+	rows3, err := db.Query("SELECT question_id FROM question_collection_map WHERE collection_id = ?", collection_user_id_tmp)
+	if err != nil {
+		return nil, err
+	}
+	var idtemp string
+	for rows3.Next() {
+		if err := rows3.Scan(&idtemp); err != nil {
+			return nil, err
+		}
+		question_tmp, qerr := question.GetQuestion(idtemp)
+		if qerr != nil {
+			return nil, err
+		}
+		user.Questions = append(user.Questions, *question_tmp)
+
+	}
+	return &user, nil
 }
