@@ -15,7 +15,6 @@
     </div>
     <br />
     <button @click="getUserAnswersAndGoScorePage()">スコアを確認する</button>
-    <div>ユーザー回答Debug : {{ this.userAnswers }}</div>
   </div>
 </template>
 
