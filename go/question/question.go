@@ -1,10 +1,7 @@
-//package question
-package main
+package question
 
 import (
-	"database/sql"
 	"errors"
-	"fmt"
 	"reflect"
 
 	"example.com/account"
@@ -441,9 +438,9 @@ type Question struct {
 
 func UpdateQuestion(q *Question) (string, error) {
 
-	//db, err := manage.NewDBConnection()
+	db, err := manage.NewDBConnection()
 
-	db, err := sql.Open("mysql", "root@/MYSQL_DATABASE")
+	//db, err := sql.Open("mysql", "root@/MYSQL_DATABASE")
 
 	// エラー処理
 	if err != nil {
@@ -889,8 +886,9 @@ func GetAuthor(id string) (*account.Account, error) {
 	//return &account.Account{}, nil
 }
 
-func main() {
-
+// 以下はテストで使用したデータです．
+/*
+	// UpdateQuestionのテスト
 	var q Question
 
 	q.QuestionID, _ = uuid.Parse("1a4ee1ec-1073-f9fb-8281-f3041d15a9d2")
@@ -915,62 +913,57 @@ func main() {
 	}
 
 	fmt.Println(ans)
+*/
+/*
+	// GetAuthorのテスト，，
+	st := "116aa423-d551-2b81-2091-132e022d40c5"
 
-	//q.CreateTime = "2021-09-06 03:21:26"
-	//q.UpdateTime = "2021-09-06 03:21:26"
+	ans, err := GetAuthor(st)
 
-	/*
-	   // GetAuthorのテスト，，
-	   	st := "116aa423-d551-2b81-2091-132e022d40c5"
+	if err != nil {
+		fmt.Println("error")
+	}
 
-	   	ans, err := GetAuthor(st)
+	fmt.Println(ans)
+*/
+/*
+	// DeleteQuestionのテスト
+	st := "660b2c4d-f417-426d-bf35-0177bd9c370a"
 
-	   	if err != nil {
-	   		fmt.Println("error")
-	   	}
+	ans := DeleteQuestion(st)
 
-	   	fmt.Println(ans)
-	*/
-	/*
-		// DeleteQuestionのテスト
-		st := "dec9318b-83db-4f3c-bc14-62037c0ff722"
+	fmt.Println(ans)
+*/
+/*
+	// setQuestionのテスト
+	var test QuestionParam
 
-		ans := DeleteQuestion(st)
+	test.UserID = "XYZ"
+	test.QuestionName = "satoko"
+	test.QuestionTag = append(test.QuestionTag, "国語")
+	test.QuestionTag = append(test.QuestionTag, "アニメ")
+	test.QuestionType = "anaume"
+	test.QuestionBody = "にぱー"
+	test.Values = append(test.Values, "orz")
+	test.Values = append(test.Values, "aiueo")
+	test.Answers = append(test.Answers, "面白い")
+	test.Answers = append(test.Answers, "神アニメ")
 
-		fmt.Println(ans)
-	*/
-	/*
-		// setQuestionのテスト
-		var test QuestionParam
+	ans, err := SetQuestion(&test)
 
-		test.UserID = "XYZ"
-		test.QuestionName = "ひぐらし"
-		test.QuestionTag = append(test.QuestionTag, "国語")
-		test.QuestionTag = append(test.QuestionTag, "アニメ")
-		test.QuestionType = "4taku"
-		test.QuestionBody = "にぱー"
-		test.Values = append(test.Values, "orz")
-		test.Values = append(test.Values, "aiueo")
-		test.Answers = append(test.Answers, "面白い")
-		test.Answers = append(test.Answers, "神アニメ")
+	if err != nil {
+		fmt.Println("error")
+	}
 
-		ans, err := SetQuestion(&test)
-
-		if err != nil {
-			fmt.Println("error")
-		}
-
-		fmt.Println(ans)
-	*/
-
-	/*
-		// GetQuestionのテスト
-		var err error
-		st := "1a4ee1ec-1073-f9fb-8281-f3041d15a9d2"
-		tt, err := GetQuestion(st)
-		if err != nil {
-			fmt.Println("hello")
-		}
-		fmt.Println(tt)
-	*/
-}
+	fmt.Println(ans)
+*/
+/*
+	// GetQuestionのテスト
+	var err error
+	st := "1a4ee1ec-1073-f9fb-8281-f3041d15a9d2"
+	tt, err := GetQuestion(st)
+	if err != nil {
+		fmt.Println("hello")
+	}
+	fmt.Println(tt)
+*/
