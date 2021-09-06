@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import ComponentsPreviewPage from '../views/ComponentsPreviewPage.vue'
 import AnswerTheQuestionPage from '../views/AnswerTheQuestionPage.vue'
+import ScorePage from '../views/ScorePage.vue'
 import LoginPage from '../views/LoginPage'
 import LoginSuccessPreviewPage from '../views/LoginSuccessPreviewPage'
 
@@ -35,6 +36,12 @@ const routes = [
     path: '/answerthequestion',
     name: 'AnswerTheQuestionPage',
     component: AnswerTheQuestionPage,
+  },
+  {
+    path: '/score',
+    name: 'ScorePage',
+    component: ScorePage,
+    props: true,
   },
   {
     path: '/login',

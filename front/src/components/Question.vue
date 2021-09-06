@@ -14,8 +14,7 @@
       <h3>unknown : {{ questionData.questionType }}</h3>
     </div>
     <br />
-    <button @click="getUserAnswersAndGoScorePage()">答え合わせ</button>
-    <div>ユーザー回答Debug : {{ this.userAnswers }}</div>
+    <button @click="getUserAnswersAndGoScorePage()">スコアを確認する</button>
   </div>
 </template>
 
@@ -88,11 +87,18 @@ export default {
           answerIndex < this.userAnswers[userAnswersIndex].length;
           answerIndex++
         ) {
-          this.answerData[userAnswersIndex][answerIndex].userAnswer =
-            this.userAnswers[userAnswersIndex][answerIndex]
+          if (this.userAnswers[userAnswersIndex][answerIndex] == null) {
+            this.answerData[userAnswersIndex][answerIndex].userAnswer = null
+          } else {
+            this.answerData[userAnswersIndex][answerIndex].userAnswer =
+              this.userAnswers[userAnswersIndex][answerIndex]
+          }
         }
       }
-      console.log(JSON.stringify(this.answerData))
+      this.$router.push({
+        name: 'ScorePage',
+        params: { answerData: this.answerData },
+      })
     },
   },
 }
