@@ -43,7 +43,7 @@ export default {
 
 .score-syomon {
     justify-content: space-evenly;
-    max-width: 500px;
+    text-align: center;
     display: flex;
     align-items: center;
     border: 1px solid black;
@@ -51,5 +51,13 @@ export default {
 
 .score-compare-answers {
     text-align: start;
+}
+
+.isCorrentAnswer-true {
+    color: green;
+}
+
+.isCorrentAnswer-false {
+    color: red;
 }
 </style>

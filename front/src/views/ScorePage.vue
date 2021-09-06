@@ -52,18 +52,12 @@ export default {
     justify-content: center;
 }
 .syomon {
-    align-items: center;
-    justify-content: center;
-    padding-bottom: 5px;
+    background: rgb(236, 236, 236);
+    width: 80%;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
 }
 
-/* .daimons { */
-
-/* } */
-
-.daimon {
-    background: chocolate;
-    align-items: center;
-    justify-content: center;
-}
 </style>
