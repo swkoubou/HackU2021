@@ -529,126 +529,139 @@ func UpdateQuestion(q *Question) (string, error) {
 		}
 	}
 
-	/*
-		// 登録してあるQuestionTagを検索
+	// 登録してあるQuestionTagを検索
 
-		var check_subject []string
+	var check_subject []string
 
-		rows2, err := db.Query("SELECT * FROM question_tag_map WHERE question_id = ?", q.QuestionID.String())
+	var cnt_tag_num int
 
+	rows2, err := db.Query("SELECT * FROM question_tag_map WHERE question_id = ?", q.QuestionID.String())
+
+	if err != nil {
+		return string(""), err
+	}
+
+	var questionid_tmp, array_tmp string
+
+	var tag_int int
+
+	for rows2.Next() {
+		if err := rows2.Scan(&questionid_tmp, &tag_int); err != nil {
+			return string(""), err
+		}
+
+		rows3, err := db.Query("SELECT question_tag_name FROM question_tag WHERE question_tag_id = ?", tag_int)
 		if err != nil {
 			return string(""), err
 		}
 
-		var questionid_tmp, array_tmp string
-
-		var tag_int int
-
-		for rows2.Next() {
-			if err := rows2.Scan(&questionid_tmp, &tag_int); err != nil {
+		for rows3.Next() {
+			if err := rows3.Scan(&array_tmp); err != nil {
 				return string(""), err
 			}
+			check_subject = append(check_subject, array_tmp)
+		}
+	}
 
-			rows3, err := db.Query("SELECT question_tag_name FROM question_tag WHERE question_tag_id = ?", tag_int)
-			if err != nil {
-				return string(""), err
-			}
+	hit := 0
 
-			for rows3.Next() {
-				if err := rows3.Scan(&array_tmp); err != nil {
-					return string(""), err
-				}
-				check_subject = append(check_subject, array_tmp)
+	for i := 0; i < len(q.QuestionTag); i++ {
+		for j := 0; j < len(check_subject); j++ {
+			if q.QuestionTag[i] == check_subject[j] {
+				hit++
 			}
 		}
+	}
 
-		hit := 0
+	// 何か更新されていたら
+	if hit != len(q.QuestionTag) {
+
+		// 削除する
+		stmtDelete, err := db.Prepare("DELETE FROM question_tag_map WHERE question_id=?")
+		if err != nil {
+			return string(""), err
+		}
+
+		_, err = stmtDelete.Exec(q.QuestionID.String())
+		if err != nil {
+			return string(""), err
+		}
+
+		// 新しく挿入する
+		var subject_nums []int
+
+		cnt_tag := 0
 
 		for i := 0; i < len(q.QuestionTag); i++ {
-			for j := 0; j < len(check_subject); j++ {
-				if check_subject[j] == q.QuestionTag[i] {
-					hit++
+
+			var subject_name string
+
+			subject_name = q.QuestionTag[i]
+
+			subject_row, err := db.Query("SELECT question_tag_id FROM question_tag WHERE question_tag_name = ?", subject_name)
+
+			if err != nil {
+				return string(""), nil
+			}
+
+			for subject_row.Next() {
+
+				var tmp_question_tag_id int
+
+				if err := subject_row.Scan(&tmp_question_tag_id); err != nil {
+					return string(""), nil
 				}
-			}
-		}
 
-		// 何か更新されていたら
-		if hit != len(q.QuestionTag) {
+				cnt_tag++
 
-			// 削除する
-			stmtDelete, err := db.Prepare("DELETE FROM question_tag_map WHERE question_id=?")
-			if err != nil {
-				return string(""), err
+				subject_nums = append(subject_nums, tmp_question_tag_id)
+
+				cnt_tag_num = tmp_question_tag_id
+
 			}
 
-			_, err = stmtDelete.Exec(q.QuestionID.String())
-			if err != nil {
-				return string(""), err
-			}
+			if cnt_tag == i {
+				cnt_tag++
 
-			// 新しく挿入する
-			var subject_nums []int
+				count_row, err := db.Query("SELECT count(question_tag_id) FROM question_tag")
 
-			cnt := 0
+				var count_tmp int
 
-			for i := 0; i < len(q.QuestionTag); i++ {
+				for count_row.Next() {
+					if err := count_row.Scan(&count_tmp); err != nil {
+						return string(""), nil
+					}
 
-				var subject_name string
+				}
 
-				subject_name = q.QuestionTag[i]
+				count_tmp++
 
-				subject_row, err := db.Query("SELECT question_tag_id FROM question_tag WHERE question_tag_name = ?", subject_name)
+				stmtInsert_tag, err := db.Prepare("INSERT IGNORE INTO question_tag (question_tag_id,question_tag_name) VALUES(?,?)")
 
 				if err != nil {
 					return string(""), nil
 				}
 
-				for subject_row.Next() {
+				_, err = stmtInsert_tag.Exec(count_tmp, subject_name)
 
-					var tmp_question_tag_id int
+				subject_nums = append(subject_nums, count_tmp)
 
-					if err := subject_row.Scan(&tmp_question_tag_id); err != nil {
-						return string(""), nil
-					}
+				cnt_tag_num = count_tmp
 
-					cnt++
-
-					subject_nums = append(subject_nums, tmp_question_tag_id)
-
-				}
-
-				if cnt == i {
-					cnt++
-
-					count_row, err := db.Query("SELECT count(question_tag_id) FROM question_tag")
-
-					var count_tmp int
-
-					for count_row.Next() {
-						if err := count_row.Scan(&count_tmp); err != nil {
-							return string(""), nil
-						}
-
-					}
-
-					count_tmp++
-
-					stmtInsert2, err := db.Prepare("INSERT IGNORE INTO question_tag (question_tag_id,question_tag_name) VALUES(?,?)")
-
-					if err != nil {
-						return string(""), nil
-					}
-
-					_, err = stmtInsert2.Exec(count_tmp, subject_name)
-
-					subject_nums = append(subject_nums, count_tmp)
-
-				}
 			}
+
+			stmtInsert_tag2, err := db.Prepare("INSERT IGNORE INTO question_tag_map (question_id,question_tag_id) VALUES(?,?)")
+
+			if err != nil {
+				return string(""), nil
+			}
+
+			_, err = stmtInsert_tag2.Exec(q.QuestionID.String(), cnt_tag_num)
 
 		}
 
-	*/
+	}
+
 	// QuestionValueについて
 
 	rows_value, err := db.Query("SELECT question_value FROM question_value_map WHERE question_id = ?", q.QuestionID.String())
@@ -884,10 +897,10 @@ func main() {
 	q.Auther.UserID, _ = uuid.Parse("c74b366b-5289-d4f5-1d80-66fedaafe97b")
 	q.Auther.UserName = "hoge"
 	q.QuestionName = "hello world"
-	q.QuestionTag = append(q.QuestionTag, "国語")
-	q.QuestionTag = append(q.QuestionTag, "算数")
-	q.QuestionTag = append(q.QuestionTag, "理科")
-	q.QuestionTag = append(q.QuestionTag, "社会")
+	q.QuestionTag = append(q.QuestionTag, "アニメ")
+	q.QuestionTag = append(q.QuestionTag, "aueu")
+	//q.QuestionTag = append(q.QuestionTag, "理科")
+	//q.QuestionTag = append(q.QuestionTag, "社会")
 	q.QuestionType = "anaume"
 	q.QuestionBody = "4つの中から選択してください"
 	q.Values = append(q.Values, "auau")
