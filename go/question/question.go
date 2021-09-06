@@ -11,7 +11,7 @@ import (
 
 type Question struct {
 	QuestionID   uuid.UUID       `json:"questionID"`
-	Author       account.Account `json:"author"`
+	Auther       account.Account `json:"auther"`
 	QuestionName string          `json:"questionName"`
 	QuestionTag  []string        `json:"questionTag"`
 	QuestionType string          `json:"questionType"`
@@ -45,7 +45,7 @@ func NewQuestion(param QuestionParam) (Question, error) {
 	}
 
 	q.QuestionID = uuid
-	q.Author = account.Account{} // DBからもってくる
+	q.Auther = account.Account{} // DBからもってくる
 	q.QuestionTag = param.QuestionTag
 	q.QuestionBody = param.QuestionBody
 	q.Values = param.Values
@@ -63,7 +63,7 @@ func (q *Question) Equals(question *Question) bool {
 		return false
 	}
 
-	if !reflect.DeepEqual(q.Author, question.Author) {
+	if !reflect.DeepEqual(q.Auther, question.Auther) {
 		return false
 	}
 
@@ -137,7 +137,7 @@ func GetQuestion(questionID string) (*Question, error) {
 			return nil, err
 		}
 		user.QuestionID, _ = uuid.Parse(uuid_tmp1)
-		user.Author.UserID, _ = uuid.Parse(uuid_tmp2)
+		user.Auther.UserID, _ = uuid.Parse(uuid_tmp2)
 	}
 
 	rows2, err := db.Query("SELECT * FROM user WHERE user_id = ?", uuid_tmp2)
@@ -149,7 +149,7 @@ func GetQuestion(questionID string) (*Question, error) {
 	var name_tmp string
 
 	for rows2.Next() {
-		if err := rows2.Scan(&name_tmp, &user.Author.UserName); err != nil {
+		if err := rows2.Scan(&name_tmp, &user.Auther.UserName); err != nil {
 			return nil, err
 		}
 	}
@@ -213,7 +213,7 @@ func GetQuestion(questionID string) (*Question, error) {
 	// uuidのnil
 	var u uuid.NullUUID
 
-	if user.QuestionID == u.UUID || user.Author.UserID == u.UUID || len(user.Author.UserName) == 0 || len(user.QuestionTag) == 0 || len(user.QuestionType) == 0 || len(user.CreateTime) == 0 || len(user.UpdateTime) == 0 || len(user.QuestionBody) == 0 || len(user.Values) == 0 || len(user.Answers) == 0 {
+	if user.QuestionID == u.UUID || user.Auther.UserID == u.UUID || len(user.Auther.UserName) == 0 || len(user.QuestionTag) == 0 || len(user.QuestionType) == 0 || len(user.CreateTime) == 0 || len(user.UpdateTime) == 0 || len(user.QuestionBody) == 0 || len(user.Values) == 0 || len(user.Answers) == 0 {
 		var isEmpty error
 
 		// エラーになる場合は，戻り値としてerrorをtrueとすることで，uuidによる00初期化を防止．．あしあし
@@ -250,7 +250,7 @@ func SetQuestion(q *QuestionParam) (string, error) {
 引数: Question
 type Question struct {
 	QuestionID   uuid.UUID       `json:"questionID"`	必須
-	Author       account.Account `json:"author"`		必須
+	Auther       account.Account `json:"auther"`		必須
 	QuestionTag  []string        `json:"questionTag"`	0個以上
 	QuestionType string          `json:"questionType"`	必須
 	CreateTime   string          `json:"createTime"`	更新しない
@@ -288,6 +288,6 @@ QuestionID
 データの取得が成功した場合はAccountとnilを返す
 データの取得に失敗した場合はnilとerrorを返す
 */
-func GetAuthor(id string) (*account.Account, error) {
+func GetAuther(id string) (*account.Account, error) {
 	return &account.Account{}, nil
 }
