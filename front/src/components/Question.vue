@@ -1,17 +1,21 @@
 <template>
   <div id="question-parent" class="question-card">
     <div v-if="questionData.questionType === '4taku'">
-      <Question4taku :question="questionData" />
+      <Question4taku :question="questionData" v-model="userAnswers[0]" />
     </div>
     <div v-else-if="questionData.questionType === 'anaume'">
-      <QuestionAnaume :question="questionData" />
+      <QuestionAnaume :question="questionData" v-model="userAnswers[0]" />
     </div>
     <div v-else-if="questionData.questionType === 'collection'">
-      <QuestionCollection :question="questionData" />
+      <!-- QuestionCollectionは、QuestionParentの親の代わりになるので、全体をあげる -->
+      <QuestionCollection :question="questionData" v-model="userAnswers" />
     </div>
     <div v-else>
       <h3>unknown : {{ questionData.questionType }}</h3>
     </div>
+    <br />
+    <button @click="getUserAnswersAndGoScorePage()">答え合わせ</button>
+    <div>ユーザー回答Debug : {{ this.userAnswers }}</div>
   </div>
 </template>
 
@@ -28,7 +32,69 @@ export default {
     QuestionAnaume,
     QuestionCollection,
   },
-  setup() {},
+  data() {
+    return {
+      userAnswers: [],
+      answerData: [],
+    }
+  },
+  created() {
+    // ユーザーの回答と、問題の回答をスコア画面に持っていくために配列を作ります
+    if (this.questionData.questionType === 'collection') {
+      for (
+        let questionIndex = 0;
+        questionIndex < this.questionData.questions.length;
+        questionIndex++
+      ) {
+        this.userAnswers.push([])
+        this.answerData[questionIndex] = []
+        for (
+          let answerIndex = 0;
+          answerIndex <
+          this.questionData.questions[questionIndex].answers.length;
+          answerIndex++
+        ) {
+          this.answerData[questionIndex].push({
+            questionAnswer:
+              this.questionData.questions[questionIndex].answers[answerIndex],
+            userAnswer: null,
+          })
+        }
+      }
+    } else {
+      this.userAnswers.push([])
+      this.answerData[0] = []
+      for (
+        let answerIndex = 0;
+        answerIndex < this.questionData.answers.length;
+        answerIndex++
+      ) {
+        this.answerData[0].push({
+          questionAnswer: this.questionData.answers[answerIndex],
+          userAnswer: null,
+        })
+      }
+    }
+  },
+  methods: {
+    getUserAnswersAndGoScorePage() {
+      for (
+        let userAnswersIndex = 0;
+        userAnswersIndex < this.userAnswers.length;
+        userAnswersIndex++
+      ) {
+        for (
+          let answerIndex = 0;
+          answerIndex < this.userAnswers[userAnswersIndex].length;
+          answerIndex++
+        ) {
+          this.answerData[userAnswersIndex][answerIndex].userAnswer =
+            this.userAnswers[userAnswersIndex][answerIndex]
+        }
+      }
+      console.log(JSON.stringify(this.answerData))
+    },
+  },
 }
 </script>
 
