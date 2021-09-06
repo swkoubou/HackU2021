@@ -14,7 +14,7 @@
       <h3>unknown : {{ questionData.questionType }}</h3>
     </div>
     <br />
-    <button v-on:click="getUserAnswersAndGoScorePage()">答え合わせ</button>
+    <button @click="getUserAnswersAndGoScorePage()">答え合わせ</button>
     <div>ユーザー回答Debug : {{ this.userAnswers }}</div>
   </div>
 </template>
@@ -39,19 +39,24 @@ export default {
     }
   },
   created() {
-    // ユーザーの回答を保存するための配列を作ります。
-    // ついでにスコア表示画面に持っていくデータも作ります。
+    // ユーザーの回答と、問題の回答をスコア画面に持っていくために配列を作ります
     if (this.questionData.questionType === 'collection') {
-      for (let i = 0; i < this.questionData.questions.length; i++) {
+      for (
+        let questionIndex = 0;
+        questionIndex < this.questionData.questions.length;
+        questionIndex++
+      ) {
         this.userAnswers.push([])
-        this.answerData[i] = []
+        this.answerData[questionIndex] = []
         for (
-          let j = 0;
-          j < this.questionData.questions[i].answers.length;
-          j++
+          let answerIndex = 0;
+          answerIndex <
+          this.questionData.questions[questionIndex].answers.length;
+          answerIndex++
         ) {
-          this.answerData[i].push({
-            questionAnswer: this.questionData.questions[i].answers[j],
+          this.answerData[questionIndex].push({
+            questionAnswer:
+              this.questionData.questions[questionIndex].answers[answerIndex],
             userAnswer: null,
           })
         }
@@ -59,28 +64,35 @@ export default {
     } else {
       this.userAnswers.push([])
       this.answerData[0] = []
-      for (let k = 0; k < this.questionData.answers.length; k++) {
+      for (
+        let answerIndex = 0;
+        answerIndex < this.questionData.answers.length;
+        answerIndex++
+      ) {
         this.answerData[0].push({
-          questionAnswer: this.questionData.answers[k],
+          questionAnswer: this.questionData.answers[answerIndex],
           userAnswer: null,
         })
       }
     }
   },
   methods: {
-    // todo
     getUserAnswersAndGoScorePage() {
-      for (let i = 0; i < this.userAnswers.length; i++) {
-        // 問題
-        for (let j = 0; j < this.userAnswers[i].length; j++) {
-          // 回答
-          this.answerData[i][j].userAnswer = this.userAnswers[i][j]
+      for (
+        let userAnswersIndex = 0;
+        userAnswersIndex < this.userAnswers.length;
+        userAnswersIndex++
+      ) {
+        for (
+          let answerIndex = 0;
+          answerIndex < this.userAnswers[userAnswersIndex].length;
+          answerIndex++
+        ) {
+          this.answerData[userAnswersIndex][answerIndex].userAnswer =
+            this.userAnswers[userAnswersIndex][answerIndex]
         }
       }
       console.log(JSON.stringify(this.answerData))
-    },
-    sayhello() {
-      alert('hello')
     },
   },
 }
