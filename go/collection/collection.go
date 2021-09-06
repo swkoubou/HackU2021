@@ -1,6 +1,7 @@
 package collection
 
 import (
+	"errors"
 	"reflect"
 
 	"example.com/account"
@@ -46,7 +47,14 @@ func NewCollection(param CollectionParam) (Collection, error) {
 
 	return c, nil
 }
+func (c *Collection) IsEmpty(collection *Collection) bool { //Collectionに空の要素があったらTrueを返す
+	var id_null uuid.NullUUID
+	return c.CollectionID == id_null.UUID || len(c.CollectionName) == 0 ||
+		len(c.CollectionDescripition) == 0 || c.Author.UserID == id_null.UUID ||
+		len(c.Author.UserName) == 0 || len(c.Questions) == 0 ||
+		len(c.UpdateTime) == 0 || len(c.CreateTime) == 0
 
+}
 func (c *Collection) Equals(collection *Collection) bool {
 	if reflect.TypeOf(*c) != reflect.TypeOf(*collection) {
 		return false
@@ -133,7 +141,12 @@ func GetCollection(collectionID string) (*Collection, error) {
 			return nil, err
 		}
 		user.Questions = append(user.Questions, *question_tmp)
-
+		if user.IsEmpty(&user) { // エラーになる場合は，戻り値としてerrorをtrueとすることで，uuidによる00初期化を防止．．あしあし
+			var isEmpty error
+			isEmpty = errors.New("true")
+			return nil, isEmpty
+		}
 	}
+
 	return &user, nil
 }
