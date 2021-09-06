@@ -40,7 +40,7 @@ var (
 	questions = []question.Question{
 		{
 			QuestionID:   newUUID("1a4ee1ec-1073-f9fb-8281-f3041d15a9d2"),
-			Auther:       users[0],
+			Author:       users[0],
 			QuestionTag:  []string{"国語", "算数", "理科", "社会"},
 			QuestionType: "4taku",
 			CreateTime:   "1000-01-01 00:00:00",
@@ -51,7 +51,7 @@ var (
 		},
 		{
 			QuestionID:   newUUID("c9d09c9e-e445-d1cf-5cb8-03d4507ad1f5"),
-			Auther:       users[1],
+			Author:       users[1],
 			QuestionTag:  []string{"Go", "Dart", "C", "JavaScript"},
 			QuestionType: "anaume",
 			CreateTime:   "1000-01-01 00:00:00",
