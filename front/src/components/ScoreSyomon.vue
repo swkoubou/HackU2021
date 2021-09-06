@@ -3,7 +3,7 @@
     <h4 class="score-syomon-no">問{{ SyomonNo }}</h4>
     <div class="score-compare-answers">
       <div class="score-compare-answers-user">
-        あなたの回答 : {{ (UserAnswer == null) ? "未回答" : UserAnswer }}
+        あなたの回答 : {{ UserAnswer == null ? '未回答' : UserAnswer }}
       </div>
       <div class="score-compare-answers-question">
         問題の答え : {{ QuestionAnswer }}
@@ -40,24 +40,23 @@ export default {
 </script>
 
 <style scoped>
-
 .score-syomon {
-    justify-content: space-evenly;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    border: 1px solid black;
+  justify-content: space-evenly;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  border: 1px solid black;
 }
 
 .score-compare-answers {
-    text-align: start;
+  text-align: start;
 }
 
 .isCorrentAnswer-true {
-    color: green;
+  color: green;
 }
 
 .isCorrentAnswer-false {
-    color: red;
+  color: red;
 }
 </style>
