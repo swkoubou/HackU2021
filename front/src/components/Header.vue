@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <button class="header-button" @click="notImplement">
+    <button class="header-button" @click="changeHomePage">
       <FontAwesomeIcon icon="home" />
     </button>
     <input
@@ -40,6 +40,9 @@ export default {
   methods: {
     notImplement() {
       alert('まだないよ')
+    },
+    changeHomePage() {
+      this.$router.push({ path: '/' })
     },
   },
 }
