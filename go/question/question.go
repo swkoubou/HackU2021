@@ -852,8 +852,6 @@ QuestionID
 func GetAuthor(id string) (*account.Account, error) {
 	var author account.Account
 
-	author.UserID, _ = uuid.Parse(id)
-
 	db, err := manage.NewDBConnection()
 
 	// エラー処理
@@ -864,7 +862,28 @@ func GetAuthor(id string) (*account.Account, error) {
 	// returnされた後に実行され，DBとの接続を切る
 	defer db.Close()
 
-	rows, err := db.Query("SELECT user_name FROM user WHERE user_id = ?", id)
+	rows, err := db.Query("SELECT user_id FROM question WHERE question_id = ?", id)
+
+	defer rows.Close()
+
+	// エラー処理
+	if err != nil {
+		return nil, err
+	}
+
+	var userId_string string
+
+	// ここからデータベースでの処理
+	for rows.Next() {
+		if err := rows.Scan(&userId_string); err != nil {
+			return nil, err
+		}
+		author.UserID, _ = uuid.Parse(userId_string)
+	}
+
+	// userNameの取得
+
+	rows2, err := db.Query("SELECT user_name FROM user WHERE user_id = ?", author.UserID.String())
 
 	defer rows.Close()
 
@@ -874,8 +893,8 @@ func GetAuthor(id string) (*account.Account, error) {
 	}
 
 	// ここからデータベースでの処理
-	for rows.Next() {
-		if err := rows.Scan(&author.UserName); err != nil {
+	for rows2.Next() {
+		if err := rows2.Scan(&author.UserName); err != nil {
 			return nil, err
 		}
 	}
