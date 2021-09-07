@@ -180,6 +180,7 @@
   ],
   "api": {
     "anaume": {
+      "questionName": "桃太郎の問題",
       "questionID": "aea20877-0e55-11ec-bf6a-0242ac140005",
       "author": {
         "userID": "aea20861-0e55-11ec-bf6a-0242ac140005",
@@ -194,6 +195,7 @@
       "answers": ["桃", "鬼", "おばあさん"]
     },
     "4taku": {
+      "questionName": "肉の問題",
       "questionID": "aea20877-0e55-11ec-bf6a-0242ac140005",
       "author": {
         "userID": "aea20861-0e55-11ec-bf6a-0242ac140005",
@@ -209,7 +211,7 @@
     },
     "collection": {
       "collectionId": "aea20877-0e55-11ec-bf6a-0242ac140005",
-      "CollectionName": "foo",
+      "CollectionName": "テスト問題集",
       "CollectionDescripition": "テスト用のコレクション",
       "author": {
         "userID": "aea20861-0e55-11ec-bf6a-0242ac140005",
@@ -217,6 +219,7 @@
       },
       "questions": [
         {
+          "questionName": "(c)肉の問題",
           "questionID": "aea20877-0e55-11ec-bf6a-0242ac140005",
           "author": {
             "userID": "aea20861-0e55-11ec-bf6a-0242ac140005",
@@ -231,6 +234,7 @@
           "answers": ["ニワトリ"]
         },
         {
+          "questionName": "(c)桃太郎の問題",
           "questionID": "aea20877-0e55-11ec-bf6a-0242ac140005",
           "author": {
             "userID": "aea20861-0e55-11ec-bf6a-0242ac140005",
