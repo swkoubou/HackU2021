@@ -421,7 +421,7 @@ func SetQuestion(q *QuestionParam) (string, error) {
 引数: Question
 type Question struct {
 	QuestionID   uuid.UUID       `json:"questionID"`	必須
-	Auther       account.Account `json:"auther"`		必須
+	Author       account.Account `json:"author"`		必須
 	QuestionTag  []string        `json:"questionTag"`	0個以上
 	QuestionType string          `json:"questionType"`	必須
 	CreateTime   string          `json:"createTime"`	更新しない
@@ -850,6 +850,7 @@ QuestionID
 データの取得に失敗した場合はnilとerrorを返す
 */
 func GetAuthor(id string) (*account.Account, error) {
+
 	var author account.Account
 
 	db, err := manage.NewDBConnection()
@@ -903,6 +904,7 @@ func GetAuthor(id string) (*account.Account, error) {
 
 	return &author, nil
 	//return &account.Account{}, nil
+
 }
 
 // 以下はテストで使用したデータです．

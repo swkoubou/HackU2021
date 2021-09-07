@@ -1,32 +1,44 @@
 <template>
   <div id="question-4taku">
-    <h3 class="title">{{ question.name }}</h3>
-    <h3>Q. {{ question.question }}</h3>
+    <h3 class="title">{{ question.questionName }}</h3>
+    <h3>Q. {{ question.questionBody }}</h3>
     <span></span>
-    <div v-for="(value, index) in question.value" :key="index">
+    <div v-for="(value, index) in question.values" :key="index">
       <label class="radio">
-        <input v-model="userChoice" :value="value" name="answer" type="radio" />
+        <input
+          v-model="userAnswers[0]"
+          :value="value"
+          name="answer"
+          type="radio"
+        />
         {{ value }}
       </label>
     </div>
-    <h3>
-      あなたの回答: {{ userChoice === '' ? '未回答' : userChoice }} ({{
-        userChoice === question.answer ? '正解' : '不正解'
-      }})
-    </h3>
   </div>
 </template>
 
 <script>
 export default {
   name: 'Question4taku',
-  props: ['question'],
-  data() {
-    return {
-      userChoice: '',
-    }
+  model: {
+    prop: 'propUserAnswers',
+    event: 'change',
   },
-  setup() {},
+  props: {
+    question: {},
+    propUserAnswers: [],
+  },
+  computed: {
+    userAnswers: {
+      get() {
+        return this.propUserAnswers
+      },
+      set(value) {
+        console.log(value)
+        this.$emit('change', value)
+      },
+    },
+  },
 }
 </script>
 

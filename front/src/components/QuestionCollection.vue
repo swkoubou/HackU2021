@@ -4,10 +4,16 @@
       {{ this.questionNo + 1 }} / {{ question.questions.length }}
     </div>
     <div v-if="question.questions[questionNo].questionType === 'anaume'">
-      <QuestionAnaume :question="question.questions[questionNo]" />
+      <QuestionAnaume
+        :question="question.questions[questionNo]"
+        v-model="userAnswers[questionNo]"
+      />
     </div>
     <div v-else-if="question.questions[questionNo].questionType === '4taku'">
-      <Question4taku :question="question.questions[questionNo]" />
+      <Question4taku
+        :question="question.questions[questionNo]"
+        v-model="userAnswers[questionNo]"
+      />
     </div>
     <div v-else>
       <h3>{{ question.questions[questionNo] }}</h3>
@@ -29,17 +35,38 @@ import QuestionAnaume from '@/components/QuestionAnaume'
 
 export default {
   name: 'QuestionCollection',
-  props: ['question'],
   components: {
     Question4taku,
     QuestionAnaume,
   },
+  // emitで親にデータを伝える =1=
+  model: {
+    prop: 'propUserAnswers',
+    event: 'change',
+  },
+  props: {
+    question: {},
+    propUserAnswers: [],
+  },
+  computed: {
+    userAnswers: {
+      get() {
+        return this.propUserAnswers
+      },
+      set(value) {
+        console.log(value)
+        this.$emit('change', value)
+      },
+    },
+  },
+  // =1=
   data() {
     return {
       questionNo: 0,
     }
   },
   methods: {
+    // 前の問題へ
     goBackQuestion() {
       if (this.questionNo <= 0) {
         return
@@ -47,6 +74,7 @@ export default {
         this.questionNo--
       }
     },
+    // 次の問題へ
     goNextQuestoin() {
       if (this.questionNo >= this.question.questions.length - 1) {
         return
