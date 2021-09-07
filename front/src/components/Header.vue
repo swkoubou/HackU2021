@@ -1,5 +1,10 @@
 <template>
   <header class="header">
+    <div class="header-context-menu" v-if="isContextMenuOpen">
+      <button @click="notImplement">マイページ</button>
+      <button @click="notImplement">設定</button>
+      <button @click="toggleContextMenu">閉じる</button>
+    </div>
     <button class="header-button" @click="changeHomePage">
       <FontAwesomeIcon icon="home" />
     </button>
@@ -14,7 +19,7 @@
     <button class="header-button" @click="notImplement">
       <FontAwesomeIcon icon="bell" />
     </button>
-    <button class="header-button" @click="notImplement">
+    <button class="header-button" @click="toggleContextMenu">
       <FontAwesomeIcon icon="user-circle" />
     </button>
   </header>
@@ -37,12 +42,20 @@ export default {
   components: {
     FontAwesomeIcon,
   },
+  data() {
+    return {
+      isContextMenuOpen: false,
+    }
+  },
   methods: {
     notImplement() {
       alert('まだないよ')
     },
     changeHomePage() {
       this.$router.push({ path: '/' })
+    },
+    toggleContextMenu() {
+      this.isContextMenuOpen = !this.isContextMenuOpen
     },
   },
 }
@@ -72,5 +85,21 @@ export default {
   margin: 0px 5px;
   border-radius: 10px;
   border: none;
+}
+
+.header-context-menu {
+  background-color: white;
+  position: absolute;
+  right: 40px;
+  top: 35px;
+  min-height: 50px;
+  display: flex;
+  flex-direction: column;
+}
+.header-context-menu button {
+  border-radius: 0px;
+  border: solid 1px #9a9a9a;
+  font-size: 1em;
+  padding: 0.5em 1.5em;
 }
 </style>
