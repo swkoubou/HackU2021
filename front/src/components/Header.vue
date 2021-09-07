@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <button class="header-button">
+    <button class="header-button" @click="notImplement">
       <FontAwesomeIcon icon="home" />
     </button>
     <input
@@ -8,13 +8,13 @@
       class="search-box"
       placeholder="問題や問題集を検索する"
     />
-    <button class="header-button">
+    <button class="header-button" @click="notImplement">
       <FontAwesomeIcon icon="pencil-alt" />
     </button>
-    <button class="header-button">
+    <button class="header-button" @click="notImplement">
       <FontAwesomeIcon icon="bell" />
     </button>
-    <button class="header-button">
+    <button class="header-button" @click="notImplement">
       <FontAwesomeIcon icon="user-circle" />
     </button>
   </header>
@@ -38,8 +38,10 @@ export default {
     FontAwesomeIcon,
   },
   methods: {
-    
-  }
+    notImplement() {
+      alert('まだないよ')
+    },
+  },
 }
 </script>
 
