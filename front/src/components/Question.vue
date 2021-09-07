@@ -6,7 +6,7 @@
     <div v-else-if="questionData.questionType === 'anaume'">
       <QuestionAnaume :question="questionData" v-model="userAnswers[0]" />
     </div>
-    <div v-else-if="questionData.questionType === 'collection'">
+    <div v-else-if="questionData.questionType == null">
       <!-- QuestionCollectionは、QuestionParentの親の代わりになるので、全体をあげる -->
       <QuestionCollection :question="questionData" v-model="userAnswers" />
     </div>
@@ -39,7 +39,7 @@ export default {
   },
   created() {
     // ユーザーの回答と、問題の回答をスコア画面に持っていくために配列を作ります
-    if (this.questionData.questionType === 'collection') {
+    if (this.questionData.questionType == null) {
       for (
         let questionIndex = 0;
         questionIndex < this.questionData.questions.length;
