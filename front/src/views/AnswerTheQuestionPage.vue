@@ -20,9 +20,9 @@ export default {
   },
   created() {
     let samples = [
-      this.sampleQuestionDatas.q_4taku,
-      this.sampleQuestionDatas.q_anaume,
-      this.sampleQuestionDatas.q_collection,
+      this.sampleQuestionDatas.api.q_4taku,
+      this.sampleQuestionDatas.api.q_anaume,
+      this.sampleQuestionDatas.api.q_collection,
     ]
     this.sampleQuestionData =
       samples[Math.floor(Math.random() * samples.length)]
