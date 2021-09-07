@@ -6,7 +6,7 @@
     "questionType": "4taku",
     "author": {
       "userId": 0,
-      "displayName": "テストユーザー"
+      "userName": "テストユーザー"
     },
     "createTime": "2000/01/01 00:00:00",
     "updateTime": "2000/01/01 00:00:00",
@@ -20,7 +20,7 @@
     "questionType": "anaume",
     "author": {
       "userId": 0,
-      "displayName": "テストユーザー"
+      "userName": "テストユーザー"
     },
     "createTime": "2000/01/01 00:00:00",
     "updateTime": "2000/01/01 00:00:00",
@@ -32,19 +32,18 @@
     "description": "食事の問題集",
     "author": {
       "userId": 0,
-      "displayName": "テストユーザー"
+      "userName": "テストユーザー"
     },
     "createTime": "2000/01/01 00:00:00",
     "updateTime": "2000/01/01 00:00:00",
-    "questions": [
-      {
+    "questions": [{
         "questionId": "uuid",
         "name": "ポケモンの問題",
         "question": "アニメポケットモンスターシリーズに登場する主人公の名前は？",
         "questionType": "4taku",
         "author": {
           "userId": 0,
-          "displayName": "テストユーザー"
+          "userName": "テストユーザー"
         },
         "createTime": "2000/01/01 00:00:00",
         "updateTime": "2000/01/01 00:00:00",
@@ -58,7 +57,7 @@
         "questionType": "anaume",
         "author": {
           "userId": 0,
-          "displayName": "テストユーザー"
+          "userName": "テストユーザー"
         },
         "createTime": "2000/01/01 00:00:00",
         "updateTime": "2000/01/01 00:00:00",
@@ -66,12 +65,11 @@
       }
     ]
   },
-  "multipleProblemSamples": [
-    {
+  "multipleProblemSamples": [{
       "questionID": "aea20873-0e55-11ec-bf6a-0242ac140005",
       "author": {
         "userID": "aea20225-0e55-11ec-bf6a-0242ac140005",
-        "displayName": "hoge"
+        "userName": "hoge"
       },
       "questionTag": ["国語", "算数", "理科", "社会"],
       "questionType": "4taku",
@@ -85,7 +83,7 @@
       "questionID": "aea2087B-0e55-11ec-bf6a-0242ac140005",
       "author": {
         "userID": "aea2086f-0e55-11ec-bf6a-0242ac140005",
-        "displayName": "huga"
+        "userName": "huga"
       },
       "questionTag": ["Go", "Dart", "C", "JavaScript"],
       "questionType": "anaume",
@@ -99,7 +97,7 @@
       "questionID": "aea2087A-0e55-11ec-bf6a-0242ac140005",
       "author": {
         "userID": "aea20864-0e55-11ec-bf6a-0242ac140005",
-        "displayName": "huga"
+        "userName": "huga"
       },
       "questionTag": ["Go", "Dart", "C", "JavaScript"],
       "questionType": "anaume",
@@ -113,7 +111,7 @@
       "questionID": "aea20875-0e55-11ec-bf6a-0242ac140005",
       "author": {
         "userID": "aea2086f-0e55-11ec-bf6a-0242ac140005",
-        "displayName": "huga"
+        "userName": "huga"
       },
       "questionTag": ["Go", "Dart", "C", "JavaScript"],
       "questionType": "anaume",
@@ -127,7 +125,7 @@
       "questionID": "aea20879-0e55-11ec-bf6a-0242ac140005",
       "author": {
         "userID": "aea20863-0e55-11ec-bf6a-0242ac140005",
-        "displayName": "huga"
+        "userName": "huga"
       },
       "questionTag": ["Go", "Dart", "C", "JavaScript"],
       "questionType": "anaume",
@@ -141,7 +139,7 @@
       "questionID": "aea20878-0e55-11ec-bf6a-0242ac140005",
       "author": {
         "userID": "aea20862-0e55-11ec-bf6a-0242ac140005",
-        "displayName": "huga"
+        "userName": "huga"
       },
       "questionTag": ["Go", "Dart", "C", "JavaScript"],
       "questionType": "anaume",
@@ -155,7 +153,7 @@
       "questionID": "aea20877-0e55-11ec-bf6a-0242ac140005",
       "author": {
         "userID": "aea20861-0e55-11ec-bf6a-0242ac140005",
-        "displayName": "huga"
+        "userName": "huga"
       },
       "questionTag": ["Go", "Dart", "C", "JavaScript"],
       "questionType": "anaume",
@@ -169,7 +167,7 @@
       "questionID": "aea20876-0e55-11ec-bf6a-0242ac140005",
       "author": {
         "userID": "aea20860-0e55-11ec-bf6a-0242ac140005",
-        "displayName": "huga"
+        "userName": "huga"
       },
       "questionTag": ["Go", "Dart", "C", "JavaScript"],
       "questionType": "anaume",
@@ -179,5 +177,76 @@
       "values": ["[]って[]?"],
       "answers": ["hoge", "hoge"]
     }
-  ]
+  ],
+  "api": {
+    "anaume": {
+      "questionID": "aea20877-0e55-11ec-bf6a-0242ac140005",
+      "author": {
+        "userID": "aea20861-0e55-11ec-bf6a-0242ac140005",
+        "userName": "田中"
+      },
+      "questionTag": ["Go", "Dart", "C", "JavaScript"],
+      "questionType": "anaume",
+      "createTime": "1000-01-01 00:00:00.000000",
+      "updateTime": "9999-12-31 23:59:59.999999",
+      "questionBody": "以下の空欄を埋めなさい",
+      "values": ["桃太郎は[]から生まれ、おじいさんと[]に育てられ、[]を退治した"],
+      "answers": ["桃", "鬼", "おばあさん"]
+    },
+    "4taku": {
+      "questionID": "aea20877-0e55-11ec-bf6a-0242ac140005",
+      "author": {
+        "userID": "aea20861-0e55-11ec-bf6a-0242ac140005",
+        "userName": "山田孝之"
+      },
+      "questionTag": ["Go", "Dart", "C", "JavaScript"],
+      "questionType": "4taku",
+      "createTime": "1000-01-01 00:00:00.000000",
+      "updateTime": "9999-12-31 23:59:59.999999",
+      "questionBody": "鶏肉はなんの肉？",
+      "values": ["ブタ", "ウシ", "イノシシ", "ニワトリ"],
+      "answers": ["ニワトリ"]
+    },
+    "collection": {
+      "collectionId": "aea20877-0e55-11ec-bf6a-0242ac140005",
+      "CollectionName": "foo",
+      "CollectionDescripition": "テスト用のコレクション",
+      "author": {
+        "userID": "aea20861-0e55-11ec-bf6a-0242ac140005",
+        "userName": "山田孝之"
+      },
+      "questions": [
+        {
+          "questionID": "aea20877-0e55-11ec-bf6a-0242ac140005",
+          "author": {
+            "userID": "aea20861-0e55-11ec-bf6a-0242ac140005",
+            "userName": "山田孝之"
+          },
+          "questionTag": ["Go", "Dart", "C", "JavaScript"],
+          "questionType": "4taku",
+          "createTime": "1000-01-01 00:00:00.000000",
+          "updateTime": "9999-12-31 23:59:59.999999",
+          "questionBody": "(c)鶏肉はなんの肉？",
+          "values": ["ブタ", "ウシ", "イノシシ", "ニワトリ"],
+          "answers": ["ニワトリ"]
+        },
+        {
+          "questionID": "aea20877-0e55-11ec-bf6a-0242ac140005",
+          "author": {
+            "userID": "aea20861-0e55-11ec-bf6a-0242ac140005",
+            "userName": "田中"
+          },
+          "questionTag": ["Go", "Dart", "C", "JavaScript"],
+          "questionType": "anaume",
+          "createTime": "1000-01-01 00:00:00.000000",
+          "updateTime": "9999-12-31 23:59:59.999999",
+          "questionBody": "(c)以下の空欄を埋めなさい",
+          "values": ["桃太郎は[]から生まれ、おじいさんと[]に育てられ、[]を退治した"],
+          "answers": ["桃", "鬼", "おばあさん"]
+        }
+      ],
+      "createTime": "9999-12-31 23:59:59.999999",
+      "updateTime": ""
+    }
+  }
 }
