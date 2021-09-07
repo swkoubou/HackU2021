@@ -25,8 +25,12 @@
     </div>
 
     <div class="question-preview-footer">
-      <div v-if="question.questionType != null " class="question-preview-title">「{{ question.questionName }}」</div>
-      <div v-else class="question-preview-title">「{{ question.collectionName }}」</div>
+      <div v-if="question.questionType != null" class="question-preview-title">
+        「{{ question.questionName }}」
+      </div>
+      <div v-else class="question-preview-title">
+        「{{ question.collectionName }}」
+      </div>
       <div class="question-preview-info">
         <div class="question-preview-author">
           {{ question.author.userName }}
