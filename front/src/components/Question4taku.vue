@@ -1,9 +1,9 @@
 <template>
   <div id="question-4taku">
-    <h3 class="title">{{ question.name }}</h3>
-    <h3>Q. {{ question.question }}</h3>
+    <h3 class="title">{{ question.questionName }}</h3>
+    <h3>Q. {{ question.questionBody }}</h3>
     <span></span>
-    <div v-for="(value, index) in question.value" :key="index">
+    <div v-for="(value, index) in question.values" :key="index">
       <label class="radio">
         <input
           v-model="userAnswers[0]"

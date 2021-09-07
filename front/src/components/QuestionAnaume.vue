@@ -1,6 +1,7 @@
 <template>
   <div id="question-anaume">
-    <h3>{{ question.name }}</h3>
+    <h3>{{ question.questionName }}</h3>
+    <h3>Q. {{ question.questionBody }}</h3>
     <div v-for="(wordData, index) in parsedQuestion" :key="`word-${index}`">
       <div v-if="wordData.word === '[]'">
         <input v-model="userAnswers[wordData.index]" type="text" />
@@ -38,7 +39,7 @@ export default {
       // 目的: v-modelと答えを一致させる
       // 参考: https://qiita.com/iwato/items/183e6dd676bf547ea341
       // 分割対象を残した状態で、分割する。
-      let questionSplit = this.question.question.split(/(\[\])/g)
+      let questionSplit = this.question.values[0].split(/(\[\])/g)
       let questionWordWithIndex = []
       let holeIndex = 0
       for (let i = 0; i < questionSplit.length; i++) {
@@ -53,6 +54,7 @@ export default {
         }
         questionWordWithIndex.push(wordData)
       }
+      console.log(questionWordWithIndex)
       return questionWordWithIndex
     },
   },
