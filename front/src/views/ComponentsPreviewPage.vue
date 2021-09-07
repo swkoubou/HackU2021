@@ -2,16 +2,16 @@
   <div class="components-preview">
     <h3>実際に解く問題</h3>
     <div class="question-compoents">
-      <QuestionParent :questionData="sampleQuestionData.q_4taku" />
-      <QuestionParent :questionData="sampleQuestionData.q_anaume" />
-      <QuestionParent :questionData="sampleQuestionData.q_collection" />
+      <QuestionParent :questionData="sampleQuestionData.api.q_4taku" />
+      <QuestionParent :questionData="sampleQuestionData.api.q_anaume" />
+      <QuestionParent :questionData="sampleQuestionData.api.q_collection" />
     </div>
 
     <h3>ホームに表示される問題プレビュー</h3>
     <div class="question-preview-components">
-      <QuestionPreview :question="sampleQuestionData.q_4taku" />
-      <QuestionPreview :question="sampleQuestionData.q_anaume" />
-      <QuestionPreview :question="sampleQuestionData.q_collection" />
+      <QuestionPreview :question="sampleQuestionData.api.q_4taku" />
+      <QuestionPreview :question="sampleQuestionData.api.q_anaume" />
+      <QuestionPreview :question="sampleQuestionData.api.q_collection" />
     </div>
   </div>
 </template>

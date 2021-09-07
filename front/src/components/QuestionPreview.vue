@@ -18,17 +18,18 @@
 
     <div
       class="question-preview-header"
-      v-else-if="question.questionType === 'collection'"
+      v-else-if="question.questionType == null"
     >
       <IconQuestionCollection :width="100" :height="100" />
       <h3>問題集</h3>
     </div>
 
     <div class="question-preview-footer">
-      <div class="question-preview-title">「{{ question.name }}」</div>
+      <div v-if="question.questionType != null " class="question-preview-title">「{{ question.questionName }}」</div>
+      <div v-else class="question-preview-title">「{{ question.collectionName }}」</div>
       <div class="question-preview-info">
         <div class="question-preview-author">
-          {{ question.author.displayName }}
+          {{ question.author.userName }}
         </div>
         <div class="question-preview-updatetime">
           {{ question.updateTime }}
