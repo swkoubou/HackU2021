@@ -100,6 +100,7 @@ var questions []question.Question = []question.Question{
 	{
 		QuestionID:   newUUID(),
 		Author:       accounts[1],
+		QuestionName: "ミラーリングとは",
 		QuestionTag:  []string{"資格", "基本情報", "IT"},
 		QuestionType: "4taku",
 		CreateTime:   "9999-12-31 23:59:59.999999",
@@ -111,6 +112,7 @@ var questions []question.Question = []question.Question{
 	{
 		QuestionID:   newUUID(),
 		Author:       accounts[1],
+		QuestionName: "計算誤差について",
 		QuestionTag:  []string{"資格", "基本情報", "IT"},
 		QuestionType: "4taku",
 		CreateTime:   "9999-12-31 23:59:59.999999",
@@ -122,6 +124,7 @@ var questions []question.Question = []question.Question{
 	{
 		QuestionID:   newUUID(),
 		Author:       accounts[1],
+		QuestionName: "記憶方式",
 		QuestionTag:  []string{"資格", "基本情報", "IT"},
 		QuestionType: "4taku",
 		CreateTime:   "9999-12-31 23:59:59.999999",
@@ -133,6 +136,7 @@ var questions []question.Question = []question.Question{
 	{
 		QuestionID:   newUUID(),
 		Author:       accounts[1],
+		QuestionName: "攻撃手法について",
 		QuestionTag:  []string{"資格", "基本情報", "IT"},
 		QuestionType: "4taku",
 		CreateTime:   "9999-12-31 23:59:59.999999",
