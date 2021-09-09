@@ -10,7 +10,7 @@
         v-for="data in postDataList"
         :key="data.questionID"
       >
-        <QuestionPreview :question="data" />
+        <QuestionPreview :question="data" :style="setRandomColorStyle" />
       </div>
     </div>
   </div>
@@ -24,6 +24,18 @@ export default {
   components: {
     QuestionPreview,
   },
+  data() {
+    return {
+      // とりあえずランダムに色をつける
+      questionPreviewColors: [
+        '#A2F1FF',
+        '#FFB4C5',
+        '#9AF7B6',
+        '#FFE796',
+        '#D4D9F2',
+      ],
+    }
+  },
   props: {
     title: {
       type: String,
@@ -33,6 +45,17 @@ export default {
       type: Array,
       default: () => [],
       required: false,
+    },
+  },
+  computed: {
+    // とりあえずランダムに色をつける
+    setRandomColorStyle() {
+      const min = Math.ceil(0)
+      const max = Math.floor(this.questionPreviewColors.length)
+      const index = Math.floor(Math.random() * (max - min) + min)
+      return {
+        'background-color': this.questionPreviewColors[index],
+      }
     },
   },
 }
@@ -47,6 +70,7 @@ export default {
   display: flex;
   gap: 0px 20px;
   overflow-x: scroll;
+  height: 215px;
 }
 .post-title {
   padding: 10px 30px;
