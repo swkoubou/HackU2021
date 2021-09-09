@@ -93,7 +93,7 @@ var questions []question.Question = []question.Question{
 		QuestionType: "4taku",
 		CreateTime:   "9999-12-31 23:59:59.999999",
 		UpdateTime:   "",
-		QuestionBody: "intの何型?",
+		QuestionBody: "intは何型?",
 		Values:       []string{"整数型", "文字型", "実数型", "構造体"},
 		Answers:      []string{"整数型"},
 	},
