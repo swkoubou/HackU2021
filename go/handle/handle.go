@@ -100,7 +100,7 @@ var questions []question.Question = []question.Question{
 	{
 		QuestionID:   newUUID(),
 		Author:       accounts[1],
-		QuestionName: "ミラーリングとは",
+		QuestionName: "ミラーリングについて",
 		QuestionTag:  []string{"資格", "基本情報", "IT"},
 		QuestionType: "4taku",
 		CreateTime:   "9999-12-31 23:59:59.999999",
