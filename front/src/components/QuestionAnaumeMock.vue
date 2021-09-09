@@ -31,7 +31,6 @@
         {{ choice }}
       </h3>
     </div>
-    <button>正誤判定をする</button>
   </div>
 </template>
 

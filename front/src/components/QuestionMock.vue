@@ -12,6 +12,9 @@
     <div v-else>
       <h3>unknown</h3>
     </div>
+    <div v-if="question.questionType != null">
+      <button>正誤判定をする</button>
+    </div>
   </div>
 </template>
 
