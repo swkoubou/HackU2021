@@ -63,6 +63,7 @@ export default {
         this.$parent.goScorePageAndCheckAnswers(answersData)
       } else {
         this.$parent.storeUserAnswers(answersData)
+        this.selectingQuestionIndex = null
         this.$parent.goNextQuestion()
       }
     },
