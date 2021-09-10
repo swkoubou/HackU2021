@@ -72,7 +72,7 @@ export default {
   methods: {
     shuffleArray: function (target) {
       let array = target.concat()
-      var currentIndex = array.length,
+      let currentIndex = array.length,
         randomIndex
 
       // While there remain elements to shuffle...
