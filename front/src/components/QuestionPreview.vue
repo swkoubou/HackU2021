@@ -1,5 +1,5 @@
 <template>
-  <div class="question-preview">
+  <div class="question-preview" @click="goAnswerTheQuestion()">
     <div
       class="question-preview-header"
       v-if="question.questionType === 'anaume'"
@@ -67,6 +67,14 @@ export default {
         new Date()
       )
       return format(updateTime, 'yyyy年MM月dd日')
+    },
+  },
+  methods: {
+    goAnswerTheQuestion() {
+      this.$router.push({
+        name: 'AnswerTheQuestionPage',
+        params: { question: this.question },
+      })
     },
   },
 }

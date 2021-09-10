@@ -37,6 +37,7 @@ const routes = [
     path: '/answerthequestion',
     name: 'AnswerTheQuestionPage',
     component: AnswerTheQuestionPage,
+    props: true,
   },
   {
     path: '/score',
