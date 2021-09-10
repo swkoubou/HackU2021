@@ -29,10 +29,23 @@
         {{ choice }}
       </h3>
     </div>
+    <div class="anaume-reset">
+      <button class="anaume-reset-button" @click="resetSelecting()">
+        <FontAwesomeIcon icon="undo" class="anaume-reset-button-icon"/><span class="anaume-reset-button-text">選択し直す</span>
+      </button>
+      <!-- <i class="fas fa-trash" @click="resetSelecting()"></i> -->
+    </div>
   </div>
 </template>
 
 <script>
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import {
+  faUndo
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(faUndo)
 export default {
   name: 'QuestionAnaumeMock',
   props: {
@@ -44,6 +57,9 @@ export default {
       type: Boolean,
       required: true,
     },
+  },
+  components: {
+    FontAwesomeIcon
   },
   data() {
     return {
@@ -88,6 +104,13 @@ export default {
         ]
       }
       return array
+    },
+    resetSelecting: function() {
+      for (let i = 0; i < this.selectingIndexs.length; i++) {
+        this.questionSplit[this.squareBracketsIndexs[i]] =
+        '[ ' + (i + 1) + ' ]'
+      }
+      this.selectingIndexs = []
     },
     setSelecting: function (index) {
       // すでに選択されているか
@@ -138,6 +161,28 @@ export default {
 </script>
 
 <style scoped>
+.anaume-reset-button-text {
+  font-size: 15px;
+}
+
+.anaume-reset-button-icon {
+  padding-right: 5px;
+}
+
+.anaume-reset-button {
+  font-size: 15px;
+  background-color: transparent;
+  border: 2px solid;
+  border-color: #00237E;
+  border-radius: 30px;
+}
+
+.anaume-reset {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 5%;
+}
+
 .question-paper {
   /* display: contents; */
   display: inline-block;
