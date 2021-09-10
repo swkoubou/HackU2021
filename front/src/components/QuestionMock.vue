@@ -50,4 +50,11 @@ export default {
   position: relative;
   width: 500px;
 }
+
+@media (max-width: 500px) {
+  .question-card {
+    width: 90%;
+  }
+}
+
 </style>
