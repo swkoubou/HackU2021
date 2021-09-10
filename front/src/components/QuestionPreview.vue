@@ -62,7 +62,7 @@ export default {
   computed: {
     updateTime() {
       const updateTime = parse(
-        '1999-08-28 23:59:59.999999'.replace(/\.[0-9]*$/g, ''),
+        this.question.updateTime.replace(/\.[0-9]*$/g, ''),
         'yyyy-MM-dd HH:mm:ss',
         new Date()
       )
