@@ -1,8 +1,6 @@
 <template>
   <div>
-    <h3>
-      {{ question.questionName }}
-    </h3>
+    <h3>「{{ question.questionName }}」</h3>
 
     <h3>
       <div
@@ -37,7 +35,16 @@
 <script>
 export default {
   name: 'QuestionAnaumeMock',
-  props: ['question'],
+  props: {
+    question: {
+      type: Object,
+      required: true,
+    },
+    isInCollection: {
+      type: Boolean,
+      required: true,
+    },
+  },
   data() {
     return {
       selectingIndexs: [],
@@ -51,15 +58,20 @@ export default {
     this.choices = this.shuffleArray(this.question.answers)
     // 置換のために、四角と文章を分ける
     this.questionSplit = this.question.values[0].split(/(\[\])/g)
+
+    let questionNoForHuman = 0
+
     for (let i = 0; i < this.questionSplit.length; i++) {
       if (this.questionSplit[i] == '[]') {
+        questionNoForHuman++
         this.squareBracketsIndexs.push(i)
-        this.questionSplit[i] = '[ ]'
+        this.questionSplit[i] = '[ ' + questionNoForHuman + ' ]'
       }
     }
   },
   methods: {
-    shuffleArray: function (array) {
+    shuffleArray: function (target) {
+      let array = target.concat()
       var currentIndex = array.length,
         randomIndex
 
@@ -83,11 +95,9 @@ export default {
         // 最後かどうか
         if (this.selectingIndexs[this.selectingIndexs.length - 1] == index) {
           // 選択を取り消します
-          // console.log(`${this.squareBracketsIndexs[this.selectingIndexs[index]]} : ${this.questionSplit[this.squareBracketsIndexs[this.selectingIndexs[index]]]}`)
-          // this.questionSplit[this.squareBracketsIndexs[this.selectingIndexs[index]]] == "[]"
           this.questionSplit[
             this.squareBracketsIndexs[this.selectingIndexs.indexOf(index)]
-          ] = '[ ]'
+          ] = '[ ' + (this.selectingIndexs.indexOf(index) + 1) + ' ]'
           this.selectingIndexs.splice(this.selectingIndexs.indexOf(index), 1)
         }
       } else {
@@ -98,6 +108,28 @@ export default {
         this.questionSplit[this.squareBracketsIndexs[i]] =
           '[ ' + this.choices[this.selectingIndexs[i]] + ' ]'
       }
+
+      if (this.selectingIndexs.length == this.choices.length) {
+        let choicesText = []
+        for (let i = 0; i < this.selectingIndexs.length; i++) {
+          choicesText.push(this.choices[this.selectingIndexs[i]])
+        }
+
+        const answersData = {
+          squareBracketsIndexs: this.squareBracketsIndexs,
+          questionSplit: this.questionSplit,
+          questionAnswers: this.question.answers,
+          userAnswers: choicesText,
+          type: this.question.questionType,
+        }
+
+        if (!this.isInCollection) {
+          this.$parent.goScorePageAndCheckAnswers(answersData)
+        } else {
+          this.$parent.storeUserAnswers(answersData)
+          this.$parent.goNextQuestion()
+        }
+      }
     },
   },
 }
@@ -105,7 +137,7 @@ export default {
 
 <style scoped>
 .question-paper {
-  display: contents;
+  display: inline-block;
 }
 
 .selecting-mark {
@@ -137,16 +169,12 @@ export default {
   align-items: center;
 
   color: white;
-  /* border-top: 2px solid; */
-  /* border-bottom: 2px solid; */
   border: 2px solid;
   border-color: #00237e;
   background-color: #4472c4;
 }
 
 .question-choice-list {
-  /* list-style-type: none; */
-  /* text-align:center; */
   display: flex;
   align-items: center;
   justify-content: center;

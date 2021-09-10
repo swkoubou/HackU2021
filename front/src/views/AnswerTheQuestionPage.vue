@@ -1,17 +1,16 @@
 <template>
   <div>
-    <QuestionParent :questionData="this.sampleQuestionData" />
-    <!-- <div>{{ this.sampleQuestionData }}</div> -->
+    <QuestionMock :question="this.sampleQuestionData" />
   </div>
 </template>
 
 <script>
-import QuestionParent from '@/components/Question.vue'
+import QuestionMock from '@/components/QuestionMock.vue'
 
 export default {
   name: 'AnswerTheQuestionPage',
   components: {
-    QuestionParent,
+    QuestionMock,
   },
   data() {
     return {

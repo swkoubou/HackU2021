@@ -4,7 +4,7 @@
     <div class="daimons">
       <div
         class="daimon"
-        v-for="(daimon, daimonIndex) in answerData"
+        v-for="(daimon, daimonIndex) in answersData"
         :key="`daimon-${daimonIndex}`"
       >
         <div class="question-score-card">
@@ -12,13 +12,13 @@
           <div class="syomons">
             <div
               class="syomon"
-              v-for="(syomon, syomonIndex) in daimon"
+              v-for="(syomon, syomonIndex) in daimon['questionAnswers']"
               :key="`syomon-${syomonIndex}`"
             >
               <ScoreSyomon
                 :SyomonNo="syomonIndex + 1"
-                :UserAnswer="syomon.userAnswer"
-                :QuestionAnswer="syomon.questionAnswer"
+                :UserAnswer="daimon['userAnswers'][syomonIndex]"
+                :QuestionAnswer="syomon"
               />
             </div>
           </div>
@@ -34,7 +34,7 @@ import ScoreSyomon from '@/components/ScoreSyomon.vue'
 export default {
   name: 'ScorePage',
   props: {
-    answerData: {
+    answersData: {
       type: Array,
       required: true,
     },
@@ -46,16 +46,19 @@ export default {
 </script>
 
 <style scoped>
-.syomons {
-  align-items: center;
-  justify-content: center;
-}
 .syomon {
   background: rgb(236, 236, 236);
-  width: 80%;
   max-width: 800px;
+  margin: 5px 0px;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 5px;
+}
+
+/* 横幅が少ない時の最低マージン */
+@media (max-width: 840px) {
+  .syomon {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
 }
 </style>
