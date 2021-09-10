@@ -204,7 +204,7 @@ export default {
   position: absolute;
   justify-content: center;
   align-items: center;
-  left: 20px;
+  left: 4%;
 
   color: white;
   background-color: #ffc000;
