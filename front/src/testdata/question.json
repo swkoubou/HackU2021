@@ -36,8 +36,7 @@
     },
     "createTime": "2000/01/01 00:00:00",
     "updateTime": "2000/01/01 00:00:00",
-    "questions": [
-      {
+    "questions": [{
         "questionId": "uuid",
         "name": "ポケモンの問題",
         "question": "アニメポケットモンスターシリーズに登場する主人公の名前は？",
@@ -66,8 +65,7 @@
       }
     ]
   },
-  "multipleProblemSamples": [
-    {
+  "multipleProblemSamples": [{
       "questionID": "aea20873-0e55-11ec-bf6a-0242ac140005",
       "author": {
         "userID": "aea20225-0e55-11ec-bf6a-0242ac140005",
@@ -229,8 +227,7 @@
         "userID": "aea20861-0e55-11ec-bf6a-0242ac140005",
         "userName": "山田孝之"
       },
-      "questions": [
-        {
+      "questions": [{
           "questionName": "(c)肉の問題",
           "questionID": "aea20877-0e55-11ec-bf6a-0242ac140005",
           "author": {
@@ -266,5 +263,231 @@
       "createTime": "9999-12-31 23:59:59.999999",
       "updateTime": "9999-12-31 23:59:59.999999"
     }
-  }
+  },
+  "searchSource": [{
+    "questionID": "e6a472f7-126e-11ec-b3ec-0242ac120004",
+    "author": {
+      "userID": "e6a46f5a-126e-11ec-b3eb-0242ac120004",
+      "userName": "hoge"
+    },
+    "questionName": "コード進行1",
+    "questionTag": ["音楽", "音楽記号", "コード理論"],
+    "questionType": "4taku",
+    "createTime": "2021-08-31 15:30:57.499391",
+    "updateTime": "2021-08-31 18:33:24.299391",
+    "questionBody": "C,G,Am,Em,F,C,F,Gのコード進行は?",
+    "values": ["カノン進行", "J-POP王道進行", "小室進行", "イチロクニーゴー"],
+    "answers": ["カノン進行"],
+    "color": "#A2F1FF"
+  }, {
+    "questionID": "e6a4730b-126e-11ec-b3ec-0242ac120004",
+    "author": {
+      "userID": "e6a46f5a-126e-11ec-b3eb-0242ac120004",
+      "userName": "hoge"
+    },
+    "questionName": "音楽用語1",
+    "questionTag": ["音楽", "音楽用語"],
+    "questionType": "anaume",
+    "createTime": "2021-08-31 15:36:27.135791",
+    "updateTime": "2021-08-31 19:32:24.359291",
+    "questionBody": "Poco Allegro con affettoの意味は?",
+    "values": ["やや[]く[]こめて"],
+    "answers": ["はや", "愛情"],
+    "color": "#FFB4C5"
+  }, {
+    "questionID": "e6a4730c-126e-11ec-b3ec-0242ac120004",
+    "author": {
+      "userID": "e6a46f5a-126e-11ec-b3eb-0242ac120004",
+      "userName": "hoge"
+    },
+    "questionName": "音楽用語2",
+    "questionTag": ["音楽", "音楽用語"],
+    "questionType": "anaume",
+    "createTime": "2021-09-01 02:15:30.321691",
+    "updateTime": "2021-09-01 04:18:21.321691",
+    "questionBody": "più animato con passioneの意味は?",
+    "values": ["[]的にやや[]と[]く"],
+    "answers": ["情熱", "生き生きと", "はや"],
+    "color": "#9AF7B6"
+  }, {
+    "questionID": "e6a4730d-126e-11ec-b3ec-0242ac120004",
+    "author": {
+      "userID": "e6a46f5a-126e-11ec-b3eb-0242ac120004",
+      "userName": "hoge"
+    },
+    "questionName": "C言語1",
+    "questionTag": ["プログラミング言語", "C"],
+    "questionType": "4taku",
+    "createTime": "2021-09-01 05:32:47.401391",
+    "updateTime": "2021-09-01 10:24:25.401391",
+    "questionBody": "intは何型?",
+    "values": ["整数型", "文字型", "実数型", "構造体"],
+    "answers": ["整数型"],
+    "color": "#FFE796"
+  }, {
+    "questionID": "e6a4730e-126e-11ec-b3ec-0242ac120004",
+    "author": {
+      "userID": "e6a472f4-126e-11ec-b3eb-0242ac120004",
+      "userName": "huga"
+    },
+    "questionName": "ミラーリングについて",
+    "questionTag": ["資格", "基本情報", "IT"],
+    "questionType": "4taku",
+    "createTime": "2021-09-01 15:20:12.821491",
+    "updateTime": "2021-09-01 22:34:51.821491",
+    "questionBody": "ミラーリングを用いることで，信頼性を高め障害発生時にデータ復元を行う方式はどれか？",
+    "values": ["RAID1", "RAID2", "RAID3", "RAID4"],
+    "answers": ["RAID1"],
+    "color": "#D4D9F2"
+  }, {
+    "questionID": "e6a4730f-126e-11ec-b3ec-0242ac120004",
+    "author": {
+      "userID": "e6a472f4-126e-11ec-b3eb-0242ac120004",
+      "userName": "huga"
+    },
+    "questionName": "計算誤差について",
+    "questionTag": ["資格", "基本情報", "IT"],
+    "questionType": "4taku",
+    "createTime": "2021-09-01 15:25:32.135491",
+    "updateTime": "2021-09-01 22:57:12.135491",
+    "questionBody": "値がほぼ等しい浮動小数点同士の計算により，有効桁数が減ってしまうのはどれか？",
+    "values": ["桁落ち", "丸め誤差", "情報落ち", "桁あふれ誤差"],
+    "answers": ["桁落ち"],
+    "color": "#A2F1FF"
+  }, {
+    "questionID": "e6a47310-126e-11ec-b3ec-0242ac120004",
+    "author": {
+      "userID": "e6a472f4-126e-11ec-b3eb-0242ac120004",
+      "userName": "huga"
+    },
+    "questionName": "記憶方式について",
+    "questionTag": ["資格", "基本情報", "IT"],
+    "questionType": "4taku",
+    "createTime": "2021-09-01 18:49:32.632182",
+    "updateTime": "2021-09-01 20:32:47.632182",
+    "questionBody": "仮想記憶空間と実記憶空間を，固定長の領域に区切り対応させる管理方式はどれか？",
+    "values": ["動的再配置", "メモリインタリーブ", "ページング方式", "ブロック化"],
+    "answers": ["ページング方式"],
+    "color": "#FFB4C5"
+  }, {
+    "questionID": "e6a47312-126e-11ec-b3ec-0242ac120004",
+    "author": {
+      "userID": "e6a472f4-126e-11ec-b3eb-0242ac120004",
+      "userName": "huga"
+    },
+    "questionName": "攻撃手法について",
+    "questionTag": ["資格", "基本情報", "IT"],
+    "questionType": "4taku",
+    "createTime": "2021-09-01 23:20:18.311491",
+    "updateTime": "2021-09-02 22:43:32.311491",
+    "questionBody": "パスワードを解読する手法として，総当たりで調べるのはどれか？",
+    "values": ["線形解読法", "ブルートフォース攻撃", "差分解読法", "関連鍵攻撃"],
+    "answers": ["ブルートフォース攻撃"],
+    "color": ""
+  }, {
+    "questionID": "e6a47313-126e-11ec-b3ec-0242ac120004",
+    "author": {
+      "userID": "e6a472f4-126e-11ec-b3eb-0242ac120004",
+      "userName": "huga"
+    },
+    "questionName": "英文法",
+    "questionTag": ["英語", "英文法", "TOEIC"],
+    "questionType": "4taku",
+    "createTime": "2021-09-02 22:19:32.231891",
+    "updateTime": "2021-09-02 23:15:21.231891",
+    "questionBody": "The International Peace Conference ___ as planned of Saturday.",
+    "values": ["concluded", "held", "achieved", "invited"],
+    "answers": ["concluded"],
+    "color": "#9AF7B6"
+  }, {
+    "questionID": "e6a47314-126e-11ec-b3ec-0242ac120004",
+    "author": {
+      "userID": "e6a472f4-126e-11ec-b3eb-0242ac120004",
+      "userName": "huga"
+    },
+    "questionName": "英文法",
+    "questionTag": ["英語", "英文法", "TOEIC"],
+    "questionType": "4taku",
+    "createTime": "2021-09-03 19:13:32.102491",
+    "updateTime": "2021-09-03 21:45:33.102491",
+    "questionBody": "The new guidelines regarding jury duty should be ___ to strictly.",
+    "values": ["respected", "adhered", "willing", "set"],
+    "answers": ["adhered"],
+    "color": "#FFE796"
+  }, {
+    "questionID": "e6a47315-126e-11ec-b3ec-0242ac120004",
+    "author": {
+      "userID": "e6a472f4-126e-11ec-b3eb-0242ac120004",
+      "userName": "huga"
+    },
+    "questionName": "英文法",
+    "questionTag": ["英語", "英文法", "TOEIC"],
+    "questionType": "4taku",
+    "createTime": "2021-09-04 12:43:42.502491",
+    "updateTime": "2021-09-04 19:21:11.502491",
+    "questionBody": "Our new facility ___ right across from the city's new convention center.",
+    "values": ["is located", "will locate", "is to locate", "had located"],
+    "answers": ["is located"],
+    "color": "#D4D9F2"
+  }, {
+    "questionID": "e6a47316-126e-11ec-b3ec-0242ac120004",
+    "author": {
+      "userID": "e6a472f4-126e-11ec-b3eb-0242ac120004",
+      "userName": "huga"
+    },
+    "questionName": "英文法",
+    "questionTag": ["英語", "英文法", "TOEIC"],
+    "questionType": "4taku",
+    "createTime": "2021-09-06 18:13:29.319491",
+    "updateTime": "2021-09-06 23:43:11.319491",
+    "questionBody": "A sudden drop in sales would ___ cuts in production and employment.",
+    "values": ["necessitate", "necessary", "necessity", "necessarily"],
+    "answers": ["necessitate"],
+    "color": "#A2F1FF"
+  }, {
+    "questionID": "e6a47319-126e-11ec-b3ec-0242ac120004",
+    "author": {
+      "userID": "e6a472f4-126e-11ec-b3eb-0242ac120004",
+      "userName": "huga"
+    },
+    "questionName": "英単語",
+    "questionTag": ["英語", "英単語", "TOEIC"],
+    "questionType": "4taku",
+    "createTime": "2021-09-07 20:12:12.812391",
+    "updateTime": "2021-09-08 18:15:29.319491",
+    "questionBody": "protractor の意味は？",
+    "values": ["コンパス", "分度器", "消しゴム", "黒板消し"],
+    "answers": ["分度器"],
+    "color": "#FFB4C5"
+  }, {
+    "questionID": "e6a4731a-126e-11ec-b3ec-0242ac120004",
+    "author": {
+      "userID": "e6a472f4-126e-11ec-b3eb-0242ac120004",
+      "userName": "huga"
+    },
+    "questionName": "英単語",
+    "questionTag": ["英語", "英単語", "TOEIC"],
+    "questionType": "4taku",
+    "createTime": "2021-09-08 03:41:22.352390",
+    "updateTime": "2021-09-08 14:22:45.352390",
+    "questionBody": "apprentice の意味は？",
+    "values": ["人類", "謝る", "初心者", "食欲"],
+    "answers": ["初心者"],
+    "color": "#9AF7B6"
+  }, {
+    "questionID": "e6a4731b-126e-11ec-b3ec-0242ac120004",
+    "author": {
+      "userID": "e6a472f4-126e-11ec-b3eb-0242ac120004",
+      "userName": "huga"
+    },
+    "questionName": "英単語",
+    "questionTag": ["英語", "英単語", "TOEIC"],
+    "questionType": "4taku",
+    "createTime": "2021-09-09 23:22:42.292391",
+    "updateTime": "2021-09-10 11:34:45.292391",
+    "questionBody": "photosynthesis の意味は？",
+    "values": ["写真", "定説", "映像", "光合成"],
+    "answers": ["光合成"],
+    "color": "#FFE796"
+  }]
 }
