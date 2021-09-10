@@ -1,13 +1,13 @@
 <template>
   <div>
     <div v-if="question.questions[questionNo].questionType === 'anaume'">
-      <QuestionAnaumeMock
+      <QuestionAnaume
         :question="question.questions[questionNo]"
         :isInCollection="true"
       />
     </div>
     <div v-else-if="question.questions[questionNo].questionType === '4taku'">
-      <Question4takuMock
+      <Question4taku
         :question="question.questions[questionNo]"
         :isInCollection="true"
       />
@@ -22,15 +22,15 @@
 </template>
 
 <script>
-import Question4takuMock from '@/components/Question4takuMock.vue'
-import QuestionAnaumeMock from '@/components/QuestionAnaumeMock.vue'
+import Question4taku from '@/components/Question4taku.vue'
+import QuestionAnaume from '@/components/QuestionAnaume.vue'
 
 export default {
-  name: 'QuestionCollectionMock',
+  name: 'QuestionCollection',
   props: ['question'],
   components: {
-    Question4takuMock,
-    QuestionAnaumeMock,
+    Question4taku,
+    QuestionAnaume,
   },
   data() {
     return {

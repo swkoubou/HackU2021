@@ -29,7 +29,7 @@
 
 <script>
 export default {
-  name: 'Question4takuMock',
+  name: 'Question4taku',
   props: {
     question: {
       type: Object,

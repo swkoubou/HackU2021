@@ -8,33 +8,24 @@
     </div>
 
     <h3>新デザイン 実際に解く問題</h3>
-    <div class="question-mock-components">
-      <QuestionMock :question="sampleQuestionData.api.q_4taku" />
-      <QuestionMock :question="sampleQuestionData.api.q_anaume" />
-      <QuestionMock :question="sampleQuestionData.api.q_collection" />
-    </div>
-
-    <h3>実際に解く問題</h3>
-    <div class="question-compoents">
-      <QuestionParent :questionData="sampleQuestionData.api.q_4taku" />
-      <QuestionParent :questionData="sampleQuestionData.api.q_anaume" />
-      <QuestionParent :questionData="sampleQuestionData.api.q_collection" />
+    <div class="question-components">
+      <Question :question="sampleQuestionData.api.q_4taku" />
+      <Question :question="sampleQuestionData.api.q_anaume" />
+      <Question :question="sampleQuestionData.api.q_collection" />
     </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import QuestionParent from '@/components/Question.vue'
 import QuestionPreview from '@/components/QuestionPreview.vue'
-import QuestionMock from '@/components/QuestionMock.vue'
+import Question from '@/components/Question.vue'
 
 export default {
   name: 'ComponentsPreviewPage',
   components: {
-    QuestionParent,
     QuestionPreview,
-    QuestionMock,
+    Question,
   },
   data() {
     return {
@@ -45,12 +36,7 @@ export default {
 </script>
 
 <style scoped>
-.question-mock-components {
-  display: flex;
-  justify-content: space-between;
-}
-
-.question-compoents {
+.question-components {
   display: flex;
   justify-content: space-between;
 }

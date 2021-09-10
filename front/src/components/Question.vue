@@ -1,13 +1,13 @@
 <template>
   <div class="question-card">
     <div v-if="question.questionType === 'anaume'">
-      <QuestionAnaumeMock :question="question" :isInCollection="false" />
+      <QuestionAnaume :question="question" :isInCollection="false" />
     </div>
     <div v-else-if="question.questionType === '4taku'">
-      <Question4takuMock :question="question" :isInCollection="false" />
+      <Question4taku :question="question" :isInCollection="false" />
     </div>
     <div v-else-if="question.questionType == null">
-      <QuestionCollectionMock :question="question" />
+      <QuestionCollection :question="question" />
     </div>
     <div v-else>
       <h3>unknown</h3>
@@ -16,17 +16,17 @@
 </template>
 
 <script>
-import QuestionAnaumeMock from '@/components/QuestionAnaumeMock.vue'
-import Question4takuMock from '@/components/Question4takuMock.vue'
-import QuestionCollectionMock from '@/components/QuestionCollectionMock.vue'
+import QuestionAnaume from '@/components/QuestionAnaume.vue'
+import Question4taku from '@/components/Question4taku.vue'
+import QuestionCollection from '@/components/QuestionCollection.vue'
 
 export default {
-  name: 'QuestionMock',
+  name: 'Question',
   props: ['question'],
   components: {
-    QuestionAnaumeMock,
-    Question4takuMock,
-    QuestionCollectionMock,
+    QuestionAnaume,
+    Question4taku,
+    QuestionCollection,
   },
   methods: {
     goScorePageAndCheckAnswers(answerData) {

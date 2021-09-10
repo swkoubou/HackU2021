@@ -47,7 +47,7 @@ import { faUndo } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faUndo)
 export default {
-  name: 'QuestionAnaumeMock',
+  name: 'QuestionAnaume',
   props: {
     question: {
       type: Object,
