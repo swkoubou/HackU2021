@@ -7,6 +7,7 @@ import ScorePage from '../views/ScorePage.vue'
 import NotifiCationPage from '../views/NotifiCationPage.vue'
 import LoginPage from '../views/LoginPage'
 import LoginSuccessPreviewPage from '../views/LoginSuccessPreviewPage'
+import SearchPage from '../views/SearchPage.vue'
 
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
@@ -60,6 +61,12 @@ const routes = [
     name: 'LoginSuccessPreviewPage',
     component: LoginSuccessPreviewPage,
     meta: { requiresAuth: true },
+  },
+  {
+    path: '/search',
+    name: 'SearchPage',
+    component: SearchPage,
+    props: true,
   },
 ]
 
