@@ -1,17 +1,24 @@
 <template>
   <div class="components-preview">
-    <h3>実際に解く問題</h3>
-    <div class="question-compoents">
-      <QuestionParent :questionData="sampleQuestionData.api.q_4taku" />
-      <QuestionParent :questionData="sampleQuestionData.api.q_anaume" />
-      <QuestionParent :questionData="sampleQuestionData.api.q_collection" />
-    </div>
-
     <h3>ホームに表示される問題プレビュー</h3>
     <div class="question-preview-components">
       <QuestionPreview :question="sampleQuestionData.api.q_4taku" />
       <QuestionPreview :question="sampleQuestionData.api.q_anaume" />
       <QuestionPreview :question="sampleQuestionData.api.q_collection" />
+    </div>
+
+    <h3>新デザイン 実際に解く問題</h3>
+    <div class="question-mock-components">
+      <QuestionMock :question="sampleQuestionData.api.q_4taku" />
+      <QuestionMock :question="sampleQuestionData.api.q_anaume" />
+      <QuestionMock :question="sampleQuestionData.api.q_collection" />
+    </div>
+
+    <h3>実際に解く問題</h3>
+    <div class="question-compoents">
+      <QuestionParent :questionData="sampleQuestionData.api.q_4taku" />
+      <QuestionParent :questionData="sampleQuestionData.api.q_anaume" />
+      <QuestionParent :questionData="sampleQuestionData.api.q_collection" />
     </div>
   </div>
 </template>
@@ -20,12 +27,14 @@
 // @ is an alias to /src
 import QuestionParent from '@/components/Question.vue'
 import QuestionPreview from '@/components/QuestionPreview.vue'
+import QuestionMock from '@/components/QuestionMock.vue'
 
 export default {
   name: 'ComponentsPreviewPage',
   components: {
     QuestionParent,
     QuestionPreview,
+    QuestionMock,
   },
   data() {
     return {
@@ -36,6 +45,11 @@ export default {
 </script>
 
 <style scoped>
+.question-mock-components {
+  display: flex;
+  justify-content: space-between;
+}
+
 .question-compoents {
   display: flex;
   justify-content: space-between;
