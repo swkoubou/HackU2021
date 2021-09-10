@@ -1,10 +1,11 @@
 <template>
   <div>
     <h2>スコア</h2>
+    <!-- <h4>{{answersData}}</h4> -->
     <div class="daimons">
       <div
         class="daimon"
-        v-for="(daimon, daimonIndex) in answerData"
+        v-for="(daimon, daimonIndex) in answersData"
         :key="`daimon-${daimonIndex}`"
       >
         <div class="question-score-card">
@@ -12,13 +13,13 @@
           <div class="syomons">
             <div
               class="syomon"
-              v-for="(syomon, syomonIndex) in daimon"
+              v-for="(syomon, syomonIndex) in daimon['questionAnswers']"
               :key="`syomon-${syomonIndex}`"
             >
               <ScoreSyomon
                 :SyomonNo="syomonIndex + 1"
-                :UserAnswer="syomon.userAnswer"
-                :QuestionAnswer="syomon.questionAnswer"
+                :UserAnswer="daimon['userAnswers'][syomonIndex]"
+                :QuestionAnswer="syomon"
               />
             </div>
           </div>
@@ -34,7 +35,7 @@ import ScoreSyomon from '@/components/ScoreSyomon.vue'
 export default {
   name: 'ScorePage',
   props: {
-    answerData: {
+    answersData: {
       type: Array,
       required: true,
     },
