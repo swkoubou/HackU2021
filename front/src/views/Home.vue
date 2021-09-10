@@ -1,14 +1,14 @@
 <template>
   <main class="home-page">
     <PostList title="最新の問題" :postDataList="newQuestionPosts" />
-    <PostList title="最新の問題集" :postDataList="newQuestionPosts" />
+    <PostList title="最新の問題集" :postDataList="newCollectionPosts" />
     <PostList
       title="みんなが挑戦している問題"
       :postDataList="newQuestionPosts"
     />
     <PostList
       title="みんなが挑戦している問題集"
-      :postDataList="newQuestionPosts"
+      :postDataList="newCollectionPosts"
     />
   </main>
 </template>
@@ -24,15 +24,20 @@ export default {
   data() {
     return {
       newQuestionPosts: [],
+      newCollectionPosts: [],
     }
   },
-  created() {
-    const questionDataSamples = require('@/testdata/question.json')
-    questionDataSamples.multipleProblemSamples
-    // 新しいデータを挿入
-    // Todo 後でAPIに置き換え
-    this.newQuestionPosts = []
-    this.newQuestionPosts = questionDataSamples.multipleProblemSamples
+  async created() {
+    {
+      const response = await fetch('api/question/all')
+      const allQuestions = await response.json()
+      this.newQuestionPosts = allQuestions
+    }
+    {
+      const response = await fetch('api/collection/all')
+      const allCollection = await response.json()
+      this.newCollectionPosts = allCollection
+    }
   },
 }
 </script>
