@@ -29,7 +29,7 @@
         {{ choice }}
       </h3>
     </div>
-    <div class="anaume-reset">
+    <div class="anaume-reset" :class="{ shake: this.animated }">
       <button class="anaume-reset-button" @click="resetSelecting()">
         <FontAwesomeIcon icon="undo" class="anaume-reset-button-icon" /><span
           class="anaume-reset-button-text"
@@ -67,6 +67,7 @@ export default {
       choices: [],
       questionSplit: [],
       squareBracketsIndexs: [],
+      animated: false,
     }
   },
   created() {
@@ -106,10 +107,18 @@ export default {
       return array
     },
     resetSelecting: function () {
-      for (let i = 0; i < this.selectingIndexs.length; i++) {
-        this.questionSplit[this.squareBracketsIndexs[i]] = '[ ' + (i + 1) + ' ]'
+      if (this.selectingIndexs.length == 0) {
+        this.animated = true
+        setTimeout(() => {
+          this.animated = false
+        }, 300)
+      } else {
+        for (let i = 0; i < this.selectingIndexs.length; i++) {
+          this.questionSplit[this.squareBracketsIndexs[i]] =
+            '[ ' + (i + 1) + ' ]'
+        }
+        this.selectingIndexs = []
       }
-      this.selectingIndexs = []
     },
     setSelecting: function (index) {
       // すでに選択されているか
@@ -222,5 +231,29 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.shake {
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+}
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
 }
 </style>
