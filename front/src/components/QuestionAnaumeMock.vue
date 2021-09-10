@@ -31,7 +31,10 @@
     </div>
     <div class="anaume-reset">
       <button class="anaume-reset-button" @click="resetSelecting()">
-        <FontAwesomeIcon icon="undo" class="anaume-reset-button-icon"/><span class="anaume-reset-button-text">選択し直す</span>
+        <FontAwesomeIcon icon="undo" class="anaume-reset-button-icon" /><span
+          class="anaume-reset-button-text"
+          >選択し直す</span
+        >
       </button>
       <!-- <i class="fas fa-trash" @click="resetSelecting()"></i> -->
     </div>
@@ -41,9 +44,7 @@
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import {
-  faUndo
-} from '@fortawesome/free-solid-svg-icons'
+import { faUndo } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faUndo)
 export default {
@@ -59,7 +60,7 @@ export default {
     },
   },
   components: {
-    FontAwesomeIcon
+    FontAwesomeIcon,
   },
   data() {
     return {
@@ -105,10 +106,9 @@ export default {
       }
       return array
     },
-    resetSelecting: function() {
+    resetSelecting: function () {
       for (let i = 0; i < this.selectingIndexs.length; i++) {
-        this.questionSplit[this.squareBracketsIndexs[i]] =
-        '[ ' + (i + 1) + ' ]'
+        this.questionSplit[this.squareBracketsIndexs[i]] = '[ ' + (i + 1) + ' ]'
       }
       this.selectingIndexs = []
     },
@@ -173,7 +173,7 @@ export default {
   font-size: 15px;
   background-color: transparent;
   border: 2px solid;
-  border-color: #00237E;
+  border-color: #00237e;
   border-radius: 30px;
 }
 
