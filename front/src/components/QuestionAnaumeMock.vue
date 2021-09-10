@@ -36,7 +36,6 @@
           >選択し直す</span
         >
       </button>
-
     </div>
   </div>
 </template>
