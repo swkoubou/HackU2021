@@ -2,7 +2,7 @@
   <div>
     <!-- <h3>{{searchResultKeys}}</h3> -->
     <div v-if="searchResultKeys.length == 0">
-        <h2 class="no-result">結果なし</h2>
+      <h2 class="no-result">結果なし</h2>
     </div>
     <div v-for="searchResultKey in searchResultKeys" :key="searchResultKey">
       <PostList
@@ -37,10 +37,10 @@ export default {
 
 <style scoped>
 .no-result {
-    /* display: flex;
+  /* display: flex;
     justify-content: center;
     align-content: center; */
-    top: 50%;
-    left: 50%;;
+  top: 50%;
+  left: 50%;
 }
 </style>

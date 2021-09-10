@@ -161,7 +161,7 @@ export default {
       let normalWords = []
 
       // 全角の空白を全て半角の空白に変更します。
-      const searchValueHankaku = this.searchValue.replace("　", " ")
+      const searchValueHankaku = this.searchValue.replace('　', ' ')
 
       // 関数を分けたいので、タグと、通常文字を分けます。
       // 空白で区切ります。
@@ -186,8 +186,9 @@ export default {
 
       // 結果を取り出すため、鍵一覧の配列を準備します。
       const questionsFromTagSearchKeys = Object.keys(questionsFromTagSearch)
-      const questionsFromNormalWordSearchKeys =
-        Object.keys(questionsFromNormalWordSearch)
+      const questionsFromNormalWordSearchKeys = Object.keys(
+        questionsFromNormalWordSearch
+      )
 
       // 検索結果の入れ物を用意します。
       // 基本的に重なったキーワードがあった場合、上書きされます。
@@ -224,19 +225,26 @@ export default {
       // ユーザーが検索欄に入力した内容を消します。
       this.searchValue = ''
 
-      const SearchKeysForQueryRaw = [...questionsFromTagSearchKeys, ...questionsFromNormalWordSearchKeys]
+      const SearchKeysForQueryRaw = [
+        ...questionsFromTagSearchKeys,
+        ...questionsFromNormalWordSearchKeys,
+      ]
       let SearchKeysForQuerySafe = {}
-      for (let SearchKeysForQueryRawIndex=0; SearchKeysForQueryRawIndex<SearchKeysForQueryRaw.length; SearchKeysForQueryRawIndex++){
+      for (
+        let SearchKeysForQueryRawIndex = 0;
+        SearchKeysForQueryRawIndex < SearchKeysForQueryRaw.length;
+        SearchKeysForQueryRawIndex++
+      ) {
         const query = SearchKeysForQueryRaw[SearchKeysForQueryRawIndex]
         const safeQuery = encodeURIComponent(query)
-        SearchKeysForQuerySafe[`q${SearchKeysForQueryRawIndex+1}`] = safeQuery
+        SearchKeysForQuerySafe[`q${SearchKeysForQueryRawIndex + 1}`] = safeQuery
       }
 
       this.$router.push({
         path: 'search',
         name: 'SearchPage',
         params: { questionsWithKeyWord: resultQuestions },
-        query: SearchKeysForQuerySafe
+        query: SearchKeysForQuerySafe,
       })
     },
     // -- 検索機能ローカルテスト用関数群:終了 --
