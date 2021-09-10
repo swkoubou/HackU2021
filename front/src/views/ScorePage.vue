@@ -25,6 +25,7 @@
         </div>
       </div>
     </div>
+    <button class="back-home-button" @click="goHome()">ホームに戻る</button>
   </div>
 </template>
 
@@ -41,6 +42,13 @@ export default {
   },
   components: {
     ScoreSyomon,
+  },
+  methods: {
+    goHome: function () {
+      this.$router.push({
+        name: 'Home',
+      })
+    },
   },
 }
 </script>
@@ -60,5 +68,15 @@ export default {
     margin-left: 20px;
     margin-right: 20px;
   }
+}
+
+.back-home-button {
+  margin: 20px;
+  padding: 10px 25px;
+  width: auto;
+  font-size: 15px;
+  background-color: transparent;
+  border: solid #2c3e50 2px;
+  border-radius: 20px;
 }
 </style>
