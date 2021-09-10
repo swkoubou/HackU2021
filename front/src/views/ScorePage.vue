@@ -47,16 +47,19 @@ export default {
 </script>
 
 <style scoped>
-.syomons {
-  align-items: center;
-  justify-content: center;
-}
 .syomon {
   background: rgb(236, 236, 236);
-  width: 80%;
   max-width: 800px;
+  margin: 5px 0px;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 5px;
+}
+
+/* 横幅が少ない時の最低マージン */
+@media (max-width: 840px) {
+  .syomon {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
 }
 </style>
