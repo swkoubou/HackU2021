@@ -150,3 +150,33 @@ func GetCollection(collectionID string) (*Collection, error) {
 
 	return &user, nil
 }
+func SetCollection(addCollection *Collection) error {
+	//データベースを開く
+	db, err := manage.NewDBConnection()
+	if err != nil {
+		return err
+	}
+	//userテーブルにinsert
+	defer db.Close()
+	ins_user, err := db.Prepare("INSERT INTO user(user_id,user_name) VALUES(?,?)")
+	if err != nil {
+		return err
+	}
+	ins_user.Exec(addCollection.Author.ID(), addCollection.Author.UserName)
+	//question_collection_mapにinsert
+	ins_map, err := db.Prepare("INSERT INTO question_collection_map(collection_id,question_order,question_id) VALUES(?,?,?)question_id")
+	if err != nil {
+		return err
+	}
+	for i := 0; i < len(addCollection.Questions); i++ {
+		ins_map.Exec(addCollection.ID(), i, addCollection.Questions[i].ID())
+	}
+	//question_collection_mapにinsert
+	ins_collection, err := db.Prepare("INSERT INTO question_collection(collection_id,collection_name,collection_description,user_id,created_at,updated_at) VALUES(?,?,?,?,?,?)question_id")
+	if err != nil {
+		return err
+	}
+	ins_collection.Exec(addCollection.ID(), addCollection.CollectionName, addCollection.CollectionDescription, addCollection.Author.ID(), addCollection.CreateTime, addCollection.UpdateTime)
+
+	return nil
+}
