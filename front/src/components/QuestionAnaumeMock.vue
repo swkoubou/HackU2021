@@ -36,7 +36,7 @@
           >選択し直す</span
         >
       </button>
-      <!-- <i class="fas fa-trash" @click="resetSelecting()"></i> -->
+
     </div>
   </div>
 </template>
