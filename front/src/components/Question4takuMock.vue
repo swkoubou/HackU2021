@@ -53,7 +53,7 @@ export default {
         this.selectingQuestionIndex = null
       }
 
-      let answersData = {
+      const answersData = {
         questionAnswers: this.question.answers,
         userAnswers: [this.question.values[this.selectingQuestionIndex]],
         type: this.question.questionType,
@@ -106,8 +106,6 @@ export default {
 }
 
 .question-choice-list {
-  /* list-style-type: none; */
-  /* text-align:center; */
   display: flex;
   align-items: center;
   justify-content: center;

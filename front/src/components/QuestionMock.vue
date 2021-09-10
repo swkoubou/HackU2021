@@ -30,7 +30,6 @@ export default {
   },
   methods: {
     goScorePageAndCheckAnswers(answerData) {
-      // console.log(userAnswers)
       this.$router.push({
         name: 'ScorePage',
         params: { answersData: [answerData] },
@@ -49,5 +48,11 @@ export default {
   margin: 1rem;
   position: relative;
   width: 500px;
+}
+
+@media (max-width: 500px) {
+  .question-card {
+    width: 90%;
+  }
 }
 </style>

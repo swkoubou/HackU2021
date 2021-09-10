@@ -89,7 +89,7 @@ export default {
   methods: {
     shuffleArray: function (target) {
       let array = target.concat()
-      var currentIndex = array.length,
+      let currentIndex = array.length,
         randomIndex
 
       // While there remain elements to shuffle...
@@ -118,8 +118,6 @@ export default {
         // 最後かどうか
         if (this.selectingIndexs[this.selectingIndexs.length - 1] == index) {
           // 選択を取り消します
-          // console.log(`${this.squareBracketsIndexs[this.selectingIndexs[index]]} : ${this.questionSplit[this.squareBracketsIndexs[this.selectingIndexs[index]]]}`)
-          // this.questionSplit[this.squareBracketsIndexs[this.selectingIndexs[index]]] == "[]"
           this.questionSplit[
             this.squareBracketsIndexs[this.selectingIndexs.indexOf(index)]
           ] = '[ ' + (this.selectingIndexs.indexOf(index) + 1) + ' ]'
@@ -140,7 +138,7 @@ export default {
           choicesText.push(this.choices[this.selectingIndexs[i]])
         }
 
-        let answersData = {
+        const answersData = {
           squareBracketsIndexs: this.squareBracketsIndexs,
           questionSplit: this.questionSplit,
           questionAnswers: this.question.answers,
@@ -184,7 +182,6 @@ export default {
 }
 
 .question-paper {
-  /* display: contents; */
   display: inline-block;
 }
 
@@ -217,16 +214,12 @@ export default {
   align-items: center;
 
   color: white;
-  /* border-top: 2px solid; */
-  /* border-bottom: 2px solid; */
   border: 2px solid;
   border-color: #00237e;
   background-color: #4472c4;
 }
 
 .question-choice-list {
-  /* list-style-type: none; */
-  /* text-align:center; */
   display: flex;
   align-items: center;
   justify-content: center;
