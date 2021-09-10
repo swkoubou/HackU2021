@@ -137,7 +137,6 @@ export default {
 
 <style scoped>
 .question-paper {
-  /* display: contents; */
   display: inline-block;
 }
 
