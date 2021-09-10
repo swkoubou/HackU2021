@@ -12,6 +12,11 @@ export default {
   components: {
     Question,
   },
-  props: ['question'],
+  props: {
+    question: {
+      type: Object,
+      required: true,
+    },
+  },
 }
 </script>
