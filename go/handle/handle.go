@@ -56,6 +56,7 @@ var questions []question.Question = []question.Question{
 	{
 		QuestionID:   newUUID(),
 		Author:       accounts[0],
+		QuestionName: "コード進行1",
 		QuestionTag:  []string{"音楽", "音楽記号", "コード理論"},
 		QuestionType: "4taku",
 		CreateTime:   "9999-12-31 23:59:59.999999",
@@ -68,6 +69,7 @@ var questions []question.Question = []question.Question{
 	{
 		QuestionID:   newUUID(),
 		Author:       accounts[0],
+		QuestionName: "音楽用語1",
 		QuestionTag:  []string{"音楽", "音楽用語"},
 		QuestionType: "anaume",
 		CreateTime:   "9999-12-31 23:59:59.999999",
@@ -80,6 +82,7 @@ var questions []question.Question = []question.Question{
 	{
 		QuestionID:   newUUID(),
 		Author:       accounts[0],
+		QuestionName: "音楽用語2",
 		QuestionTag:  []string{"音楽", "音楽用語"},
 		QuestionType: "anaume",
 		CreateTime:   "9999-12-31 23:59:59.999999",
@@ -93,6 +96,7 @@ var questions []question.Question = []question.Question{
 		QuestionID:   newUUID(),
 		Author:       accounts[0],
 		QuestionTag:  []string{"プログラミング言語", "C"},
+		QuestionName: "C言語1",
 		QuestionType: "4taku",
 		CreateTime:   "9999-12-31 23:59:59.999999",
 		UpdateTime:   "",
