@@ -1,16 +1,16 @@
 <template>
   <div>
-    <QuestionMock :question="this.sampleQuestionData" />
+    <Question :question="this.sampleQuestionData" />
   </div>
 </template>
 
 <script>
-import QuestionMock from '@/components/QuestionMock.vue'
+import Question from '@/components/Question.vue'
 
 export default {
   name: 'AnswerTheQuestionPage',
   components: {
-    QuestionMock,
+    Question,
   },
   data() {
     return {
