@@ -106,8 +106,6 @@ export default {
 }
 
 .question-choice-list {
-  /* list-style-type: none; */
-  /* text-align:center; */
   display: flex;
   align-items: center;
   justify-content: center;

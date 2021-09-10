@@ -1,7 +1,6 @@
 <template>
   <div>
     <QuestionMock :question="this.sampleQuestionData" />
-    <!-- <div>{{ this.sampleQuestionData }}</div> -->
   </div>
 </template>
 

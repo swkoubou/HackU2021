@@ -30,7 +30,6 @@ export default {
   },
   methods: {
     goScorePageAndCheckAnswers(answerData) {
-      // console.log(userAnswers)
       this.$router.push({
         name: 'ScorePage',
         params: { answersData: [answerData] },

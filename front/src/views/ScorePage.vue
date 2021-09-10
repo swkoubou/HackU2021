@@ -1,7 +1,6 @@
 <template>
   <div>
     <h2>スコア</h2>
-    <!-- <h4>{{answersData}}</h4> -->
     <div class="daimons">
       <div
         class="daimon"

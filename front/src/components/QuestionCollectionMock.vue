@@ -14,22 +14,10 @@
     </div>
 
     <div class="question-paginator-buttons">
-      <!-- <button class="question-paginator-button-back" @click="goBackQuestion">
-        戻る
-      </button> -->
-
       <div class="question-number">
         {{ this.questionNo + 1 }} / {{ question.questions.length }}
       </div>
-
-      <!-- <button class="question-paginator-button-next" @click="goNextQuestion">
-        次へ
-      </button> -->
     </div>
-
-    <!-- <div v-if="this.questionNo >= this.question.questions.length - 1">
-      <button>正誤判定をする</button>
-    </div> -->
   </div>
 </template>
 
@@ -51,15 +39,6 @@ export default {
     }
   },
   methods: {
-    // 前の問題へ
-    // goBackQuestion() {
-    //   if (this.questionNo <= 0) {
-    //     return
-    //   } else {
-    //     this.questionNo--
-    //   }
-    // },
-
     storeUserAnswers(answerData) {
       this.userAnswersPerQuestion[this.questionNo] = answerData
     },
@@ -100,14 +79,9 @@ export default {
 }
 
 .question-paginator-buttons {
-  /* position: absolute; */
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   flex-direction: row;
 }
-
-/* .question-paginator-button-back {
-  position: relative;
-} */
 </style>

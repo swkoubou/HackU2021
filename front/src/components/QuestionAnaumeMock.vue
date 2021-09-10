@@ -95,8 +95,6 @@ export default {
         // 最後かどうか
         if (this.selectingIndexs[this.selectingIndexs.length - 1] == index) {
           // 選択を取り消します
-          // console.log(`${this.squareBracketsIndexs[this.selectingIndexs[index]]} : ${this.questionSplit[this.squareBracketsIndexs[this.selectingIndexs[index]]]}`)
-          // this.questionSplit[this.squareBracketsIndexs[this.selectingIndexs[index]]] == "[]"
           this.questionSplit[
             this.squareBracketsIndexs[this.selectingIndexs.indexOf(index)]
           ] = '[ ' + (this.selectingIndexs.indexOf(index) + 1) + ' ]'
@@ -172,16 +170,12 @@ export default {
   align-items: center;
 
   color: white;
-  /* border-top: 2px solid; */
-  /* border-bottom: 2px solid; */
   border: 2px solid;
   border-color: #00237e;
   background-color: #4472c4;
 }
 
 .question-choice-list {
-  /* list-style-type: none; */
-  /* text-align:center; */
   display: flex;
   align-items: center;
   justify-content: center;
