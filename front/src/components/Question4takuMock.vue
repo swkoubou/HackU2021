@@ -47,7 +47,6 @@ export default {
   },
   methods: {
     setSelecting: function (index) {
-
       if (this.selectingQuestionIndex != index) {
         this.selectingQuestionIndex = index
       } else {
@@ -55,9 +54,9 @@ export default {
       }
 
       let answersData = {
-        "questionAnswers": this.question.answers,
-        "userAnswers": [this.question.values[this.selectingQuestionIndex]],
-        "type": this.question.questionType
+        questionAnswers: this.question.answers,
+        userAnswers: [this.question.values[this.selectingQuestionIndex]],
+        type: this.question.questionType,
       }
 
       if (!this.isInCollection) {

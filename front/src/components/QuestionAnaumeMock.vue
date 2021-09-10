@@ -112,26 +112,25 @@ export default {
       }
 
       if (this.selectingIndexs.length == this.choices.length) {
-        let choicesText = [];
-        for (let i=0; i<this.selectingIndexs.length; i++) {
+        let choicesText = []
+        for (let i = 0; i < this.selectingIndexs.length; i++) {
           choicesText.push(this.choices[this.selectingIndexs[i]])
         }
 
         let answersData = {
-          "squareBracketsIndexs": this.squareBracketsIndexs,
-          "questionSplit": this.questionSplit,
-          "questionAnswers": this.question.answers,
-          "userAnswers": choicesText,
-          "type": this.question.questionType
+          squareBracketsIndexs: this.squareBracketsIndexs,
+          questionSplit: this.questionSplit,
+          questionAnswers: this.question.answers,
+          userAnswers: choicesText,
+          type: this.question.questionType,
         }
-
 
         if (!this.isInCollection) {
           this.$parent.goScorePageAndCheckAnswers(answersData)
         } else {
           this.$parent.storeUserAnswers(answersData)
           this.$parent.goNextQuestion()
-      }
+        }
       }
     },
   },

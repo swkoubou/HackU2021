@@ -1,10 +1,16 @@
 <template>
   <div>
     <div v-if="question.questions[questionNo].questionType === 'anaume'">
-      <QuestionAnaumeMock :question="question.questions[questionNo]" :isInCollection="true" />
+      <QuestionAnaumeMock
+        :question="question.questions[questionNo]"
+        :isInCollection="true"
+      />
     </div>
     <div v-else-if="question.questions[questionNo].questionType === '4taku'">
-      <Question4takuMock :question="question.questions[questionNo]" :isInCollection="true" />
+      <Question4takuMock
+        :question="question.questions[questionNo]"
+        :isInCollection="true"
+      />
     </div>
 
     <div class="question-paginator-buttons">
@@ -41,7 +47,7 @@ export default {
   data() {
     return {
       questionNo: 0,
-      userAnswersPerQuestion: []
+      userAnswersPerQuestion: [],
     }
   },
   methods: {
@@ -60,11 +66,10 @@ export default {
 
     // 次の問題へ
     goNextQuestion() {
-
       if (this.questionNo >= this.question.questions.length - 1) {
         this.$router.push({
-        name: 'ScorePage',
-        params: { answersData: this.userAnswersPerQuestion },
+          name: 'ScorePage',
+          params: { answersData: this.userAnswersPerQuestion },
         })
       } else {
         this.questionNo++

@@ -4,7 +4,7 @@
       <QuestionAnaumeMock :question="question" :isInCollection="false" />
     </div>
     <div v-else-if="question.questionType === '4taku'">
-      <Question4takuMock :question="question" :isInCollection="false"/>
+      <Question4takuMock :question="question" :isInCollection="false" />
     </div>
     <div v-else-if="question.questionType == null">
       <QuestionCollectionMock :question="question" />
@@ -33,13 +33,10 @@ export default {
       // console.log(userAnswers)
       this.$router.push({
         name: 'ScorePage',
-        params: { answersData: [
-          answerData
-        ] },
+        params: { answersData: [answerData] },
       })
     },
-    
-  }
+  },
 }
 </script>
 
