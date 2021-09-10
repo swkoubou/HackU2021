@@ -16,7 +16,7 @@
     <button class="header-button" @click="notImplement">
       <FontAwesomeIcon icon="pencil-alt" />
     </button>
-    <button class="header-button" @click="notImplement">
+    <button class="header-button" @click="changeNotifiCationPage">
       <FontAwesomeIcon icon="bell" />
     </button>
     <button class="header-button" @click="toggleContextMenu">
@@ -54,6 +54,10 @@ export default {
     changeHomePage() {
       this.$router.push({ path: '/' })
     },
+    changeNotifiCationPage() {
+      this.$router.push({ path: '/notification' })
+    },
+
     toggleContextMenu() {
       this.isContextMenuOpen = !this.isContextMenuOpen
     },
