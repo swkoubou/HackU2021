@@ -18,6 +18,7 @@ type Collection struct {
 	Questions             []question.Question `json:"questions"`
 	CreateTime            string              `json:"createtime"`
 	UpdateTime            string              `json:"updatetime"`
+	Color                 string              `json:"color"`
 }
 
 type CollectionParam struct {

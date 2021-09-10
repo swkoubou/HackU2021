@@ -21,6 +21,7 @@ type Question struct {
 	QuestionBody string          `json:"questionBody"`
 	Values       []string        `json:"values"`
 	Answers      []string        `json:"answers"`
+	Color        string          `json:"color"`
 }
 
 type QuestionParam struct {
