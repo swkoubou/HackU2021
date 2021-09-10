@@ -11,20 +11,20 @@ import (
 )
 
 type Collection struct {
-	CollectionID           uuid.UUID           `json:"collectionID"`
-	CollectionName         string              `json:"collectionName"`
-	CollectionDescripition string              `json:"collectionDescription"`
-	Author                 account.Account     `json:"author"`
-	Questions              []question.Question `json:"questions"`
-	CreateTime             string              `json:"createtime"`
-	UpdateTime             string              `json:"updatetime"`
+	CollectionID          uuid.UUID           `json:"collectionID"`
+	CollectionName        string              `json:"collectionName"`
+	CollectionDescription string              `json:"collectionDescription"`
+	Author                account.Account     `json:"author"`
+	Questions             []question.Question `json:"questions"`
+	CreateTime            string              `json:"createtime"`
+	UpdateTime            string              `json:"updatetime"`
 }
 
 type CollectionParam struct {
-	CollectionName         string
-	CollectionDescripition string
-	UserID                 string
-	Questions              []string
+	CollectionName       string
+	CollectionDescrption string
+	UserID               string
+	Questions            []string
 }
 
 func (c *Collection) ID() string {
@@ -41,7 +41,7 @@ func NewCollection(param CollectionParam) (Collection, error) {
 
 	c.CollectionID = uuid
 	c.CollectionName = param.CollectionName
-	c.CollectionDescripition = param.CollectionDescripition
+	c.CollectionDescription = param.CollectionDescrption
 	c.Author = account.Account{}        // DBからもってくる
 	c.Questions = []question.Question{} // DBからもってくる
 
@@ -50,7 +50,7 @@ func NewCollection(param CollectionParam) (Collection, error) {
 func (c *Collection) IsEmpty(collection *Collection) bool { //Collectionに空の要素があったらTrueを返す
 	var id_null uuid.NullUUID
 	return c.CollectionID == id_null.UUID || len(c.CollectionName) == 0 ||
-		len(c.CollectionDescripition) == 0 || c.Author.UserID == id_null.UUID ||
+		len(c.CollectionDescription) == 0 || c.Author.UserID == id_null.UUID ||
 		len(c.Author.UserName) == 0 || len(c.Questions) == 0 ||
 		len(c.UpdateTime) == 0 || len(c.CreateTime) == 0
 
@@ -68,7 +68,7 @@ func (c *Collection) Equals(collection *Collection) bool {
 		return false
 	}
 
-	if c.CollectionDescripition != collection.CollectionDescripition {
+	if c.CollectionDescription != collection.CollectionDescription {
 		return false
 	}
 
@@ -110,7 +110,7 @@ func GetCollection(collectionID string) (*Collection, error) {
 	var collection_id_tmp, collection_user_id_tmp string
 	for rows1.Next() {
 		//question_collectionテーブルのデータを構造体に代入
-		if err := rows1.Scan(&collection_id_tmp, &user.CollectionName, &user.CollectionDescripition,
+		if err := rows1.Scan(&collection_id_tmp, &user.CollectionName, &user.CollectionDescription,
 			&collection_user_id_tmp, &user.CreateTime, &user.UpdateTime); err != nil {
 			return nil, err
 		}

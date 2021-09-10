@@ -64,19 +64,19 @@ var (
 
 	collections = []collection.Collection{
 		{
-			CollectionID:           newUUID("81b989be-5f8a-a979-ed6d-7a4613ff08e3"),
-			CollectionName:         "piyo問題集",
-			CollectionDescripition: "テスト用のコレクション",
-			Author:                 users[2],
-			Questions:              questions,
-			CreateTime:             "1000-01-01 00:00:00",
-			UpdateTime:             "1000-01-01 00:00:00",
+			CollectionID:          newUUID("81b989be-5f8a-a979-ed6d-7a4613ff08e3"),
+			CollectionName:        "piyo問題集",
+			CollectionDescription: "テスト用のコレクション",
+			Author:                users[2],
+			Questions:             questions,
+			CreateTime:            "1000-01-01 00:00:00",
+			UpdateTime:            "1000-01-01 00:00:00",
 		},
 		{
-			CollectionID:           newUUID("2a2fd701-bb7e-6719-1f7b-ec67ffa5a269"),
-			CollectionName:         "foo問題集",
-			CollectionDescripition: "ンョシクレコの用トステ",
-			Author:                 users[3],
+			CollectionID:          newUUID("2a2fd701-bb7e-6719-1f7b-ec67ffa5a269"),
+			CollectionName:        "foo問題集",
+			CollectionDescription: "ンョシクレコの用トステ",
+			Author:                users[3],
 			Questions: []question.Question{
 				questions[1],
 				questions[0],
