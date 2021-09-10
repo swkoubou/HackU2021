@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import ComponentsPreviewPage from '../views/ComponentsPreviewPage.vue'
 import AnswerTheQuestionPage from '../views/AnswerTheQuestionPage.vue'
 import ScorePage from '../views/ScorePage.vue'
+import NotifiCationPage from '../views/NotifiCationPage.vue'
 import LoginPage from '../views/LoginPage'
 import LoginSuccessPreviewPage from '../views/LoginSuccessPreviewPage'
 
@@ -47,6 +48,11 @@ const routes = [
     path: '/login',
     name: 'LoginPage',
     component: LoginPage,
+  },
+  {
+    path: '/notification',
+    name: 'NotifiCation',
+    component: NotifiCationPage,
   },
   {
     path: '/loginsuccesspreviewpage',

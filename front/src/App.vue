@@ -6,6 +6,8 @@
       |
       <router-link to="/about">About</router-link>
       |
+      <router-link to="/notification">NotifiCation</router-link>
+      |
       <router-link to="/components">Components</router-link>
       |
       <router-link to="/answerthequestion">問題回答ページ</router-link>
