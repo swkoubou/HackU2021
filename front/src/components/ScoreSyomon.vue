@@ -48,15 +48,22 @@ export default {
   border: 1px solid black;
 }
 
+.score-syomon-no {
+  flex: 0 0 4em;
+}
+
 .score-compare-answers {
   text-align: start;
+  flex: 1;
 }
 
 .isCorrentAnswer-true {
   color: green;
+  flex: 0 0 4em;
 }
 
 .isCorrentAnswer-false {
   color: red;
+  flex: 0 0 4em;
 }
 </style>
