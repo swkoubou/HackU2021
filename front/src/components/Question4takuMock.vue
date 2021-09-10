@@ -53,7 +53,7 @@ export default {
         this.selectingQuestionIndex = null
       }
 
-      let answersData = {
+      const answersData = {
         questionAnswers: this.question.answers,
         userAnswers: [this.question.values[this.selectingQuestionIndex]],
         type: this.question.questionType,

@@ -115,7 +115,7 @@ export default {
           choicesText.push(this.choices[this.selectingIndexs[i]])
         }
 
-        let answersData = {
+        const answersData = {
           squareBracketsIndexs: this.squareBracketsIndexs,
           questionSplit: this.questionSplit,
           questionAnswers: this.question.answers,
