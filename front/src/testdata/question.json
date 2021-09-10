@@ -246,6 +246,21 @@
           "answers": ["ニワトリ"]
         },
         {
+          "questionName": "(c)肉の問題",
+          "questionID": "aea20877-0e55-11ec-bf6a-0242ac140005",
+          "author": {
+            "userID": "aea20861-0e55-11ec-bf6a-0242ac140005",
+            "userName": "山田孝之"
+          },
+          "questionTag": ["Go", "Dart", "C", "JavaScript"],
+          "questionType": "4taku",
+          "createTime": "1000-01-01 00:00:00.000000",
+          "updateTime": "9999-12-31 23:59:59.999999",
+          "questionBody": "(c)鶏肉はなんの肉？",
+          "values": ["ブタ", "ウシ", "イノシシ", "ニワトリ"],
+          "answers": ["ニワトリ"]
+        },
+        {
           "questionName": "(c)桃太郎の問題",
           "questionID": "aea20877-0e55-11ec-bf6a-0242ac140005",
           "author": {
