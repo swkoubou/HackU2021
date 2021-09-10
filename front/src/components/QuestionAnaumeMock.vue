@@ -176,11 +176,13 @@ export default {
 }
 
 .anaume-reset-button {
+  height: 40px;
+  width: auto;
   font-size: 15px;
   background-color: transparent;
   border: 2px solid;
   border-color: #00237e;
-  border-radius: 30px;
+  border-radius: 20px;
 }
 
 .anaume-reset {
