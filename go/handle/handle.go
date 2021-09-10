@@ -63,6 +63,7 @@ var questions []question.Question = []question.Question{
 		QuestionBody: "C,G,Am,Em,F,C,F,Gのコード進行は?",
 		Values:       []string{"カノン進行", "J-POP王道進行", "小室進行", "イチロクニーゴー"},
 		Answers:      []string{"カノン進行"},
+		Color:        "#A2F1FF",
 	},
 	{
 		QuestionID:   newUUID(),
@@ -74,6 +75,7 @@ var questions []question.Question = []question.Question{
 		QuestionBody: "Poco Allegro con affettoの意味は?",
 		Values:       []string{"やや[]く[]こめて"},
 		Answers:      []string{"はや", "愛情"},
+		Color:        "#FFB4C5",
 	},
 	{
 		QuestionID:   newUUID(),
@@ -85,6 +87,7 @@ var questions []question.Question = []question.Question{
 		QuestionBody: "più animato con passioneの意味は?",
 		Values:       []string{"[]的にやや[]と[]く"},
 		Answers:      []string{"情熱", "生き生きと", "はや"},
+		Color:        "#9AF7B6",
 	},
 	{
 		QuestionID:   newUUID(),
@@ -96,6 +99,7 @@ var questions []question.Question = []question.Question{
 		QuestionBody: "intは何型?",
 		Values:       []string{"整数型", "文字型", "実数型", "構造体"},
 		Answers:      []string{"整数型"},
+		Color:        "#FFE796",
 	},
 	{
 		QuestionID:   newUUID(),
@@ -108,6 +112,7 @@ var questions []question.Question = []question.Question{
 		QuestionBody: "ミラーリングを用いることで，信頼性を高め障害発生時にデータ復元を行う方式はどれか？",
 		Values:       []string{"RAID1", "RAID2", "RAID3", "RAID4"},
 		Answers:      []string{"RAID1"},
+		Color:        "#D4D9F2",
 	},
 	{
 		QuestionID:   newUUID(),
@@ -120,6 +125,7 @@ var questions []question.Question = []question.Question{
 		QuestionBody: "値がほぼ等しい浮動小数点同士の計算により，有効桁数が減ってしまうのはどれか？",
 		Values:       []string{"桁落ち", "丸め誤差", "情報落ち", "桁あふれ誤差"},
 		Answers:      []string{"桁落ち"},
+		Color:        "#A2F1FF",
 	},
 	{
 		QuestionID:   newUUID(),
@@ -132,6 +138,7 @@ var questions []question.Question = []question.Question{
 		QuestionBody: "仮想記憶空間と実記憶空間を，固定長の領域に区切り対応させる管理方式はどれか？",
 		Values:       []string{"動的再配置", "メモリインタリーブ", "ページング方式", "ブロック化"},
 		Answers:      []string{"ページング方式"},
+		Color:        "#FFB4C5",
 	},
 	{
 		QuestionID:   newUUID(),
@@ -156,6 +163,7 @@ var questions []question.Question = []question.Question{
 		QuestionBody: "The International Peace Conference ___ as planned of Saturday.",
 		Values:       []string{"concluded", "held", "achieved", "invited"},
 		Answers:      []string{"concluded"},
+		Color:        "#9AF7B6",
 	},
 	{
 		QuestionID:   newUUID(),
@@ -168,6 +176,7 @@ var questions []question.Question = []question.Question{
 		QuestionBody: "The new guidelines regarding jury duty should be ___ to strictly.",
 		Values:       []string{"respected", "adhered", "willing", "set"},
 		Answers:      []string{"adhered"},
+		Color:        "#FFE796",
 	},
 	{
 		QuestionID:   newUUID(),
@@ -180,6 +189,7 @@ var questions []question.Question = []question.Question{
 		QuestionBody: "Our new facility ___ right across from the city's new convention center.",
 		Values:       []string{"is located", "will locate", "is to locate", "had located"},
 		Answers:      []string{"is located"},
+		Color:        "#D4D9F2",
 	},
 	{
 		QuestionID:   newUUID(),
@@ -192,6 +202,7 @@ var questions []question.Question = []question.Question{
 		QuestionBody: "A sudden drop in sales would ___ cuts in production and employment.",
 		Values:       []string{"necessitate", "necessary", "necessity", "necessarily"},
 		Answers:      []string{"necessitate"},
+		Color:        "#A2F1FF",
 	},
 	{
 		QuestionID:   newUUID(),
@@ -204,6 +215,7 @@ var questions []question.Question = []question.Question{
 		QuestionBody: "protractor の意味は？",
 		Values:       []string{"コンパス", "分度器", "消しゴム", "黒板消し"},
 		Answers:      []string{"分度器"},
+		Color:        "#FFB4C5",
 	},
 	{
 		QuestionID:   newUUID(),
@@ -216,6 +228,7 @@ var questions []question.Question = []question.Question{
 		QuestionBody: "apprentice の意味は？",
 		Values:       []string{"人類", "謝る", "初心者", "食欲"},
 		Answers:      []string{"初心者"},
+		Color:        "#9AF7B6",
 	},
 	{
 		QuestionID:   newUUID(),
@@ -228,6 +241,7 @@ var questions []question.Question = []question.Question{
 		QuestionBody: "photosynthesis の意味は？",
 		Values:       []string{"写真", "定説", "映像", "光合成"},
 		Answers:      []string{"光合成"},
+		Color:        "#FFE796",
 	},
 }
 
