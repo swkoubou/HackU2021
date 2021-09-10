@@ -1,8 +1,10 @@
 package handle
 
 import (
+	"context"
 	"log"
 	"net/http"
+	"strings"
 
 	"example.com/account"
 	"example.com/collection"
@@ -335,5 +337,17 @@ func (h *Handle) GetCollectionHandler(c *gin.Context) {
 }
 
 func (h *Handle) GetAllCollectionsHandler(c *gin.Context) {
+	authorization := c.Request.Header.Get("Authorization")
+	idToken := strings.Replace(authorization, "Bearer ", "", 1)
+
+	token, err := h.auth.VerifyIDToken(context.Background(), idToken)
+	if err != nil {
+		// JWT が無効なら失敗判定
+		c.String(http.StatusUnauthorized, "error verifying ID token: %v\n", err)
+		c.Abort()
+	} else {
+		log.Printf("Verified ID token: %v\n", token)
+		c.Next()
+	}
 	c.JSON(http.StatusOK, collections)
 }
