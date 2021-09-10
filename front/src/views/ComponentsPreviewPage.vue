@@ -1,5 +1,23 @@
 <template>
   <div class="components-preview">
+    <div id="nav">
+      <router-link to="/">Home</router-link>
+      |
+      <router-link to="/about">About</router-link>
+      |
+      <router-link to="/notification">NotifiCation</router-link>
+      |
+      <router-link to="/components">Components</router-link>
+      |
+      <router-link to="/answerthequestion">問題回答ページ</router-link>
+      |
+      <router-link to="/score">スコア</router-link>
+      |
+      <router-link to="/loginsuccesspreviewpage">ログイン済み確認</router-link>
+      |
+      <router-link to="/login">Login</router-link>
+    </div>
+
     <h3>ホームに表示される問題プレビュー</h3>
     <div class="question-preview-components">
       <QuestionPreview :question="sampleQuestionData.api.q_4taku" />
@@ -58,5 +76,18 @@ export default {
 .question-preview-components {
   display: flex;
   justify-content: space-between;
+}
+
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
 }
 </style>
