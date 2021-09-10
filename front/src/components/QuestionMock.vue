@@ -1,19 +1,16 @@
 <template>
   <div class="question-card">
     <div v-if="question.questionType === 'anaume'">
-      <QuestionAnaumeMock :question="question" />
+      <QuestionAnaumeMock :question="question" :isInCollection="false" />
     </div>
     <div v-else-if="question.questionType === '4taku'">
-      <Question4takuMock :question="question" />
+      <Question4takuMock :question="question" :isInCollection="false"/>
     </div>
     <div v-else-if="question.questionType == null">
       <QuestionCollectionMock :question="question" />
     </div>
     <div v-else>
       <h3>unknown</h3>
-    </div>
-    <div v-if="question.questionType != null">
-      <button>正誤判定をする</button>
     </div>
   </div>
 </template>
@@ -31,6 +28,18 @@ export default {
     Question4takuMock,
     QuestionCollectionMock,
   },
+  methods: {
+    goScorePageAndCheckAnswers(answerData) {
+      // console.log(userAnswers)
+      this.$router.push({
+        name: 'ScorePage',
+        params: { answersData: [
+          answerData
+        ] },
+      })
+    },
+    
+  }
 }
 </script>
 

@@ -1,11 +1,9 @@
 <template>
   <div class="question-4taku">
-    <h3 class="question-name">
-      {{ question.questionName }}
-    </h3>
-    <h4>
+    <h3 class="question-name">「{{ question.questionName }}」</h3>
+    <h3>
       {{ question.questionBody }}
-    </h4>
+    </h3>
 
     <div
       class="question-choice-list"
@@ -32,7 +30,16 @@
 <script>
 export default {
   name: 'Question4takuMock',
-  props: ['question'],
+  props: {
+    question: {
+      type: Object,
+      required: true,
+    },
+    isInCollection: {
+      type: Boolean,
+      required: true,
+    },
+  },
   data() {
     return {
       selectingQuestionIndex: null,
@@ -40,16 +47,24 @@ export default {
   },
   methods: {
     setSelecting: function (index) {
-      // let choiceData = document.getElementById(`choice-${v}`).getBoundingClientRect();
-      // console.log(`top: ${choiceData.top}, right: ${choiceData.right}, left: ${choiceData.left}, bottom: ${choiceData.bottom}`)
-      //   let choiceData = document.getElementById(`choice-${index}`)
-      //   console.log(
-      //     `top: ${choiceData.offsetTop}, left: ${choiceData.offsetLeft}`
-      //   )
+
       if (this.selectingQuestionIndex != index) {
         this.selectingQuestionIndex = index
       } else {
         this.selectingQuestionIndex = null
+      }
+
+      let answersData = {
+        "questionAnswers": this.question.answers,
+        "userAnswers": [this.question.values[this.selectingQuestionIndex]],
+        "type": this.question.questionType
+      }
+
+      if (!this.isInCollection) {
+        this.$parent.goScorePageAndCheckAnswers(answersData)
+      } else {
+        this.$parent.storeUserAnswers(answersData)
+        this.$parent.goNextQuestion()
       }
     },
   },
