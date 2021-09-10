@@ -16,8 +16,8 @@ type Collection struct {
 	CollectionDescription string              `json:"collectionDescription"`
 	Author                account.Account     `json:"author"`
 	Questions             []question.Question `json:"questions"`
-	CreateTime            string              `json:"createtime"`
-	UpdateTime            string              `json:"updatetime"`
+	CreateTime            string              `json:"createTime"`
+	UpdateTime            string              `json:"updateTime"`
 	Color                 string              `json:"color"`
 }
 
