@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Question :question="this.sampleQuestionData" />
+    <Question :question="this.question" />
   </div>
 </template>
 
@@ -12,19 +12,11 @@ export default {
   components: {
     Question,
   },
-  data() {
-    return {
-      sampleQuestionDatas: require('@/testdata/question.json'),
-    }
-  },
-  created() {
-    let samples = [
-      this.sampleQuestionDatas.api.q_4taku,
-      this.sampleQuestionDatas.api.q_anaume,
-      this.sampleQuestionDatas.api.q_collection,
-    ]
-    this.sampleQuestionData =
-      samples[Math.floor(Math.random() * samples.length)]
+  props: {
+    question: {
+      type: Object,
+      required: true,
+    },
   },
 }
 </script>
