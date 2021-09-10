@@ -1,9 +1,12 @@
-package handle
+//package handle
+package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net/http"
+	"net/http/httptest"
 	"strings"
 
 	"example.com/account"
@@ -349,5 +352,13 @@ func (h *Handle) GetAllCollectionsHandler(c *gin.Context) {
 		log.Printf("Verified ID token: %v\n", token)
 		c.Next()
 	}
+
+	fmt.Println(token)
+
 	c.JSON(http.StatusOK, collections)
+}
+
+func main() {
+	ginContext, _ := gin.CreateTestContext(httptest.NewRecorder())
+
 }
