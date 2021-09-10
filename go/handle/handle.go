@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"net/http/httptest"
 	"strings"
 
 	"example.com/account"
@@ -262,7 +261,7 @@ var collections []collection.Collection = []collection.Collection{
 		Author:                accounts[0],
 		Questions:             questions[0:2],
 		CreateTime:            "2021-09-02 22:21:31.231891",
-		UpdateTime:            "",
+		UpdateTime:            "2021-09-04 13:13:51.713691",
 	},
 	{
 		CollectionID:          newUUID(),
@@ -359,6 +358,12 @@ func (h *Handle) GetAllCollectionsHandler(c *gin.Context) {
 }
 
 func main() {
-	ginContext, _ := gin.CreateTestContext(httptest.NewRecorder())
+	router := gin.Default()
 
+	router.GET("/api", GetSample)
+}
+
+func GetSample(c *gin.Context) {
+	fmt.Println(c)
+	c.JSON(http.StatusOK, gin.H{"message": "Hello!"})
 }
