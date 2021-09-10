@@ -26,6 +26,7 @@
         </div>
       </div>
     </div>
+    <button @click="goHome()">ホームに戻る</button>
   </div>
 </template>
 
@@ -42,6 +43,13 @@ export default {
   },
   components: {
     ScoreSyomon,
+  },
+  methods: {
+    goHome: function () {
+      this.$router.push({
+        name: 'Home',
+      })
+    },
   },
 }
 </script>
