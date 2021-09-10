@@ -252,7 +252,7 @@ var collections []collection.Collection = []collection.Collection{
 		CollectionDescription: "音楽関連の問題集",
 		Author:                accounts[0],
 		Questions:             questions[0:2],
-		CreateTime:            "9999-12-31 23:59:59.999999",
+		CreateTime:            "2021-09-02 22:21:31.231891",
 		UpdateTime:            "",
 	},
 	{
@@ -261,8 +261,8 @@ var collections []collection.Collection = []collection.Collection{
 		CollectionDescription: "基本情報技術者試験勉強用の問題集",
 		Author:                accounts[1],
 		Questions:             questions[4:7],
-		CreateTime:            "1000-01-01 00:00:00.000000",
-		UpdateTime:            "9999-12-31 23:59:59.999999",
+		CreateTime:            "2021-09-02 22:29:12.431891",
+		UpdateTime:            "2021-09-02 22:35:32.231891",
 	},
 	{
 		CollectionID:          newUUID(),
@@ -270,8 +270,8 @@ var collections []collection.Collection = []collection.Collection{
 		CollectionDescription: "英文法に関する問題集",
 		Author:                accounts[2],
 		Questions:             questions[8:11],
-		CreateTime:            "1000-01-01 00:00:00.000000",
-		UpdateTime:            "9999-12-31 23:59:59.999999",
+		CreateTime:            "2021-09-03 12:21:42.831890",
+		UpdateTime:            "2021-09-04 22:19:36.291891",
 	},
 	{
 		CollectionID:          newUUID(),
@@ -279,8 +279,8 @@ var collections []collection.Collection = []collection.Collection{
 		CollectionDescription: "英単語に関する問題集",
 		Author:                accounts[3],
 		Questions:             questions[12:14],
-		CreateTime:            "1000-01-01 00:00:00.000000",
-		UpdateTime:            "9999-12-31 23:59:59.999999",
+		CreateTime:            "2021-09-02 18:38:12.831891",
+		UpdateTime:            "2021-09-05 16:19:49.539891",
 	},
 }
 
