@@ -21,7 +21,11 @@
       v-for="(choice, index) in this.choices"
       :key="`choice-${index}`"
     >
-      <p class="selecting-mark" v-if="selectingIndexs.indexOf(index) != -1">
+      <p
+        class="selecting-mark"
+        v-if="selectingIndexs.indexOf(index) != -1"
+        @click="setSelecting(index)"
+      >
         {{ selectingIndexs.indexOf(index) + 1 }}番目
       </p>
       <h3
