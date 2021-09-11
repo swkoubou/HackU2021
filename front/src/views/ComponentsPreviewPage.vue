@@ -30,7 +30,7 @@
     <button @click="changeToggleButton">
       change buttonSelected from parent
     </button>
-    
+
     <h3>ホームに表示される問題プレビュー</h3>
     <div class="question-preview-components">
       <QuestionPreview :question="sampleQuestionData.api.q_4taku" />
