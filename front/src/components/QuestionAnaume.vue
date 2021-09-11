@@ -3,6 +3,10 @@
     <h3>「{{ question.questionName }}」</h3>
 
     <h3>
+      {{ question.questionBody }}
+    </h3>
+
+    <h3>
       <div
         v-for="(questionParts, index) in questionSplit"
         :key="`questionparts-${index}`"
