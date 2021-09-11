@@ -158,6 +158,11 @@ export default {
           this.$parent.goScorePageAndCheckAnswers(answersData)
         } else {
           this.$parent.storeUserAnswers(answersData)
+          for (let i = 0; i < this.question.answers.length; i++) {
+            this.questionSplit[this.squareBracketsIndexs[i]] =
+              '[ ' + (i + 1) + ' ]'
+          }
+          this.selectingIndexs = []
           this.$parent.goNextQuestion()
         }
       }
