@@ -10,7 +10,10 @@
         v-for="data in postDataList"
         :key="data.questionID"
       >
-        <QuestionPreview :question="data" :style="setRandomColorStyle" />
+        <QuestionPreview
+          :question="data"
+          :style="{ 'background-color': data.color }"
+        />
       </div>
     </div>
   </div>
