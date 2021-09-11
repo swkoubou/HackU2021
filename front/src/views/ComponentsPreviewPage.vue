@@ -17,7 +17,19 @@
       |
       <router-link to="/login">Login</router-link>
     </div>
-
+    <h3>Toggle Button Component</h3>
+    <p>buttonIsSelected {{ buttonIsSelected }}</p>
+    <ToggleButtonComponent v-model="buttonIsSelected">
+      テスト
+    </ToggleButtonComponent>
+    <ToggleButtonComponent
+      style="background-color: red"
+      v-model="buttonIsSelected"
+    >
+    </ToggleButtonComponent>
+    <button @click="changeToggleButton">
+      change buttonSelected from parent
+    </button>
     <h3>ホームに表示される問題プレビュー</h3>
     <div class="question-preview-components">
       <QuestionPreview :question="sampleQuestionData.api.q_4taku" />
@@ -38,17 +50,25 @@
 // @ is an alias to /src
 import QuestionPreview from '@/components/QuestionPreview.vue'
 import Question from '@/components/Question.vue'
+import ToggleButtonComponent from '@/components/ToggleButtonComponent.vue'
 
 export default {
   name: 'ComponentsPreviewPage',
   components: {
     QuestionPreview,
     Question,
+    ToggleButtonComponent,
   },
   data() {
     return {
       sampleQuestionData: require('@/testdata/question.json'),
+      buttonIsSelected: false,
     }
+  },
+  methods: {
+    changeToggleButton: function () {
+      this.buttonIsSelected = !this.buttonIsSelected
+    },
   },
 }
 </script>
