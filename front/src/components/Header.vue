@@ -1,9 +1,15 @@
 <template>
   <header class="header">
-    <div class="header-context-menu" v-if="isContextMenuOpen">
-      <button @click="notImplement">マイページ</button>
-      <button @click="notImplement">設定</button>
-      <button @click="toggleContextMenu">閉じる</button>
+    <div
+      class="header-context-menu-background"
+      @click="toggleContextMenu"
+      v-if="isContextMenuOpen"
+    >
+      <div class="header-context-menu">
+        <button @click="notImplement">マイページ</button>
+        <button @click="notImplement">設定</button>
+        <button @click="toggleContextMenu">閉じる</button>
+      </div>
     </div>
     <button class="header-button" @click="changeHomePage">
       <FontAwesomeIcon icon="home" />
@@ -23,7 +29,7 @@
     <button class="header-button" @click="changeNotifiCationPage">
       <FontAwesomeIcon icon="bell" />
     </button>
-    <button class="header-button" @click="toggleContextMenu">
+    <button class="header-button">
       <FontAwesomeIcon icon="user-circle" />
     </button>
   </header>
@@ -282,6 +288,14 @@ export default {
   margin: 0px 5px;
   border-radius: 10px;
   border: none;
+}
+
+.header-context-menu-background {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
 }
 
 .header-context-menu {
