@@ -29,13 +29,12 @@ export default {
   },
   async created() {
     {
-      const response = await fetch('api/question/all')
-      const allQuestions = await response.json()
+      const allQuestions = require('@/testdata/question.json').searchSource
       this.newQuestionPosts = allQuestions
     }
     {
-      const response = await fetch('api/collection/all')
-      const allCollection = await response.json()
+      const allCollection =
+        require('@/testdata/question.json').HomeCollectionSourse
       this.newCollectionPosts = allCollection
     }
   },
