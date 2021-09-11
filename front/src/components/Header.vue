@@ -29,7 +29,7 @@
     <button class="header-button" @click="changeNotifiCationPage">
       <FontAwesomeIcon icon="bell" />
     </button>
-    <button class="header-button">
+    <button class="header-button" @click="toggleContextMenu">
       <FontAwesomeIcon icon="user-circle" />
     </button>
   </header>
