@@ -14,7 +14,9 @@
       placeholder="問題や問題集を検索する"
       v-model="searchValue"
     />
-    <button @click="searchOnEnter()">検索</button>
+    <button class="header-button" @click="searchOnEnter()">
+      <FontAwesomeIcon icon="search" />
+    </button>
     <button class="header-button" @click="notImplement">
       <FontAwesomeIcon icon="pencil-alt" />
     </button>
