@@ -1,4 +1,4 @@
 module.exports = {
-  publicPath: '/CodingShare',
+  publicPath: '/HackU2021',
   outputDir: '../docs',
 }
