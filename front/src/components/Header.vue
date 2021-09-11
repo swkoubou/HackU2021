@@ -12,7 +12,11 @@
       type="text"
       class="search-box"
       placeholder="問題や問題集を検索する"
+      v-model="searchValue"
     />
+    <button class="header-button" @click="searchOnEnter()">
+      <FontAwesomeIcon icon="search" />
+    </button>
     <button class="header-button" @click="notImplement">
       <FontAwesomeIcon icon="pencil-alt" />
     </button>
@@ -45,8 +49,16 @@ export default {
   data() {
     return {
       isContextMenuOpen: false,
+      searchValue: '',
+      testQuestionData: require('@/testdata/question.json'),
     }
   },
+  computed: {
+    searchSource: function () {
+      return this.testQuestionData.searchSource
+    },
+  },
+
   methods: {
     notImplement() {
       alert('まだないよ')
@@ -57,6 +69,187 @@ export default {
     changeNotifiCationPage() {
       this.$router.push({ path: '/notification' })
     },
+
+    // -- 検索機能ローカルテスト用関数群:開始 --
+
+    // タグで検索
+    searchQuestionsWithTags(tags) {
+      // todo : 問題毎に一致するタグがあるかforで探すとても非効率的な方法なので、検索方法、要検討
+
+      // 検索結果を格納する入れ物を用意します
+      // 何で検索したのか: []問題達
+      let result = {}
+      for (
+        let searchSourceIndex = 0;
+        searchSourceIndex < this.searchSource.length;
+        searchSourceIndex++
+      ) {
+        // 取り出した問題に、名前をつけます
+        const question = this.searchSource[searchSourceIndex]
+        // 一致するタグがあるか探します。
+        for (let tagsIndex = 0; tagsIndex < tags.length; tagsIndex++) {
+          // 取り出したタグに名前をつけます
+          const tagRaw = tags[tagsIndex]
+          const tag = tagRaw.replace('#', '')
+          // もし、タグを含んでいれば、結果に追加します
+          if (question.questionTag.includes(tag)) {
+            // タグが結果に存在するか確認し、なかったら空の配列を設置します
+            if (!Object.prototype.hasOwnProperty.call(result, tagRaw)) {
+              result[tagRaw] = []
+            }
+            // 結果に追加します
+            result[tagRaw].push(question)
+          }
+        }
+      }
+      return result
+    },
+
+    // 通常文字で検索
+    // [ 優先順位 ]
+    // 1. 通常文字に一致するタイトルを持つ問題を探す
+    // 2. 通常文字に一致するquestionBodyを持つ問題を探す
+    searchQuestionsWithNormalWords(normalWords) {
+      // todo : 問題毎に一致する文字列があるかforで探すとても非効率的な方法なので、検索方法、要検討
+      // 部分一致参考 :
+      // https://qiita.com/aqril_1132/items/9f69575bfbcf24bdf7b5#%E9%83%A8%E5%88%86%E4%B8%80%E8%87%B4
+
+      // 検索結果を格納する入れ物を用意します
+      // 何で検索したのか: []問題達
+      let result = {}
+      for (
+        let searchSourceIndex = 0;
+        searchSourceIndex < this.searchSource.length;
+        searchSourceIndex++
+      ) {
+        // 取り出した問題に名前をつけます。
+        const question = this.searchSource[searchSourceIndex]
+        // 通常文字列を取り出し、名前をつけます。
+        for (
+          let normalWordsIndex = 0;
+          normalWordsIndex < normalWords.length;
+          normalWordsIndex++
+        ) {
+          const normalWord = normalWords[normalWordsIndex]
+          // もし、タイトルと通常文字列が部分一致したら、結果に追加します。
+          // また、もし、questionBodyと通常文字列が部分一致したら、結果に追加します。
+
+          // 同じものが、複数存在することを避けるため、else ifで分岐します。
+          if (question.questionName.indexOf(normalWord) > -1) {
+            // 通常文字が結果になかったら空の配列を用意します。
+            if (!Object.prototype.hasOwnProperty.call(result, normalWord)) {
+              result[normalWord] = []
+            }
+            // 結果に追加します。
+            result[normalWord].push(question)
+          } else if (question.questionBody.indexOf(normalWord) > -1) {
+            // 通常文字が結果になかったら空の配列を用意します。
+            if (!Object.prototype.hasOwnProperty.call(result, normalWord)) {
+              result[normalWord] = []
+            }
+            // 結果に追加します。
+            result[normalWord].push(question)
+          }
+        }
+      }
+      return result
+    },
+
+    // 検索欄でエンターが押された時に呼び出される関数
+    searchOnEnter() {
+      // 検索欄から得られた、タグ達を入れる物です。
+      let tags = []
+      // 検索欄から得られた、通常文字達を入れる物です。
+      let normalWords = []
+
+      // 全角の空白を全て半角の空白に変更します。
+      const searchValueHankaku = this.searchValue.replace('　', ' ')
+
+      // 関数を分けたいので、タグと、通常文字を分けます。
+      // 空白で区切ります。
+
+      const searchValueSplit = searchValueHankaku.split(' ')
+      for (let i = 0; i < searchValueSplit.length; i++) {
+        // 区切られた中身を取り出し、使いやすいように名前をつけます。
+        const word = searchValueSplit[i]
+        // もし、一番最初の文字が「#」ならタグです。
+        // それ以外は通常文字です。
+        if (word[0] == '#') {
+          tags.push(word)
+        } else {
+          normalWords.push(word)
+        }
+      }
+
+      // 実際に検索を行います。
+      const questionsFromTagSearch = this.searchQuestionsWithTags(tags)
+      const questionsFromNormalWordSearch =
+        this.searchQuestionsWithNormalWords(normalWords)
+
+      // 結果を取り出すため、鍵一覧の配列を準備します。
+      const questionsFromTagSearchKeys = Object.keys(questionsFromTagSearch)
+      const questionsFromNormalWordSearchKeys = Object.keys(
+        questionsFromNormalWordSearch
+      )
+
+      // 検索結果の入れ物を用意します。
+      // 基本的に重なったキーワードがあった場合、上書きされます。
+      let resultQuestions = {}
+
+      for (
+        let questionsFromTagSearchKeysIndex = 0;
+        questionsFromTagSearchKeysIndex < questionsFromTagSearchKeys.length;
+        questionsFromTagSearchKeysIndex++
+      ) {
+        // 鍵を取り出し、名前をつけます。
+        const questionsFromTagSearchKey =
+          questionsFromTagSearchKeys[questionsFromTagSearchKeysIndex]
+        // 各々の検索結果を全体の検索結果に統合します。
+        resultQuestions[questionsFromTagSearchKey] =
+          questionsFromTagSearch[questionsFromTagSearchKey]
+      }
+
+      for (
+        let questionsFromNormalWordSearchKeysIndex = 0;
+        questionsFromNormalWordSearchKeysIndex <
+        questionsFromNormalWordSearchKeys.length;
+        questionsFromNormalWordSearchKeysIndex++
+      ) {
+        // 取り出して、名前をつけます。
+        const questionsFromNormalWordSearchKey =
+          questionsFromNormalWordSearchKeys[
+            questionsFromNormalWordSearchKeysIndex
+          ]
+        resultQuestions[questionsFromNormalWordSearchKey] =
+          questionsFromNormalWordSearch[questionsFromNormalWordSearchKey]
+      }
+
+      // ユーザーが検索欄に入力した内容を消します。
+      this.searchValue = ''
+
+      const SearchKeysForQueryRaw = [
+        ...questionsFromTagSearchKeys,
+        ...questionsFromNormalWordSearchKeys,
+      ]
+      let SearchKeysForQuerySafe = {}
+      for (
+        let SearchKeysForQueryRawIndex = 0;
+        SearchKeysForQueryRawIndex < SearchKeysForQueryRaw.length;
+        SearchKeysForQueryRawIndex++
+      ) {
+        const query = SearchKeysForQueryRaw[SearchKeysForQueryRawIndex]
+        const safeQuery = encodeURIComponent(query)
+        SearchKeysForQuerySafe[`q${SearchKeysForQueryRawIndex + 1}`] = safeQuery
+      }
+
+      this.$router.push({
+        path: 'search',
+        name: 'SearchPage',
+        params: { questionsWithKeyWord: resultQuestions },
+        query: SearchKeysForQuerySafe,
+      })
+    },
+    // -- 検索機能ローカルテスト用関数群:終了 --
 
     toggleContextMenu() {
       this.isContextMenuOpen = !this.isContextMenuOpen
