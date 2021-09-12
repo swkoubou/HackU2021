@@ -377,7 +377,6 @@ export default {
   position: absolute;
   top: 80px;
   font-size: 1.5em;
-  width: calc(100% - 40px);
 }
 
 .search-toggle-button {
