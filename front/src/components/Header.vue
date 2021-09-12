@@ -24,19 +24,21 @@
         <FontAwesomeIcon icon="search" />
       </button>
     </div>
-
     <div
-      class="search-box search-box-smartphone-window"
+      class="search-box-smartphone-window-background"
+      @click.self="toggleSearchBoxFromSmartPhone"
       v-show="isSearchBoxOpenFromSmartPhoneWindow"
     >
-      <input
-        type="search"
-        placeholder="問題や問題集を検索する"
-        v-model="searchValue"
-      />
-      <button class="search-button" @click="searchOnEnter">
-        <FontAwesomeIcon icon="search" />
-      </button>
+      <div class="search-box search-box-smartphone-window">
+        <input
+          type="search"
+          placeholder="問題や問題集を検索する"
+          v-model="searchValue"
+        />
+        <button class="search-button" @click="searchOnEnter">
+          <FontAwesomeIcon icon="search" />
+        </button>
+      </div>
     </div>
     <button
       class="header-button search-toggle-button"
@@ -309,6 +311,14 @@ export default {
   border: none;
 }
 
+.search-box-smartphone-window-background {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+}
+
 .search-box {
   background-color: white;
   border-radius: 10px;
@@ -350,6 +360,7 @@ export default {
 .search-box-smartphone-window {
   position: absolute;
   top: 80px;
+  left: 20px;
   height: 1.2em;
   font-size: 1.2em;
   border: solid 2px transparent;
