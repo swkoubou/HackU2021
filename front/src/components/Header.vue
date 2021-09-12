@@ -14,13 +14,34 @@
     <button class="header-button" @click="changeHomePage">
       <FontAwesomeIcon icon="home" />
     </button>
-    <input
-      type="text"
-      class="search-box"
-      placeholder="問題や問題集を検索する"
-      v-model="searchValue"
-    />
-    <button class="header-button" @click="searchOnEnter()">
+    <div class="search-box search-box-pc-window">
+      <input
+        type="search"
+        placeholder="問題や問題集を検索する"
+        v-model="searchValue"
+      />
+      <button class="search-button" @click="searchOnEnter">
+        <FontAwesomeIcon icon="search" />
+      </button>
+    </div>
+
+    <div
+      class="search-box search-box-smartphone-window"
+      v-show="isSearchBoxOpenFromSmartPhoneWindow"
+    >
+      <input
+        type="search"
+        placeholder="問題や問題集を検索する"
+        v-model="searchValue"
+      />
+      <button class="search-button" @click="searchOnEnter">
+        <FontAwesomeIcon icon="search" />
+      </button>
+    </div>
+    <button
+      class="header-button search-toggle-button"
+      @click="toggleSearchBoxFromSmartPhone"
+    >
       <FontAwesomeIcon icon="search" />
     </button>
     <button class="header-button" @click="notImplement">
@@ -55,6 +76,7 @@ export default {
   data() {
     return {
       isContextMenuOpen: false,
+      isSearchBoxOpenFromSmartPhoneWindow: false,
       searchValue: '',
       testQuestionData: require('@/testdata/question.json'),
     }
@@ -260,6 +282,10 @@ export default {
     toggleContextMenu() {
       this.isContextMenuOpen = !this.isContextMenuOpen
     },
+    toggleSearchBoxFromSmartPhone() {
+      this.isSearchBoxOpenFromSmartPhoneWindow =
+        !this.isSearchBoxOpenFromSmartPhoneWindow
+    },
   },
 }
 </script>
@@ -284,10 +310,77 @@ export default {
 }
 
 .search-box {
+  background-color: white;
+  border-radius: 10px;
+  border: solid 2px transparent;
+  outline: solid 2px transparent;
+  outline-offset: 1px;
+  display: flex;
+}
+
+.search-box:focus-within {
+  border: solid 2px #0060df;
+  outline: solid 2px #b2ddf9;
+}
+
+.search-box input[type='search'] {
+  flex: 1 1 auto;
+  border: none;
+  border-top-left-radius: 11px;
+  border-bottom-left-radius: 11px;
+}
+
+.search-box input[type='search']:focus {
+  outline: none;
+}
+
+.search-button {
+  background-color: #0060df;
+  border: solid 1px #0060df;
+  padding: 0px 8px;
+  border-top-right-radius: 11px;
+  border-bottom-right-radius: 11px;
+}
+
+.search-box-pc-window {
   flex: 1 1 auto;
   margin: 0px 5px;
-  border-radius: 10px;
-  border: none;
+}
+
+.search-box-smartphone-window {
+  position: absolute;
+  top: 80px;
+  height: 1.2em;
+  font-size: 1.2em;
+  border: solid 2px transparent;
+  outline: solid 2px #2c3e50;
+  outline-offset: -3px;
+  width: calc(100% - 40px);
+}
+
+.search-box-smartphone-window:focus-within {
+  outline-offset: 1px;
+}
+
+.search-button-smartphone-window {
+  position: absolute;
+  top: 80px;
+  font-size: 1.2em;
+  width: calc(100% - 40px);
+}
+
+.search-toggle-button {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .search-box-pc-window {
+    display: none;
+  }
+
+  .search-toggle-button {
+    display: block;
+  }
 }
 
 .header-context-menu-background {
