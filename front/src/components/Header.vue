@@ -361,8 +361,8 @@ export default {
   position: absolute;
   top: 80px;
   left: 20px;
-  height: 1.2em;
-  font-size: 1.2em;
+  height: 1.5em;
+  font-size: 1.5em;
   border: solid 2px transparent;
   outline: solid 2px #2c3e50;
   outline-offset: -3px;
@@ -376,7 +376,7 @@ export default {
 .search-button-smartphone-window {
   position: absolute;
   top: 80px;
-  font-size: 1.2em;
+  font-size: 1.5em;
   width: calc(100% - 40px);
 }
 
