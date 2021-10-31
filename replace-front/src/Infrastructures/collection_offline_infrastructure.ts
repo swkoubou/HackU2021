@@ -3,21 +3,23 @@ import { Question } from '../models/question_model'
 import { User } from '../models/user_model'
 import { CollectionRepository } from '../repositories/collection_repository'
 
-class CollectionRepositoryOfflineImpl implements CollectionRepository {
+class OfflineCollectionRepository implements CollectionRepository {
   private collectionDB: Map<string, Collection> = new Map()
+  private autoIncrementId: number = 0
+
+  private newId(): string {
+    this.autoIncrementId++
+    return `cid_${this.autoIncrementId}`
+  }
 
   public Create(
-    id: string,
     author: User,
     title: string,
     description: string,
     questions: Question[],
     color: string
-  ) {
-    if (this.collectionDB.has(id)) {
-      throw new Error(`既に登録されているIDです。: ${id}`)
-    }
-
+  ): Collection {
+    const id = this.newId()
     const collection: Collection = {
       id: id,
       createdAt: new Date(),
@@ -34,12 +36,11 @@ class CollectionRepositoryOfflineImpl implements CollectionRepository {
     return collection
   }
 
-  public Get(id: string) {
+  public Get(id: string): Collection {
     if (this.collectionDB.has(id)) {
-      return this.collectionDB.get(id)
+      return this.collectionDB.get(id)!
     }
-
-    throw new Error(`登録されていないIDです。: ${id}`)
+    throw new OfflineDBCollectionNotFoundError(id)
   }
 
   public Update(
@@ -49,7 +50,7 @@ class CollectionRepositoryOfflineImpl implements CollectionRepository {
     description: string,
     questions: Question[],
     color: string
-  ) {
+  ): Collection {
     if (this.collectionDB.has(id)) {
       const oldCollectionData: Collection = this.collectionDB.get(id)!
       const createdAt: Date = oldCollectionData.createdAt
@@ -70,10 +71,14 @@ class CollectionRepositoryOfflineImpl implements CollectionRepository {
       return newCollectionData
     }
 
-    throw new Error(`登録されていないIDです。: ${id}`)
+    throw new OfflineDBCollectionNotFoundError(id)
   }
 
-  public Delete(id: string) {
-    return this.collectionDB.delete(id)
+  public Delete(id: string): void {
+    if (this.collectionDB.has(id)) {
+      this.collectionDB.delete(id)
+      return
+    }
+    throw new OfflineDBCollectionNotFoundError(id)
   }
 }

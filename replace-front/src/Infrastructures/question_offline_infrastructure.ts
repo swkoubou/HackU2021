@@ -2,11 +2,16 @@ import { Question } from '../models/question_model'
 import { User } from '../models/user_model'
 import { QuestionRepository } from '../repositories/question_repository'
 
-class QuestionRepositoryOfflineImpl implements QuestionRepository {
+class OfflineQuestionRepository implements QuestionRepository {
   private questionDB: Map<string, Question> = new Map()
+  private autoIncrementId: number = 0
+
+  private newId(): string {
+    this.autoIncrementId++
+    return `qid_${this.autoIncrementId}`
+  }
 
   public Create(
-    id: string,
     author: User,
     title: string,
     tags: string[],
@@ -14,11 +19,8 @@ class QuestionRepositoryOfflineImpl implements QuestionRepository {
     body: string,
     answers: string[],
     color: string
-  ) {
-    if (this.questionDB.has(id)) {
-      throw new Error(`既に登録されているIDです。: ${id}`)
-    }
-
+  ): Question {
+    const id = this.newId()
     const question: Question = {
       id: id,
       createdAt: new Date(),
@@ -37,12 +39,12 @@ class QuestionRepositoryOfflineImpl implements QuestionRepository {
     return question
   }
 
-  public Get(id: string) {
+  public Get(id: string): Question {
     if (this.questionDB.has(id)) {
-      return this.questionDB.get(id)
+      return this.questionDB.get(id)!
     }
 
-    throw new Error(`登録されていないIDです。: ${id}`)
+    throw new OfflineDBQuestionNotFoundError(id)
   }
 
   public Update(
@@ -54,7 +56,7 @@ class QuestionRepositoryOfflineImpl implements QuestionRepository {
     body: string,
     answers: string[],
     color: string
-  ) {
+  ): Question {
     if (this.questionDB.has(id)) {
       const oldQuestionData: Question = this.questionDB.get(id)!
       const createdAt: Date = oldQuestionData.createdAt
@@ -77,10 +79,14 @@ class QuestionRepositoryOfflineImpl implements QuestionRepository {
       return newQuestionData
     }
 
-    throw new Error(`登録されていないIDです。: ${id}`)
+    throw new OfflineDBQuestionNotFoundError(id)
   }
 
-  public Delete(id: string) {
-    return this.questionDB.delete(id)
+  public Delete(id: string): void {
+    if (this.questionDB.has(id)) {
+      this.questionDB.delete(id)
+      return
+    }
+    throw new OfflineDBQuestionNotFoundError(id)
   }
 }

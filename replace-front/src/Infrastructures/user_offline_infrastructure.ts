@@ -1,14 +1,17 @@
 import { User } from '../models/user_model'
 import { UserRepository } from '../repositories/user_repository'
 
-class UserRepositoryOffLineImpl implements UserRepository {
+class OfflineUserRepository implements UserRepository {
   private userDB: Map<string, User> = new Map()
+  private autoIncrementId: number = 0
 
-  public Create(id: string, displayName: string) {
-    if (this.userDB.has(id)) {
-      throw new Error(`既に登録されているIDです。${id}`)
-    }
+  private newId(): string {
+    this.autoIncrementId++
+    return `uid_${this.autoIncrementId}`
+  }
 
+  public Create(displayName: string): User {
+    const id = this.newId()
     const user: User = {
       id: id,
       displayName: displayName,
@@ -17,15 +20,15 @@ class UserRepositoryOffLineImpl implements UserRepository {
     return user
   }
 
-  public Get(id: string) {
+  public Get(id: string): User {
     if (this.userDB.has(id)) {
-      return this.userDB.get(id)
+      return this.userDB.get(id)!
     }
 
-    throw new Error(`登録されていないIDです。: ${id}`)
+    throw new OfflineDBUserNotFoundError(id)
   }
 
-  public Update(id: string, displayName: string) {
+  public Update(id: string, displayName: string): User {
     if (this.userDB.has(id)) {
       const newUserData: User = {
         id: id,
@@ -35,10 +38,14 @@ class UserRepositoryOffLineImpl implements UserRepository {
       return newUserData
     }
 
-    throw new Error(`登録されていないIDです。: ${id}`)
+    throw new OfflineDBUserNotFoundError(id)
   }
 
-  public Delete(id: string) {
-    return this.userDB.delete(id)
+  public Delete(id: string): void {
+    if (this.userDB.has(id)) {
+      this.userDB.delete(id)
+      return
+    }
+    throw new OfflineDBUserNotFoundError(id)
   }
 }
