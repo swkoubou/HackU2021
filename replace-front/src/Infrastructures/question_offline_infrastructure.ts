@@ -36,16 +36,14 @@ class OfflineQuestionRepository implements QuestionRepository {
     }
 
     this.questionDB.set(id, question)
-
     return question
   }
 
   public Get(id: string): Question {
-    if (this.questionDB.has(id)) {
-      return this.questionDB.get(id)!
+    if (!this.questionDB.has(id)) {
+      throw new error_infrastructures.OfflineDBQuestionNotFoundError(id)
     }
-
-    throw new error_infrastructures.OfflineDBQuestionNotFoundError(id)
+    return this.questionDB.get(id)!
   }
 
   public Update(
@@ -58,36 +56,36 @@ class OfflineQuestionRepository implements QuestionRepository {
     answers: string[],
     color: string
   ): Question {
-    if (this.questionDB.has(id)) {
-      const oldQuestionData: Question = this.questionDB.get(id)!
-      const createdAt: Date = oldQuestionData.createdAt
-
-      const newQuestionData: Question = {
-        id: id,
-        createdAt: createdAt,
-        updatedAt: new Date(),
-        author: author,
-        title: title,
-        tags: tags,
-        type: type,
-        body: body,
-        answers: answers,
-        color: color,
-      }
-
-      this.questionDB.set(id, newQuestionData)
-
-      return newQuestionData
+    if (!this.questionDB.has(id)) {
+      throw new error_infrastructures.OfflineDBQuestionNotFoundError(id)
     }
 
-    throw new error_infrastructures.OfflineDBQuestionNotFoundError(id)
+    const oldQuestionData: Question = this.questionDB.get(id)!
+    const createdAt: Date = oldQuestionData.createdAt
+
+    const newQuestionData: Question = {
+      id: id,
+      createdAt: createdAt,
+      updatedAt: new Date(),
+      author: author,
+      title: title,
+      tags: tags,
+      type: type,
+      body: body,
+      answers: answers,
+      color: color,
+    }
+
+    this.questionDB.set(id, newQuestionData)
+
+    return newQuestionData
   }
 
   public Delete(id: string): void {
-    if (this.questionDB.has(id)) {
-      this.questionDB.delete(id)
-      return
+    if (!this.questionDB.has(id)) {
+      throw new error_infrastructures.OfflineDBQuestionNotFoundError(id)
     }
-    throw new error_infrastructures.OfflineDBQuestionNotFoundError(id)
+    this.questionDB.delete(id)
+    return
   }
 }

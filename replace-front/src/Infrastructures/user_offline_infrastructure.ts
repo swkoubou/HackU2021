@@ -22,31 +22,31 @@ class OfflineUserRepository implements UserRepository {
   }
 
   public Get(id: string): User {
-    if (this.userDB.has(id)) {
-      return this.userDB.get(id)!
+    if (!this.userDB.has(id)) {
+      throw new error_infrastructures.OfflineDBUserNotFoundError(id)
     }
 
-    throw new error_infrastructures.OfflineDBUserNotFoundError(id)
+    return this.userDB.get(id)!
   }
 
   public Update(id: string, displayName: string): User {
-    if (this.userDB.has(id)) {
-      const newUserData: User = {
-        id: id,
-        displayName: displayName,
-      }
-      this.userDB.set(id, newUserData)
-      return newUserData
+    if (!this.userDB.has(id)) {
+      throw new error_infrastructures.OfflineDBUserNotFoundError(id)
     }
 
-    throw new error_infrastructures.OfflineDBUserNotFoundError(id)
+    const newUserData: User = {
+      id: id,
+      displayName: displayName,
+    }
+    this.userDB.set(id, newUserData)
+    return newUserData
   }
 
   public Delete(id: string): void {
-    if (this.userDB.has(id)) {
-      this.userDB.delete(id)
-      return
+    if (!this.userDB.has(id)) {
+      throw new error_infrastructures.OfflineDBUserNotFoundError(id)
     }
-    throw new error_infrastructures.OfflineDBUserNotFoundError(id)
+    this.userDB.delete(id)
+    return
   }
 }

@@ -38,10 +38,10 @@ class OfflineCollectionRepository implements CollectionRepository {
   }
 
   public Get(id: string): Collection {
-    if (this.collectionDB.has(id)) {
-      return this.collectionDB.get(id)!
+    if (!this.collectionDB.has(id)) {
+      throw new error_infrastructures.OfflineDBCollectionNotFoundError(id)
     }
-    throw new error_infrastructures.OfflineDBCollectionNotFoundError(id)
+    return this.collectionDB.get(id)!
   }
 
   public Update(
@@ -52,34 +52,34 @@ class OfflineCollectionRepository implements CollectionRepository {
     questions: Question[],
     color: string
   ): Collection {
-    if (this.collectionDB.has(id)) {
-      const oldCollectionData: Collection = this.collectionDB.get(id)!
-      const createdAt: Date = oldCollectionData.createdAt
-
-      const newCollectionData: Collection = {
-        id: id,
-        createdAt: createdAt,
-        updatedAt: new Date(),
-        author: author,
-        title: title,
-        description: description,
-        questions: questions,
-        color: color,
-      }
-
-      this.collectionDB.set(id, newCollectionData)
-
-      return newCollectionData
+    if (!this.collectionDB.has(id)) {
+      throw new error_infrastructures.OfflineDBCollectionNotFoundError(id)
     }
 
-    throw new error_infrastructures.OfflineDBCollectionNotFoundError(id)
+    const oldCollectionData: Collection = this.collectionDB.get(id)!
+    const createdAt: Date = oldCollectionData.createdAt
+
+    const newCollectionData: Collection = {
+      id: id,
+      createdAt: createdAt,
+      updatedAt: new Date(),
+      author: author,
+      title: title,
+      description: description,
+      questions: questions,
+      color: color,
+    }
+
+    this.collectionDB.set(id, newCollectionData)
+
+    return newCollectionData
   }
 
   public Delete(id: string): void {
-    if (this.collectionDB.has(id)) {
-      this.collectionDB.delete(id)
-      return
+    if (!this.collectionDB.has(id)) {
+      throw new error_infrastructures.OfflineDBCollectionNotFoundError(id)
     }
-    throw new error_infrastructures.OfflineDBCollectionNotFoundError(id)
+    this.collectionDB.delete(id)
+    return
   }
 }
