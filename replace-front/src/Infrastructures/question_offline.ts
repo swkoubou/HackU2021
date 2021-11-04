@@ -1,17 +1,8 @@
 import { Question } from '../models/question'
 import { User } from '../models/user'
 import { QuestionRepository } from '../repositories/question'
-import { OfflineDBQuestionNotFoundError } from '../errors/infrastructures'
 
 class OfflineQuestionRepository implements QuestionRepository {
-  private questionDB: Map<string, Question> = new Map()
-  private autoIncrementId: number = 0
-
-  private newId(): string {
-    this.autoIncrementId++
-    return `qid_${this.autoIncrementId}`
-  }
-
   public Create(
     author: User,
     title: string,
@@ -21,9 +12,8 @@ class OfflineQuestionRepository implements QuestionRepository {
     answers: string[],
     color: string
   ): Question {
-    const id = this.newId()
     const question: Question = {
-      id: id,
+      id: 'questionId',
       createdAt: new Date(),
       updatedAt: new Date(),
       author: author,
@@ -35,15 +25,28 @@ class OfflineQuestionRepository implements QuestionRepository {
       color: color,
     }
 
-    this.questionDB.set(id, question)
     return question
   }
 
   public Get(id: string): Question {
-    if (!this.questionDB.has(id)) {
-      throw new OfflineDBQuestionNotFoundError(id)
+    const user: User = {
+      displayName: 'displayName',
+      id: 'userId',
     }
-    return this.questionDB.get(id)!
+
+    const question: Question = {
+      id: 'questionId',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      author: user,
+      title: 'title',
+      tags: [],
+      type: 0,
+      body: 'body',
+      answers: [],
+      color: '#cee9e7',
+    }
+    return question
   }
 
   public Update(
@@ -56,16 +59,9 @@ class OfflineQuestionRepository implements QuestionRepository {
     answers: string[],
     color: string
   ): Question {
-    if (!this.questionDB.has(id)) {
-      throw new OfflineDBQuestionNotFoundError(id)
-    }
-
-    const oldQuestionData: Question = this.questionDB.get(id)!
-    const createdAt: Date = oldQuestionData.createdAt
-
     const newQuestionData: Question = {
       id: id,
-      createdAt: createdAt,
+      createdAt: new Date(),
       updatedAt: new Date(),
       author: author,
       title: title,
@@ -76,16 +72,10 @@ class OfflineQuestionRepository implements QuestionRepository {
       color: color,
     }
 
-    this.questionDB.set(id, newQuestionData)
-
     return newQuestionData
   }
 
   public Delete(id: string): void {
-    if (!this.questionDB.has(id)) {
-      throw new OfflineDBQuestionNotFoundError(id)
-    }
-    this.questionDB.delete(id)
     return
   }
 }

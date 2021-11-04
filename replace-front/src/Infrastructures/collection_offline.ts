@@ -2,17 +2,8 @@ import { Collection } from '../models/collection'
 import { Question } from '../models/question'
 import { User } from '../models/user'
 import { CollectionRepository } from '../repositories/collection'
-import { OfflineDBCollectionNotFoundError } from '../errors/infrastructures'
 
 class OfflineCollectionRepository implements CollectionRepository {
-  private collectionDB: Map<string, Collection> = new Map()
-  private autoIncrementId: number = 0
-
-  private newId(): string {
-    this.autoIncrementId++
-    return `cid_${this.autoIncrementId}`
-  }
-
   public Create(
     author: User,
     title: string,
@@ -20,9 +11,8 @@ class OfflineCollectionRepository implements CollectionRepository {
     questions: Question[],
     color: string
   ): Collection {
-    const id = this.newId()
     const collection: Collection = {
-      id: id,
+      id: 'collectionId',
       createdAt: new Date(),
       updatedAt: new Date(),
       author: author,
@@ -31,17 +21,40 @@ class OfflineCollectionRepository implements CollectionRepository {
       questions: questions,
       color: color,
     }
-
-    this.collectionDB.set(id, collection)
-
     return collection
   }
 
   public Get(id: string): Collection {
-    if (!this.collectionDB.has(id)) {
-      throw new OfflineDBCollectionNotFoundError(id)
+    const user: User = {
+      displayName: 'displayName',
+      id: 'userId',
     }
-    return this.collectionDB.get(id)!
+
+    const question: Question = {
+      id: 'questionId',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      author: user,
+      title: 'title',
+      tags: [],
+      type: 0,
+      body: 'body',
+      answers: [],
+      color: '#cee9e7',
+    }
+
+    const collection: Collection = {
+      id: id,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      author: user,
+      title: 'title',
+      description: '',
+      questions: [question],
+      color: '#cee9e7',
+    }
+
+    return collection
   }
 
   public Update(
@@ -52,16 +65,9 @@ class OfflineCollectionRepository implements CollectionRepository {
     questions: Question[],
     color: string
   ): Collection {
-    if (!this.collectionDB.has(id)) {
-      throw new OfflineDBCollectionNotFoundError(id)
-    }
-
-    const oldCollectionData: Collection = this.collectionDB.get(id)!
-    const createdAt: Date = oldCollectionData.createdAt
-
     const newCollectionData: Collection = {
       id: id,
-      createdAt: createdAt,
+      createdAt: new Date(),
       updatedAt: new Date(),
       author: author,
       title: title,
@@ -70,16 +76,10 @@ class OfflineCollectionRepository implements CollectionRepository {
       color: color,
     }
 
-    this.collectionDB.set(id, newCollectionData)
-
     return newCollectionData
   }
 
   public Delete(id: string): void {
-    if (!this.collectionDB.has(id)) {
-      throw new OfflineDBCollectionNotFoundError(id)
-    }
-    this.collectionDB.delete(id)
     return
   }
 }
