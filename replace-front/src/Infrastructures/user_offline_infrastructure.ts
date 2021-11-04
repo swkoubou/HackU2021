@@ -1,5 +1,6 @@
 import { User } from '../models/user_model'
 import { UserRepository } from '../repositories/user_repository'
+import * as error_infrastructures from './error_infrastructures'
 
 class OfflineUserRepository implements UserRepository {
   private userDB: Map<string, User> = new Map()
@@ -25,7 +26,7 @@ class OfflineUserRepository implements UserRepository {
       return this.userDB.get(id)!
     }
 
-    throw new OfflineDBUserNotFoundError(id)
+    throw new error_infrastructures.OfflineDBUserNotFoundError(id)
   }
 
   public Update(id: string, displayName: string): User {
@@ -38,7 +39,7 @@ class OfflineUserRepository implements UserRepository {
       return newUserData
     }
 
-    throw new OfflineDBUserNotFoundError(id)
+    throw new error_infrastructures.OfflineDBUserNotFoundError(id)
   }
 
   public Delete(id: string): void {
@@ -46,6 +47,6 @@ class OfflineUserRepository implements UserRepository {
       this.userDB.delete(id)
       return
     }
-    throw new OfflineDBUserNotFoundError(id)
+    throw new error_infrastructures.OfflineDBUserNotFoundError(id)
   }
 }

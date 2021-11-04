@@ -2,6 +2,7 @@ import { Collection } from '../models/collection_model'
 import { Question } from '../models/question_model'
 import { User } from '../models/user_model'
 import { CollectionRepository } from '../repositories/collection_repository'
+import * as error_infrastructures from './error_infrastructures'
 
 class OfflineCollectionRepository implements CollectionRepository {
   private collectionDB: Map<string, Collection> = new Map()
@@ -40,7 +41,7 @@ class OfflineCollectionRepository implements CollectionRepository {
     if (this.collectionDB.has(id)) {
       return this.collectionDB.get(id)!
     }
-    throw new OfflineDBCollectionNotFoundError(id)
+    throw new error_infrastructures.OfflineDBCollectionNotFoundError(id)
   }
 
   public Update(
@@ -71,7 +72,7 @@ class OfflineCollectionRepository implements CollectionRepository {
       return newCollectionData
     }
 
-    throw new OfflineDBCollectionNotFoundError(id)
+    throw new error_infrastructures.OfflineDBCollectionNotFoundError(id)
   }
 
   public Delete(id: string): void {
@@ -79,6 +80,6 @@ class OfflineCollectionRepository implements CollectionRepository {
       this.collectionDB.delete(id)
       return
     }
-    throw new OfflineDBCollectionNotFoundError(id)
+    throw new error_infrastructures.OfflineDBCollectionNotFoundError(id)
   }
 }

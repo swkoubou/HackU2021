@@ -1,6 +1,7 @@
 import { Question } from '../models/question_model'
 import { User } from '../models/user_model'
 import { QuestionRepository } from '../repositories/question_repository'
+import * as error_infrastructures from './error_infrastructures'
 
 class OfflineQuestionRepository implements QuestionRepository {
   private questionDB: Map<string, Question> = new Map()
@@ -44,7 +45,7 @@ class OfflineQuestionRepository implements QuestionRepository {
       return this.questionDB.get(id)!
     }
 
-    throw new OfflineDBQuestionNotFoundError(id)
+    throw new error_infrastructures.OfflineDBQuestionNotFoundError(id)
   }
 
   public Update(
@@ -79,7 +80,7 @@ class OfflineQuestionRepository implements QuestionRepository {
       return newQuestionData
     }
 
-    throw new OfflineDBQuestionNotFoundError(id)
+    throw new error_infrastructures.OfflineDBQuestionNotFoundError(id)
   }
 
   public Delete(id: string): void {
@@ -87,6 +88,6 @@ class OfflineQuestionRepository implements QuestionRepository {
       this.questionDB.delete(id)
       return
     }
-    throw new OfflineDBQuestionNotFoundError(id)
+    throw new error_infrastructures.OfflineDBQuestionNotFoundError(id)
   }
 }
