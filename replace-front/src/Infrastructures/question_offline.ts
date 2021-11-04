@@ -1,7 +1,7 @@
-import { Question } from '../models/question_model'
-import { User } from '../models/user_model'
-import { QuestionRepository } from '../repositories/question_repository'
-import * as error_infrastructures from './error_infrastructures'
+import { Question } from '../models/question'
+import { User } from '../models/user'
+import { QuestionRepository } from '../repositories/question'
+import * as error_infrastructures from '../errors/infrastructures'
 
 class OfflineQuestionRepository implements QuestionRepository {
   private questionDB: Map<string, Question> = new Map()

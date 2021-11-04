@@ -1,6 +1,6 @@
-import { User } from '../models/user_model'
-import { UserRepository } from '../repositories/user_repository'
-import * as error_infrastructures from './error_infrastructures'
+import { User } from '../models/user'
+import { UserRepository } from '../repositories/user'
+import * as error_infrastructures from '../errors/infrastructures'
 
 class OfflineUserRepository implements UserRepository {
   private userDB: Map<string, User> = new Map()

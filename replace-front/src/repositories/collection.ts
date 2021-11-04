@@ -1,6 +1,6 @@
-import { User } from '../models/user_model'
-import { Question } from '../models/question_model'
-import { Collection } from '../models/collection_model'
+import { User } from '../models/user'
+import { Question } from '../models/question'
+import { Collection } from '../models/collection'
 
 export interface CollectionRepository {
   Create: (

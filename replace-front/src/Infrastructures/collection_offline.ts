@@ -1,8 +1,8 @@
-import { Collection } from '../models/collection_model'
-import { Question } from '../models/question_model'
-import { User } from '../models/user_model'
-import { CollectionRepository } from '../repositories/collection_repository'
-import * as error_infrastructures from './error_infrastructures'
+import { Collection } from '../models/collection'
+import { Question } from '../models/question'
+import { User } from '../models/user'
+import { CollectionRepository } from '../repositories/collection'
+import * as error_infrastructures from '../errors/infrastructures'
 
 class OfflineCollectionRepository implements CollectionRepository {
   private collectionDB: Map<string, Collection> = new Map()

@@ -1,4 +1,4 @@
-import { User } from '../models/user_model'
+import { User } from '../models/user'
 
 export interface UserRepository {
   Create: (displayName: string) => User

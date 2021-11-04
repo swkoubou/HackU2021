@@ -1,4 +1,4 @@
-import { User } from './user_model'
+import { User } from './user'
 
 export interface Question {
   id: string

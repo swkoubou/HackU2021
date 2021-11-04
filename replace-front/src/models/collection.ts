@@ -1,5 +1,5 @@
-import { User } from './user_model'
-import { Question } from './question_model'
+import { User } from './user'
+import { Question } from './question'
 
 export interface Collection {
   id: string

@@ -1,5 +1,5 @@
-import { User } from '../models/user_model'
-import { Question } from '../models/question_model'
+import { User } from '../models/user'
+import { Question } from '../models/question'
 
 export interface QuestionRepository {
   Create: (
