@@ -1,9 +1,9 @@
 import { Collection } from '../models/collection'
 import { Question } from '../models/question'
 import { User } from '../models/user'
-import { CollectionRepository } from '../repositories/collection'
+import { CollectionRepository } from '../repositories/collection_repository'
 
-class OfflineCollectionRepository implements CollectionRepository {
+class OfflineCollectionRepositoryImpl implements CollectionRepository {
   public Create(
     author: User,
     title: string,

@@ -1,8 +1,8 @@
 import { Question } from '../models/question'
 import { User } from '../models/user'
-import { QuestionRepository } from '../repositories/question'
+import { QuestionRepository } from '../repositories/question_repository'
 
-class OfflineQuestionRepository implements QuestionRepository {
+class OfflineQuestionRepositoryImpl implements QuestionRepository {
   public Create(
     author: User,
     title: string,
