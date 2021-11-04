@@ -2,7 +2,11 @@ import { Question } from '../models/question'
 import { User } from '../models/user'
 import { QuestionRepository } from '../repositories/question_repository'
 
-export class OfflineQuestionRepositoryImpl implements QuestionRepository {
+export function CreateQuestionRepository(): QuestionRepository {
+  return new OfflineQuestionRepositoryImpl()
+}
+
+class OfflineQuestionRepositoryImpl implements QuestionRepository {
   public Create(
     author: User,
     title: string,

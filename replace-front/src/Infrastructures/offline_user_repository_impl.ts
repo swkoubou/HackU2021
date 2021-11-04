@@ -1,7 +1,11 @@
 import { User } from '../models/user'
 import { UserRepository } from '../repositories/user_repository'
 
-export class OfflineUserRepositoryImpl implements UserRepository {
+export function CreateUserRepository(): UserRepository {
+  return new OfflineUserRepositoryImpl()
+}
+
+class OfflineUserRepositoryImpl implements UserRepository {
   public Create(displayName: string): User {
     const user: User = {
       id: 'userId',

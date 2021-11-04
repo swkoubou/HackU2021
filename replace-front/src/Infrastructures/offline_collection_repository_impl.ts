@@ -3,7 +3,11 @@ import { Question } from '../models/question'
 import { User } from '../models/user'
 import { CollectionRepository } from '../repositories/collection_repository'
 
-export class OfflineCollectionRepositoryImpl implements CollectionRepository {
+export function CreatCollectionRepository(): CollectionRepository {
+  return new OfflineCollectionRepositoryImpl()
+}
+
+class OfflineCollectionRepositoryImpl implements CollectionRepository {
   public Create(
     author: User,
     title: string,
