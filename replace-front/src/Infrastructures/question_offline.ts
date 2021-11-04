@@ -1,7 +1,7 @@
 import { Question } from '../models/question'
 import { User } from '../models/user'
 import { QuestionRepository } from '../repositories/question'
-import * as error_infrastructures from '../errors/infrastructures'
+import { OfflineDBQuestionNotFoundError } from '../errors/infrastructures'
 
 class OfflineQuestionRepository implements QuestionRepository {
   private questionDB: Map<string, Question> = new Map()
@@ -41,7 +41,7 @@ class OfflineQuestionRepository implements QuestionRepository {
 
   public Get(id: string): Question {
     if (!this.questionDB.has(id)) {
-      throw new error_infrastructures.OfflineDBQuestionNotFoundError(id)
+      throw new OfflineDBQuestionNotFoundError(id)
     }
     return this.questionDB.get(id)!
   }
@@ -57,7 +57,7 @@ class OfflineQuestionRepository implements QuestionRepository {
     color: string
   ): Question {
     if (!this.questionDB.has(id)) {
-      throw new error_infrastructures.OfflineDBQuestionNotFoundError(id)
+      throw new OfflineDBQuestionNotFoundError(id)
     }
 
     const oldQuestionData: Question = this.questionDB.get(id)!
@@ -83,7 +83,7 @@ class OfflineQuestionRepository implements QuestionRepository {
 
   public Delete(id: string): void {
     if (!this.questionDB.has(id)) {
-      throw new error_infrastructures.OfflineDBQuestionNotFoundError(id)
+      throw new OfflineDBQuestionNotFoundError(id)
     }
     this.questionDB.delete(id)
     return
