@@ -5,12 +5,8 @@ import (
 )
 
 type Account struct {
-	UserID   uuid.UUID `json:"userID"`
-	UserName string    `json:"userName"`
-}
-
-func (a *Account) ID() string {
-	return a.UserID.String()
+	UserID   string `json:"userID" db:"user_id"`
+	UserName string `json:"userName" db:"user_name"`
 }
 
 func NewAccount(userName string) (Account, error) {
@@ -21,7 +17,7 @@ func NewAccount(userName string) (Account, error) {
 		return a, err
 	}
 
-	a.UserID = uuid
+	a.UserID = uuid.String()
 	a.UserName = userName
 
 	return a, nil
