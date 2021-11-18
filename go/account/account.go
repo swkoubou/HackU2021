@@ -9,10 +9,6 @@ type Account struct {
 	UserName string `json:"userName" db:"user_name"`
 }
 
-/*func (a *Account) ID() string {
-	return a.UserID.String()
-}*/
-
 func NewAccount(userName string) (Account, error) {
 	a := Account{}
 
