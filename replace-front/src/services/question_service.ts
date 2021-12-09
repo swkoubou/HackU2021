@@ -5,8 +5,8 @@ import { NotAllowedCharacterError } from '../errors/service_error'
 interface QuestionService {
   // IDを使って、問題を取得する
   GetQuestionByID: (id: string) => Question
-  // 答え合わせをする
-  CheckAnswers: (question: Question, answers: string[]) => boolean
+  // 最新の問題をn個取得する
+  // GetLatestQuestion: (n: Number) => Question[]
 }
 
 export class QuestionServiceImpl implements QuestionService {
@@ -16,7 +16,7 @@ export class QuestionServiceImpl implements QuestionService {
   }
 
   // アルファベット、数字、表示可能な記号かどうか
-  isPrintableAscii(text: string): boolean {
+  private isPrintableAscii(text: string): boolean {
     const printableAsciiRegex = /^[\x20-\x7F]*$/
     return printableAsciiRegex.test(text)
   }
@@ -27,21 +27,5 @@ export class QuestionServiceImpl implements QuestionService {
       throw new NotAllowedCharacterError(id)
     }
     return this.repository.Get(id)
-  }
-
-  CheckAnswers(question: Question, answers: string[]): boolean {
-    if (question.answers.length != answers.length) {
-      // 回答の数が一致しない
-      return false
-    }
-
-    // １つ１つあっているか確認してく
-    for (let i = 1; i < answers.length; i++) {
-      if (question.answers[i] != answers[i]) {
-        return false
-      }
-    }
-
-    return true
   }
 }
